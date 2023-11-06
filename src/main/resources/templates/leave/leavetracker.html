@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		            <div class="container-fluid">
+                <div class="row">
+                    <h4 class="cards-title col-lg-6" th:text="#{global.leaveTracker.title}">Leave Tracker</h4>
+                </div>
+
+                <div class="col-sm-12 form-group">
+                    <div class="line">
+                        <hr>
+                    </div>
+                </div>
+                
+			<div class="row">
+				<div
+					class="col-xl-4 col-lg-4 col-xxl-4 col-md-6 col-sm-4 text-center">
+					<div class="card">
+						<div class="contain">
+							<div class="card">
+								<div class="imgBx">
+									<img src="../../../images/profile/earnings.png" th:src="@{/images/profile/earnings.png}" alt="">
+								</div>
+								<div class="contentBx">
+									<h2 th:text="#{global.leaveTracker.totalLeave}">Earned leave for India</h2>
+									<div class="Availabel">
+										<h3 th:text="#{global.leaveTracker.availabel}" >Availabel : </h3>
+										<h3 th:each="leaveTracker : ${leaveTrackerList}" th:text="${leaveTracker.totalLeave}"> </h3>
+										
+									</div>
+									<div class="Booked">
+										<h3 th:text="#{global.leaveTracker.booked}">Booked :</h3>
+										<h3 th:each="leaveTracker : ${leaveTrackerList}" th:text="${leaveTracker.bookedTotalLeave}"> </h3>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-4 col-xxl-6 col-md-6 col-sm-4">
+					<div class="contain">
+						<div class="card">
+							<div class="imgBx">
+								<img src="../../../images/profile/paid-articles.png" th:src="@{/images/profile/paid-articles.png}" alt="">
+							</div>
+							<div class="contentBx">
+								<h2 th:text="#{global.leaveTracker.paidLeave}">Paid leave</h2>
+								<div class="Availabel">
+									<h3 th:text="#{global.leaveTracker.availabel}"> Availabel : </h3>
+									<h3 th:each="leaveTracker : ${leaveTrackerList}" th:text="${leaveTracker.paidLeave}"> </h3>
+								</div>
+								<div class="Booked">
+									<h3 th:text="#{global.leaveTracker.booked}">Booked :</h3>
+									<h3 th:each="leaveTracker : ${leaveTrackerList}" th:text="${leaveTracker.bookedPaidLeave}"> </h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-4 col-xxl-6 col-md-6 col-sm-4" 
+				th:each="emp : ${empBasicDetails}" th:if="${emp.empPersonalDetails.maritalStatus} == 'Married'">
+					<div class="contain">
+						<div class="card">
+							<div class="imgBx">
+								<img src="../../../images/profile/maternity.png" th:src="@{/images/profile/maternity.png}" alt="">
+							</div>
+							<div class="contentBx">
+								<h2 th:text="#{global.leaveTracker.maternityLeave}">Maternity leave</h2>
+								<div class="Availabel">
+									<h3 th:text="#{global.leaveTracker.availabel}"> Availabel : </h3>
+										<h3 th:each="leaveTracker : ${leaveTrackerList}" th:text="${leaveTracker.maternityLeave}"> </h3>
+								</div>
+								<div class="Booked">
+									<h3 th:text="#{global.leaveTracker.booked}">Booked :</h3>
+									<h3 th:each="leaveTracker : ${leaveTrackerList}" th:text="${leaveTracker.bookedMaternityLeave}"> </h3>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- <div class="col-xl-12 col-lg-6 col-xxl-6 col-md-6">
+				<div class="cards">
+					<div class="cards-body">
+						<h4 class="cards-title" th:text="#{global.leaveTracker.title2}">All Leaves and Holidays</h4>
+						<ul class="nav nav-tabs pull-right" role="tablist">
+							<li class="nav-item">
+							<a class="nav-link active" data-toggle="tab" th:href="@{/upcomingHolidayList}"> 
+							<label for="tab1" th:text="#{global.leaveTracker.upcoming}">Upcoming</label>
+							</a></li>
+							<li class="nav-item">
+							<a class="nav-link" data-toggle="tab" th:href="@{/historyHolidayList}"> 
+								<label for="tab2" th:text="#{global.leaveTracker.history}">History</label>
+							</a></li>
+						</ul>
+						Tab panes
+						<div class="tab-content tabcontent-border">
+							<div class="tab-pane fade show active" id="upcomingHolidayList" role="tabpanel">
+								<div class="card-body">
+								<div class="tracker">
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="day" style="width:500px;"></th>
+													<th class="day"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="calen" th:each="holiday : ${holidayList}">
+													<td class="fa-solid fa-calendar-days">&emsp; <span th:text="${holiday.holidayDate}"></span>
+													</td>
+													<td>&emsp; <span th:text="${holiday.description}"></span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="historyHolidayList" role="tabpanel">
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-striped">
+											<thead>
+												<tr>
+													<th class="day" style="width:500px;"></th>
+													<th class="day"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="calen" th:each="holiday : ${holidayList}">
+													<td class="fa-solid fa-calendar-days">&emsp; <span th:text="${holiday.holidayDate}"></span>
+													</td>
+													<td>&emsp; <span th:text="${holiday.description}"></span>
+													</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+</body>
+</html>

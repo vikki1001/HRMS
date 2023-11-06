@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:field="#{global.payroll.title}">Payroll</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+
+			<form onsubmit="return payrollValidate()" th:action="@{/payroll}" method="POST" th:object="${payrollMst}" autocomplete="off" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+																				
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:field="#{global.payroll.excel}"> Upload Excel </label>
+											<div class="col-lg-3">
+												<input type="file" name="file" class="form-control" placeholder="Enter heading here" id="payrollFile">
+												<span class="red" id="blankMsg"> </span>
+											</div>
+											
+											<label class="col-lg-3 col-form-label asterisk" th:field="#{global.holidayMaster.format}"> Download Excel Format </label>
+											<div class="col-lg-3">
+												<a th:href="@{/downloadPayroll}">
+												<input class="btn btn-mshsd" type="button" value="Click here to download" />
+												</a>
+											</div>
+										</div>									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/payrollSlipList}" class="btn btn-outline-secondary btn-md float-left"> <em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.payroll.backToList}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:field="#{global.payroll.upload}">Upload</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

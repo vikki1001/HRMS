@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.totalNewReq.heading}"> Total New Request List </h4>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.totalAttendance.userId}">Employee ID</th>
+											<th th:text="#{global.totalAttendance.checkinDateTime}">CheckIn Date Time</th>
+											<th th:text="#{global.totalAttendance.checkoutDateTime}">CheckOut Date Time</th>
+											<th th:text="#{global.totalAttendance.dayOfWeek}">Day Of The Week</th>
+											<th th:text="#{global.totalAttendance.timeDuration}">Total Time</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="newReq : ${totalNewReq}">
+											<td th:text="${newReq.userId}"></td>
+											<td th:text="${newReq.checkinDateTime}"></td>
+											<td th:text="${newReq.checkoutDateTime}"></td>
+											<td th:text="${newReq.dayOfTheWeek}"></td>
+											<td th:text="${newReq.timeDuration}"></td>											
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

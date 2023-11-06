@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.expenseReimb.expenseReimb}">Expense Reimbursement</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-8">
+						<a th:href="@{/expenseReimbHome}" class="btn add-btn pull-right plus" th:text="#{global.expenseReimb.addNew}" >Add New</a>
+					</div>		
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+						
+				<div class=" col-sm-12 form-group text-center">		
+				<label for="name-f" th:text="#{global.expenseReimb.expenseList}"> Expense list </label>
+                        <a th:href="@{/activeExpenseReimbList}">
+                            <button class="btn btn-secondary rounded-pill" th:text="#{global.expenseReimb.active}">Active</button></a>
+                        <a th:href="@{/cancelExpenseReimbList}">
+                        	<button class="btn btn-secondary rounded-pill active" th:text="#{global.expenseReimb.cancel}">Cancel</button></a>
+               </div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.expenseReimb.employeeName}">EMPLOYEE NAME</th>
+											<th th:text="#{global.expenseReimb.date}">DATE</th>
+											<th th:text="#{global.expenseReimb.reimbursementType}">REIMBURSEMENT</th>
+											<th th:text="#{global.expenseReimb.currency}">CURRENCY</th>
+											<th th:text="#{global.expenseReimb.attachment}">ATTACHMENT</th>
+											<th th:text="#{global.expenseReimb.expenseAmount}">EXPENSE AMOUNT</th>
+											<th th:text="#{global.expenseReimb.reasonsForExpense}">REASON FOR EXPENSE</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="expenseReimb : ${expenseList}">
+											<td th:text="${expenseReimb.employeeName}"></td>
+											<td th:text="${expenseReimb.date}"></td>
+											<td th:text="${expenseReimb.reimbursementType}"></td>
+											<td th:text="${expenseReimb.currency}"></td>
+											<td>
+											<img th:src="@{${'/attachment?id='+ expenseReimb.id}}" width="50px" height="50px"  alt="">
+											</td>
+											<td th:text="${expenseReimb.expenseAmount}"></td>
+											<td th:text="${expenseReimb.reasonsForExpense}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

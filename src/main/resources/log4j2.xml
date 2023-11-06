@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="60">
+  	<Properties>
+   	 <Property name="baseDir">D://Logs//services</Property>
+  	</Properties>
+	<Appenders>
+		<!-- Console Appender -->
+		<Console name="Console" target="SYSTEM_OUT" follow="true">
+			<PatternLayout pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+		<!-- Rolling File Appender -->
+		<RollingFile name="RollingFile">
+			<FileName>${baseDir}/services.log</FileName>
+			<FilePattern>${baseDir}/services%d{yyyy-MM-dd-hh-mm-ss}.log.zip
+			</FilePattern>
+			<PatternLayout Pattern="%d{yyyy-MMM-dd HH:mm:ss a} [%t] %-5level %logger{36} - %msg%n" />
+			<Policies>
+				<!-- RollOver on startup, daily and when the file reaches 500 MB -->
+				<SizeBasedTriggeringPolicy size="500MB" />
+			</Policies>		
+			<DefaultRolloverStrategy>
+				<Delete basePath="${baseDir}" maxDepth="3">
+					<IfFileName glob="*/services*.log.zip" />
+					<IfLastModified age="P90D" />
+				</Delete>
+			</DefaultRolloverStrategy>
+		</RollingFile>
+	</Appenders>
+	<Loggers>
+		<Logger name="com.ksvsofttech.product" level="info"	additivity="false">
+			<AppenderRef ref="RollingFile" />
+			<AppenderRef ref="Console" />
+		</Logger>
+		<Root level="error">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="RollingFile" />
+		</Root>
+	</Loggers>
+</Configuration>

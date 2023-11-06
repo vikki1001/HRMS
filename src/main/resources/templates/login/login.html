@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+<link rel = "icon" type = "image/png" th:href="@{/images/Favicon.png}" href="../../../images/Favicon.png">
+  <link rel="stylesheet" href="../../../css/login.css" th:href="@{/css/login.css}">
+  
+<script type="text/javascript">
+/*Login Validation*/
+function loginValidateForm() {
+  var loginId = document.getElementById("loginId").value;
+  var password = document.getElementById("password").value;
+     
+    if (!loginId == null || loginId != "") {     
+           document.getElementById("blankMsg2").innerHTML = "";   
+    } else {
+       document.getElementById("blankMsg2").innerHTML = "Login ID must be required";
+      return false;
+    }
+    
+    if (!password == null || password != "") {     
+           document.getElementById("blankMsg3").innerHTML = "";   
+    } else {
+       document.getElementById("blankMsg3").innerHTML = "Password must be required";
+      return false;
+    }  
+}
+</script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="forms-container">
+      <div class="login">
+        <form onsubmit="return loginValidateForm()" class="sign-in-form" th:action="@{/loginSuccess}" method="POST" th:object="${userMst}" autocomplete="off">
+          <img src="./images/Ksv.png" th:src="@{/images/Ksv.png}" alt="logo" class="logo">
+          
+         	<div class="alert alert-success" role="alert" id="alertMessage" th:text="${password}" th:if="${password}"></div>
+         	<div th:if="${param.error}" class="alert alertred" >[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</div>
+			<div th:if="${param.logout}" class="alert alert-warning" th:text="#{global.message.logout}"> You have been logged out. </div>
+			<div th:if="${message ne null}" class="alert alert-warning" > ${message} </div>
+	            	          
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" th:field="*{loginId}" style="text-transform: uppercase;"/>            
+          </div>
+          <span class="red" id="blankMsg2"></span>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" th:field="*{password}"/>
+          </div>
+          <span class="red" id="blankMsg3"></span>
+          
+          <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+          <button type="submit" class="btn btn-block login-btn" th:text="#{global.lbl.login}">LOGIN</button>
+          <a th:href="@{/forgot}" class="forgot-password-link" th:text="#{global.lbl.forgetPass}">Forgot your password ?</a>
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container">
+      <div class="panel left-panel">     
+          <div class="lngg">
+             <select id="locales" class="form-control rounded-pill form-control-lg-sm">
+                <option value="" disabled selected th:text="#{global.lbl.language}">LANGUAGE</option>
+                <option value="en" th:text="#{global.lang.en}">English</option>
+				<option value="hi" th:text="#{global.lang.hi}">Hindi</option>
+             </select>
+         </div>      
+        <img src="../../images/hrms.png" th:src="@{/images/hrms.png}" alt="" class="image" />
+      </div>
+    </div>
+  </div>
+
+
+  <!--**********************************
+            Footer start
+        ***********************************-->
+  <div class="footer">
+    <div class="copyright">
+      <p> All Rights Reserved. © 2022 &amp; Developed and Design by <a href="#" target="_blank">KSV-Softtech</a> PVT LTD
+      </p>
+    </div>
+  </div> 
+  <!--*******************************
+          Footer end
+   ********************************-->
+
+<script src="../../../js/datatable/jquery-3.5.1.js" th:src="@{/js/datatable/jquery-3.5.1.js}"></script>
+  <script src="../../../js/font.js" th:src="@{/js/font.js}"></script>
+  <script type="text/javascript">
+		$(document).ready(function() {
+			$("#locales").change(function() {
+				var selectedOption = $('#locales').val();
+				if (selectedOption != '') {
+					window.location.replace('/ksvsofttech/login?lang=' + selectedOption);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

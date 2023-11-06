@@ -1,0 +1,7 @@
+<select class="mdb-select md-form" >
+	<option th:each="empDetails : ${empBasicDetails}" th:value="${empDetails.empId} + ' - ' + ${empDetails.fullName}"
+				th:text="${empDetails.empId} + ' - ' + ${empDetails.fullName}"> 
+	</option>
+</select>
+
+ 

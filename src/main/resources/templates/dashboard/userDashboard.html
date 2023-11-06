@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+		
+	
+			<div class="row">
+				<!-- <div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.quickLinks}">Quick Links</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">India Payroll Portal</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">UK Payroll Portal</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">Kiyazen</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">4sight</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">Happy</p></li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.attendance}">Attendance</h4>
+							<ul class="nav nav-tabs" role="tablist">
+								<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#days"><label for="tab1"><img src="./images/profile/calendar.png" class="img_class" alt=""></label></a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#weeks"> <label for="tab2"> <img src="./images/profile/7-days.png" class="img_class" alt=""> </label></a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content tabcontent-border">
+								<div class="tab-pane fade show active" id="days" role="tabpanel">
+									<div class="cards-body">
+										<div class="hour">
+											<span><img src="./images/profile/clock.gif" class="img_cla" alt=""></span>
+											<div th:if="${flag.flag} == null"><span id="coundownStart1">00:00:00</span></div>
+											<div th:if="${flag.flag} == 'Y'"><span id="coundownStart">00:00:00</span></div>
+											<div th:if="${flag.flag} == 'N'"><span th:each="checkin : ${checkin}" th:text="${checkin.timeDuration}">00:00:00</span></div>
+										</div>
+
+										<input type="hidden" name="checkinDateTime" th:readonly="readonly" id="checkinDateTime" th:each="checkin : ${checkin}" th:value="${checkin.checkinDateTime}">
+
+										<div class="punch-btn-section" th:if="${flag.flag} == null"><input class="btn61 btn-primary punch-btn" type="button" id="enable" value="Check In" onclick="disableButton()"></div>
+
+										<div id="disableajaxbutton" class="punch-btn-section" th:if="${flag.flag} == 'Y'"><input class="btn662 btn-primary punch-btn" type="button" id="disable" value="Check Out"></div>
+
+										<div id="disableajaxbutton1" class="punch-btn-section"></div>
+
+										<h5 class="card-title text-center" th:text="${#dates.format(date, 'dd MMMM yyyy')}"></h5>
+
+										<div class="mt-n1 col-lg-12">
+											<input type="text" style="height:30px;" class="form-control" name="fname" id="name-f" placeholder="Add Notes">
+										</div>
+										<h6 class="prosize"> 10:00 AM <span class="pull-right">7:00 PM</span> </h6>
+										<div class="progresse">
+											<div class="progresse-bar" style="width: 60%; height: 6px;" role="progressbar"></div>
+										</div>
+										<h6 class="text-center" th:text="#{global.chkInChkOut.general}">General</h6>
+									</div>
+								</div>
+								
+								 <div class="tab-pane fade" id="weeks" role="tabpanel">
+									<div class="pt-4">
+										<div class="cards-body text-center">
+											<div class="hour">
+											<span><img src="./images/profile/clock.gif" class="img_cla" alt=""></span>
+											<div th:if="${flag.flag} == null"><span id="coundownStart2">00:00:00</span></div>
+											<div th:if="${flag.flag} == 'Y'"><span id="coundownStart">00:00:00</span></div>
+											<div th:if="${flag.flag} == 'N'"><span th:each="checkin : ${checkin}" th:text="${checkin.timeDuration}">00:00:00</span></div>
+										</div>
+
+										<input type="hidden" name="checkinDateTime" th:readonly="readonly" id="checkinDateTime" th:each="checkin : ${checkin}" th:value="${checkin.checkinDateTime}">
+
+										<div class="punch-btn-section" th:if="${flag.flag} == null"><input class="btn6 btn-primary punch-btn" type="button" id="enable" value="Check In" onclick="disableButton()"></div>
+
+										<div id="disableajaxbutton" class="punch-btn-section" th:if="${flag.flag} == 'Y'"><input class="btn66 btn-primary punch-btn" type="button" id="disable" value="Check Out"></div>
+
+										<div id="disableajaxbutton1" class="punch-btn-section"></div>
+
+										<h5 class="card-title text-center" th:text="${#dates.format(date, 'dd MMMM yyyy')}"></h5>
+
+											<span th:if="${flag.flag} == null"> <small class="text-muted">Late by 00:00</small></span> 
+											<span th:if="${flag.flag} == 'Y' or 'N'"> <small class="text-muted">Late by <span th:text="${minutes}" />:<span th:text="${seconds}" /></small></span>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles"
+								th:text="#{global.chkInChkOut.reqForApproval}">Request For Approval</h4>
+							<p class="cards-description7" th:text="#{global.chkInChkOut.pending}">Pending</p>
+							<div class="recent-comment">
+								<div class="media" th:each="leave : ${leaveDashboard}">
+									<div class="media-left">
+										<a th:href="@{/appliedLeaveList}" th:if="${leave.empId.file} != null"><img class="media-object mr-3 center" th:src="@{${'/image?empId='+ leave.empId}}" alt=""></a> 
+										<a th:href="@{/appliedLeaveList}" th:if="${leave.empId.file} == null"><img class="media-object mr-3 center" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt=""></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/appliedLeaveList}">
+											<h4 class="media-heading" th:text="'For Leave - ' + ${leave.fullName}"></h4>
+											<p class="comment-date" th:text="${leave.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+								<div class="media" th:each="att : ${attendanceDashboard}">
+									<div class="media-left">
+										<a th:href="@{/approvalNewReqList}" th:each="img : ${image}" th:if="${img.file} != null"> <img class="media-object mr-3" th:src="@{${'/image?empId='+ att.userId}}" alt="..."></a> 
+										<a th:href="@{/approvalNewReqList}" th:each="img : ${image}" th:if="${img.file} == null"> <img class="media-object mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/approvalNewReqList}">
+											<h4 class="media-heading" th:text="'For Attendance - ' + ${att.UserId}"></h4>
+											<p class="comment-date" th:text="${att.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+								<div class="media" th:each="exit : ${exitActivityDashboard}">
+									<div class="media-left">
+										<a th:href="@{/appliedExitActivityList}" th:each="img : ${image}" th:if="${img.file} != null"> <img class="media-object mr-3" th:src="@{${'/image?empId='+ exit.empId.empId}}" alt="..."></a>
+										<a th:href="@{/appliedExitActivityList}" th:each="img : ${image}" th:if="${img.file} == null"> <img class="media-object mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/appliedExitActivityList}">
+											<h4 class="media-heading" th:text="'For Exit Activity - ' + ${exit.empId.empId}"></h4>
+											<p class="comment-date" th:text="${exit.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+								<div class="media" th:each="expense : ${expenseReimbDashboard}">
+									<div class="media-left">
+										<a th:href="@{/appliedExpenseReimbList}" th:each="img : ${image}" th:if="${img.file} != null"> <img class="media-object mr-3" th:src="@{${'/image?empId='+ expense.empId}}" alt="..."></a>
+										<a th:href="@{/appliedExpenseReimbList}" th:each="img : ${image}" th:if="${img.file} == null"> <img class="media-object mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/appliedExpenseReimbList}">
+											<h4 class="media-heading" th:text="'For Expense - ' + ${expense.empId}"></h4>
+											<p class="comment-date" th:text="${expense.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				
+                    <div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+                        <div class="cards">
+                            <div class="cards-body">
+                            <h4 class="card-titles">News Feed</h4>
+                                <div class="slider">
+                                    <div class="slide active">
+                                    <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalpopover"><img src="./././images/slider/1.jpg" class="imageslide" alt=""></a>
+                                                 
+                                      <div class="info">
+                                            <h2>Winter Mountains</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore
+                                                et dolore magna aliqua.</p>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="slide">
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalpopover2"><img src="./././images/slider/2.jpg" class="imageslide" alt=""></a>
+                                        
+                                        <div class="info">
+                                            <h2>Tropical Desert</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore
+                                                et dolore magna aliqua.</p>
+                                        </div>
+                                    </div>
+                                    <div class="slide">
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalpopover3"><img src="./././images/slider/3.jpg" class="imageslide" alt=""></a>
+                                        <div class="info">
+                                            <h2>Steaming Volcanoes</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore
+                                                et dolore magna aliqua.</p>
+                                        </div>
+                                    </div>
+                                    <div class="slide">
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalpopover4"><img src="./././images/slider/4.jpg" class="imageslide" alt=""></a>
+                                        <div class="info">
+                                            <h2>Mountain River</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore
+                                                et dolore magna aliqua.</p>
+                                        </div>
+                                    </div>
+                                    <div class="slide">
+                                        <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModalpopover5"><img src="./././images/slider/5.jpg" class="imageslide" alt=""></a>
+                                        <div class="info">
+                                            <h2>Egypt Pyramids</h2>
+                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                                tempor incididunt ut labore
+                                                et dolore magna aliqua.</p>
+                                        </div>
+                                    </div>
+                                    <div class="navigation">
+                                        <i class="fas fa-chevron-left prev-btn"></i>
+                                        <i class="fas fa-chevron-right next-btn"></i>
+                                    </div>
+                                    <div class="navigation-visibility">
+                                        <div class="slide-icon active"></div>
+                                        <div class="slide-icon"></div>
+                                        <div class="slide-icon"></div>
+                                        <div class="slide-icon"></div>
+                                        <div class="slide-icon"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              
+
+                <div class="modal" id="exampleModalpopover">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title11</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Popover in a modal</h5>
+                                <p>This <a href="#" role="button" data-container-fluid="body" data-toggle="popover" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a>                                                        triggers a popover on click.</p>
+                                <hr>
+                                <h5>Tooltips in a modal</h5>
+                                <p><a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Told you!">This link</a> and <a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Another one!">that link</a>                                                        have tooltips on hover.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="exampleModalpopover2">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title22</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Popover in a modal</h5>
+                                <p>This <a href="#" role="button" data-container-fluid="body" data-toggle="popover" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a>                                                        triggers a popover on click.</p>
+                                <hr>
+                                <h5>Tooltips in a modal</h5>
+                                <p><a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Told you!">This link</a> and <a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Another one!">that link</a>                                                        have tooltips on hover.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="exampleModalpopover3">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title33</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Popover in a modal</h5>
+                                <p>This <a href="#" role="button" data-container-fluid="body" data-toggle="popover" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a>                                                        triggers a popover on click.</p>
+                                <hr>
+                                <h5>Tooltips in a modal</h5>
+                                <p><a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Told you!">This link</a> and <a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Another one!">that link</a>                                                        have tooltips on hover.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="exampleModalpopover4">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title44</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Popover in a modal</h5>
+                                <p>This <a href="#" role="button" data-container-fluid="body" data-toggle="popover" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a>                                                        triggers a popover on click.</p>
+                                <hr>
+                                <h5>Tooltips in a modal</h5>
+                                <p><a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Told you!">This link</a> and <a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Another one!">that link</a>                                                        have tooltips on hover.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal" id="exampleModalpopover5">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Modal title55</h5>
+                                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <h5>Popover in a modal</h5>
+                                <p>This <a href="#" role="button" data-container-fluid="body" data-toggle="popover" class="btn btn-secondary popover-test" title="Popover title" data-content="Popover body content is set in this attribute.">button</a>                                                        triggers a popover on click.</p>
+                                <hr>
+                                <h5>Tooltips in a modal</h5>
+                                <p><a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Told you!">This link</a> and <a href="#" class="tooltip-test text-primary" data-toggle="tooltip" title="Another one!">that link</a>                                                        have tooltips on hover.</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+			</div>
+
+
+
+			<div class="row">
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles"
+								th:text="#{global.chkInChkOut.upcomingBirthday}">Upcoming Birthday</h4>
+							<div class="recent-comments">
+								<ul class="vertical-scroll pt-4 ">
+									<li class="item">
+										<div class="card p-4" th:each="emp : ${birthDayToday}">
+											<div class="d-flex">
+												<span th:if="${emp.empBasicDetails.file} == null"> <img class="avatar1 avatar-md bradius mr-4" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt=""></span> 
+												<span th:if="${emp.empBasicDetails.file} != null"> <img class="avatar1 avatar-md bradius mr-4" th:src="@{${'/image?empId='+ emp.empBasicDetails.empId}}" alt=""></span>
+												<div class="mr-4 mt-0 mt-sm-1 d-block">
+													<h6 class="mb-1 d1" th:text=${emp.empBasicDetails.fullName}>
+													</h6>
+													<small th:text="#{global.chkInChkOut.birthDayOn}" class="d2">
+													</small> 
+													<small class="d2"> Today </small>
+													<br> <small class="d3" th:text=${emp.contactNo}> </small>
+												</div>
+											</div>
+										</div>
+									
+										<div class="card p-4" th:each="emp : ${upcomingBirthDay}">
+											<div class="d-flex">
+												<span th:if="${emp.empBasicDetails.file} == null"> <img class="avatar1 avatar-md bradius mr-4" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt=""></span> 
+												<span th:if="${emp.empBasicDetails.file} != null"> <img class="avatar1 avatar-md bradius mr-4" th:src="@{${'/image?empId='+ emp.empBasicDetails.empId}}" alt=""></span>
+												<div class="mr-4 mt-0 mt-sm-1 d-block">
+													<h6 class="mb-1 d1" th:text=${emp.empBasicDetails.fullName}>
+													</h6>
+													<small th:text="#{global.chkInChkOut.birthDayOn}" class="d2">
+													</small> 
+													<small class="d2" th:text="${#dates.format(emp.birthDate, 'dd/MMMM')}"></small>
+													<br> <small class="d3" th:text=${emp.contactNo}> </small>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.onLeaveToday}">On leave Today</h4>
+							<div class="recent-comment">
+								<ul class="vertical-scroll pt-4 ">
+									<li class="item">
+										<div class="card p-4" th:each="leave : ${onLeaveToday}">
+											<div class="d-flex">
+												<span th:if="${leave.empId.file} == null"><img src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="img" class="avatar avatar-md bradius mr-3"></span> 
+												<span th:if="${leave.empId.file} != null"><img th:src="@{${'/image?empId='+ leave.empId.empId}}" alt="img" class="avatar avatar-md bradius mr-3"></span>
+												<div class="mr-3 mt-0 mt-sm-1 d-block"> <h6 th:text="${leave.empId.empId}"></h6><small th:text="${leave.fullName}"></small></div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.upcomingHoliday}">Upcoming Holidays</h4>
+							<ul class="holiday-activity">
+								<div class="d-flex comming_holidays calendar-icon icons mb-5" th:each="holiday : ${holidayList}">
+									<span class="date_time bg-success-transparent bradius mr-3">
+										<span class="date fs-20"><span th:text="${#dates.format(holiday.holidayDate, 'dd')}"></span></span>
+										<span class="month fs-13"><span th:text="${#dates.format(holiday.holidayDate, 'MMM')}"></span></span>
+									</span>
+									<div class="mr-3 mt-0 mt-sm-1 d-block"> 
+										<h6 class="mb-1 font-weight-semibold d1" th:text="${holiday.description}"></h6>
+										<span class="clearfix"></span> <small class="d2" th:text="${#dates.dayOfWeekName(holiday.holidayDate)}"></small>
+									</div>
+									<p class="float-right text-muted  mb-0 fs-13 ml-auto bradius my-auto" th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}" th:text="${days.convert(holiday.holidayDate.getTime() - #dates.createNow().getTime(), millis) + ' days to left'}">
+									</p>
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.files}">Files</h4>
+							<p class="cards-description7 ">Total Files</p>
+							<div class="tabset">
+								<!-- Tab 1 -->
+								<input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked> <label for="tab1" th:text="#{global.chkInChkOut.organization}" th:href="@{/empDashboard}">Organization</label>
+								<!-- Tab 2 -->
+								<input type="radio" name="tabset" id="tab2" aria-controls="rauchbier"> <label for="tab2" th:text="#{global.chkInChkOut.employee}" th:href="@{/empDashboard}">Employee</label>
+
+								<div class="tab-panels">
+									<section id="marzen" class="tab-panel">
+										<ul class="files-activity">
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension} == 'pdf'" src="./images/profile/pdf.png" th:src="@{/images/profile/pdf.png}" alt="PDF"></a>
+												<p class="d" th:if="${orgList.extension} == 'pdf'" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension == 'xlsx' or orgList.extension == 'xls'}" src="./images/profile/xls.png" th:src="@{/images/profile/xls.png}" alt="EXCEL"></a>
+												<p class="d" th:if="${orgList.extension == 'xlsx' or orgList.extension == 'xls'}" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension == 'docx' or orgList.extension == 'doc'}" src="./images/profile/doc.png" th:src="@{/images/profile/doc.png}" alt="DOC"></a>
+												<p class="d" th:if="${orgList.extension == 'docx' or orgList.extension == 'doc'}" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension == 'pptx' or orgList.extension == 'ppt'}" src="./images/profile/ppt.png" th:src="@{/images/profile/ppt.png}" alt="PPT"></a>
+												<p class="d" th:if="${orgList.extension == 'pptx' or orgList.extension == 'ppt'}" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension} == 'txt'" src="./images/profile/txt.png" th:src="@{/images/profile/txt.png}" alt="txt"></a>
+												<p class="d" th:if="${orgList.extension} == 'txt'" th:text="${orgList.templateName}"></p></li>
+										</ul>
+									</section>
+
+									<section id="getResultDiv" class="tab-panel">
+										<ul class="files-activity">
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"> <img class="img_class" th:if="${empList.extension} == 'pdf'" src="./images/profile/pdf.png" th:src="@{/images/profile/pdf.png}" alt="PDF"></a>
+												<p class="d" th:if="${empList.extension} == 'pdf'" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"> <img class="img_class" th:if="${empList.extension == 'xlsx' or empList.extension == 'xls'}" src="./images/profile/xls.png" th:src="@{/images/profile/xls.png}" alt="EXCEL"></a>
+												<p class="d" th:if="${empList.extension == 'xlsx' or empList.extension == 'xls'}" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"><img class="img_class" th:if="${empList.extension == 'docx' or empList.extension == 'doc'}" src="./images/profile/doc.png" th:src="@{/images/profile/doc.png}" alt="DOC"></a>
+												<p class="d" th:if="${empList.extension == 'docx' or empList.extension == 'doc'}" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"><img class="img_class" th:if="${empList.extension == 'pptx' or empList.extension == 'ppt'}" src="./images/profile/ppt.png" th:src="@{/images/profile/ppt.png}" alt="PPT"></a>
+												<p class="d" th:if="${empList.extension == 'pptx' or empList.extension == 'ppt'}" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"><img class="img_class" th:if="${empList.extension} == 'txt'" src="./images/profile/txt.png" th:src="@{/images/profile/txt.png}" alt="txt"></a>
+												<p class="d" th:if="${empList.extension} == 'txt'" th:text="${empList.templateName}"></p>
+											</li>
+										</ul>
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xl-8 col-lg-8 col-xxl-8 col-md-8">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.timesheets}">Timesheets</h4>
+							<ul class="Timesheet-activity">
+								<div class="table-responsive">
+									<table
+										class="table table-vcenter text-nowrap table-bordered border-bottom dataTable no-footer" id="emp-attendance" role="grid" aria-describedby="emp-attendance_info">
+										<thead>
+											<tr role="row">
+												<th class="border-bottom-0 sorting sorting_desc" tabindex="0" aria-controls="emp-attendance" rowspan="1" colspan="1" aria-sort="descending" aria-label="Date: activate to sort column ascending" style="width: 500px;">Date</th>
+												<th class="border-bottom-0 sorting" tabindex="0" aria-controls="emp-attendance" rowspan="1" colspan="1" aria-label="Status: activate to sort column ascending" style="width: 500px;">Project</th>
+												<th class="border-bottom-0 sorting" tabindex="0" aria-controls="emp-attendance" rowspan="1" colspan="1" aria-label="Clock-In: activate to sort column ascending" style="width: 500px;">Description</th>
+												<th class="border-bottom-0 sorting" tabindex="0" aria-controls="emp-attendance" rowspan="1" colspan="1" aria-label="Clock-Out: activate to sort column ascending" style="width: 500px;">Time(Hours)</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr class="odd" th:each="task : ${dashboardTaskList}">
+												<td th:text="${task.date}"></td>
+												<td th:text="${task.projects}"></td>
+												<td th:text="${task.description}"></td>
+												<td th:text="${task.hours}"></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.favorites}">Favorites</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.bill}">Billable/Non-Billable</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.pendingTask}">Pending Tasks</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles ">Pending Jobs</h4>
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<tbody>
+										<tr>
+											<td class="py-1">Training</td>
+											<td>--</td>
+											<td>12-april-2022</td>
+											<td>--</td>
+											<td>No End Date</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

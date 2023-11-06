@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6">Payroll Slip</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+
+			<form th:action="@{/payrollSlip}" method="GET" autocomplete="off">
+				
+				<div class="row">
+					<div class="col-lg-12">
+
+										<div class="container-fluid">
+											<div class="row">
+												<div class="col-xl-12">
+													<div class="form-group row">
+														<label class="col-lg-2 col-form-label">Employee ID</label>
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empId}">0</label>
+
+														<label class="col-lg-2 col-form-label">Name</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.nameOfEmp}">0</label>
+													</div>
+												</div>
+
+												<div class="col-xl-12">
+													<div class="form-group row">
+														<label class="col-lg-2 col-form-label">Department</label>
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.departName}">0</label>
+														 
+														<label class="col-lg-2 col-form-label">Designation</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.designation}">0</label>
+													</div>
+												</div>
+
+												<div class="col-xl-12">
+													<div class="form-group row">
+														<label class="col-lg-2 col-form-label">Pay Date</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label">02/08/2022</label> 
+														
+														<label class="col-lg-2 col-form-label">Days Working</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label">25</label>
+													</div>
+												</div>
+
+												<div class="col-xl-12">
+													<div class="form-group row">
+														<label class="col-lg-2 col-form-label">PF No.</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label">123456789013</label> 
+														
+														<label class="col-lg-2 col-form-label">Bank A/C No.</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empSalaryDetails.salaryAccNo}">0</label>
+													</div>
+												</div>
+
+												<div class="col-xl-12">
+													<div class="form-group row">
+														<label class="col-lg-2 col-form-label">Pan No.</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empPersonalDetails.panNumber}">0</label> 
+														
+														<label class="col-lg-2 col-form-label">DOB</label> 
+														<label class="col-lg-1 col-form-label">:</label> 
+														<label class="col-lg-3 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.empBasicDetails.empPersonalDetails.birthDate}">0</label>
+													</div>
+												</div>
+											</div>
+
+											<div class="col-sm-12 form-group">
+												<div class="card">
+													<div class="card-body">
+														<div class="table-responsive">
+															<table class="table table-center text-nowrap table-bordered border-bottom dataTable no-footer">
+																<thead>
+																	<tr>
+																		<th>Earning</th>
+																		<th>Amount</th>
+																		<th>Deduction</th>
+																		<th>Amount</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<tr>
+																		<td>Basic Salary</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.basicSalary}">0</td>
+																		<td>PF</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.empProvidentFundOrg}">0</td>
+																	</tr>
+																	<tr>
+																		<td>HRA</td>
+																		<td >0 </td>
+																		<td>Income Tax</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.incomeTax}">0</td>
+																	</tr>
+																	<tr>
+																		<td>Darness Allowance</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.dearnessAllowances}">0</td>
+																		<td>Leave Deduction</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.leavesRate}">0</td>
+																	</tr>
+																	<tr>
+																		<td>Conveyance</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.conveyance}">0</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>Medical Benefit</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.medicalBenefit}">0</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>Overtime Rate</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.overTimeRate}">0</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>Variable Pay</td>
+																		<td th:each="emp : ${empPayroll}" th:text="${emp.variablePay}">0</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																	<tr>
+																		<td>Extra Allowance</td>
+																		<td >0</td>
+																		<td></td>
+																		<td></td>
+																	</tr>
+																</tbody>
+
+																<thead>
+																	<tr>
+																		<th>Total Earning</th>
+																		<th th:each="emp : ${empPayroll}" th:text="${emp.grossSalary}">0</th>
+																		<th>Total Deduction</th>
+																		<th>0</th>
+																	</tr>
+																</thead>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-xl-12">
+													<div class="form-group row">
+														<label class="col-lg-3 col-form-label">NET PAY </label> 
+														<label class="col-lg-1 col-form-label"> : </label> 
+														<label class="col-lg-8 col-form-label" th:each="emp : ${empPayroll}" th:text="${emp.netSalary}">0</label> 
+														
+														<label class="col-lg-3 col-form-label">Amount in Words </label>
+														<label class="col-lg-1 col-form-label"> : </label> 
+														<label class="col-lg-8 col-form-label">Ten Thousand Five Hundred</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+								</div>		
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

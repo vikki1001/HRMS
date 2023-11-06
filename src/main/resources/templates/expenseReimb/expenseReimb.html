@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.expenseReimb.title}">Expense Reimbursement</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+		    </div>
+				<form onsubmit="return expenseReimbValidateForm()" th:action="@{saveExpenseReimb}" th:object="${expenseReimb}" method="POST" autocomplete="off" enctype="multipart/form-data">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.expenseReimb.employeeName}>Employee Name</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" id="employeeName" name = "employeeName"  th:readonly="readonly"
+												th:each="empBasic : ${expenseList}" th:value="${empBasic.fullName}">
+												<span class="red" id="blankMsg"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.expenseReimb.date}>Date</label>
+											<div class="col-lg-4">
+												<input class="form-control" type="date" id ="date" placeholder="YYYY-MM-DD" th:field="*{date}"></input>
+												<span class="red" id="blankMsg2"></span>
+											</div>
+										</div>
+														
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.expenseReimb.reimbursementType}>Reimbursement Type</label>
+											<div class="col-lg-4">
+												<select class="form-control" id="reimbursementType" th:field="*{reimbursementType}">										
+												<option value="" selected th:text="#{global.expenseReimb.select}">Select...  </option>
+															<option value="Team Lunch">Team Lunch</option>
+															<option value="Intra City Conveyance/Local Conveyance">Intra City Conveyance/Local Conveyance</option>
+															<option value="Transfers-Movement of Personal Goods">Transfers-Movement of Personal Goods</option>
+															<option value="Mobile">Mobile</option>
+															<option value="WFH Internet">WFH Internet</option>															
+												</select>
+												<span class="red" id="blankMsg3"></span>
+											</div>
+											<label class="col-lg-2 col-form-label" th:text=#{global.expenseReimb.currency}>Currency</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{currency}">										
+												<option value="" selected th:text="#{global.expenseReimb.select}">Select...</option>
+															<option value="INR">INR</option>
+															<option value="USD">USD</option>
+															<option value="EUR">EUR</option>
+															<option value="JPY">JPY</option>
+															<option value="PHP">PHP</option>															
+												</select>
+											</div>
+										</div>																	
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.expenseReimb.attachment}>Attachment</label>
+											<div class="col-lg-4">
+												<input type = "file" name="file" class="form-control" th:field="*{attachment}" onchange="readURL(this);"></input>
+												<img id="blah" class = "img1" >
+												<span class="red" id="blankMsg4"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.expenseReimb.expenseAmount}>Expense Amount</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="expenseAmount"  placeholder="Enter expense Amount here..."  th:field="*{expenseAmount}"></input>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+										</div>																	
+																		
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label"></label>
+											<div class="col-lg-4">
+												<input class="form-control" type = "hidden"  >
+												<span class="red" th:if="${#fields.hasErrors('reasonsForExpense')}" th:errors="*{reasonsForExpense}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.expenseReimb.reasonsForExpense}>Reasons For Expense</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="reasonsForExpense" placeholder="Enter reasons For Expense here..." th:field="*{reasonsForExpense}"></input>
+												<span class="red" id="blankMsg6"></span>
+											</div>
+									</div>																											
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeExpenseReimbList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.expenseReimb.cancel}"> Cancel </span></a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text=#{global.expenseReimb.save}>Submit</button>
+						</div>
+					</div>
+				</div>				
+        </form>
+        </div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+    <style>
+        body {
+            font-family: Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+        }
+        h1{
+            text-align:center;
+            margin-left: 150px;
+            font-size: 26px;
+            color: #1b7abd;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+        table {
+            color: var(--gray);
+            width: 100%;
+        }
+        table td {
+            padding: 0.60rem;
+            vertical-align: baseline;
+            font-size: 16px;
+            color: #2e2d2d;
+            width: 100px;
+            font-weight: 500;
+        }
+        table thead {
+            vertical-align: baseline;
+        }
+        
+    </style>
+</head>
+<body>
+    <h1> Apply for leave </h1>
+    <table>
+        <thead>
+        <tbody>
+            <span th:each="leaveList : ${leaveList}">
+                <p>On <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}">01-02-2022</span>, <span th:text="${leaveList.fullName}">Ayush panwar</span>
+                | KSV Soft-Tech Wrote:</p>
+                <p th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy HH:mm')}"></p>
+            <tr>
+                <td>Hello Madam/Sir,</td>
+            </tr>
+            <tr>
+                <td>Employee Name</td>
+                <td style="text-align:center;">-</td>
+                <td th:text="${leaveList.empId.empId}">Ayush Panwar</td>
+
+            </tr>
+            <tr>
+                <td>Current Date</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}">24/07/2022</td>
+            </tr>
+            <tr>
+                <td>Leave Day</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.dayLeave}">Monday</td>
+            </tr>
+            <tr>
+                <td>Phone Number</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.phoneNo}">9009130072</td>
+            </tr>
+            <tr>
+                <td>Leave Type</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.leaveType}">Unpaid</td>
+            </tr>
+            <tr>
+                <td>Project Code</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.projectCode}">KSVSOFTTECH001</td>
+            </tr>
+            <tr>
+                <td>Address During Leave</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.addrDuringLeave}">201,labbik regncy</td>
+            </tr>
+            <tr>
+                <td>Project Manager</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.managerId}">KSVP0001</td>
+            </tr>
+            <tr>
+                <td>Absent On</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.fromDate}">01/02/2022</td>
+            </tr>
+            <tr>
+                <td>Returning Date</td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.toDate}">01/02/2022</td>
+            </tr>
+            <tr>
+                <td>Reason for absence </td>
+                <td style="text-align: center;">-</td>
+                <td th:text="${leaveList.leaveDetails}">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas saepe eaque perspiciatis</td>
+            </tr>
+            <tr>
+                <td><p>Thanks & Regards <br> <span th:text="${leaveList.fullName}">Ayush Panwar</span><br><span>----------</span></p></td>
+            </tr>            
+            <tr>
+                <td style="position: relative; bottom: 36px;"><p>Regards,<br>
+                <span style="font-size:16px; font-weight: 700; " th:text="${leaveList.managerId}">Ayush Panwar</span><br>
+                <!-- <span style="font-size:16px; font-weight: 700;" ></span><br> -->
+                <span style="font-size:16px; font-weight: 700; " th:text="${leaveList.empId.empWorkDetails.businessUnit}">KSVSofttech</span></p></td>   
+            </tr>         
+        </tbody>
+    </table>
+</body>
+
+</html>

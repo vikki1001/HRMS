@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.training.title}">Training</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-8">
+						<a th:href="@{/trainingForm}" class="btn add-btn pull-right plus" th:text="#{global.training.addNew}" >Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:text="#{global.training.departmentlist}"> Training list  </label>
+                        <a th:href="@{/activeTrainingList}">
+                            <button class="btn btn-secondary rounded-pill active" th:text="#{global.training.active}">Active</button></a>
+                        <a th:href="@{/inActiveTrainingList}">
+                        	 <button class="btn btn-secondary rounded-pill " th:text="#{global.training.inactive}">Inactive</button></a>
+               </div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.training.Subject}">Subject</th>
+											<th th:text="#{global.training.trainingPurpose}">Training Purpose</th>
+											<th th:text="#{global.training.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="training : ${trainingList}">
+											<td th:text="${training.subject}"></td>
+											<td th:text="${training.trainingPurpose}"></td>
+											<td>
+											<a th:href="@{'/trainingForm/' + ${training.id}}" class="btn update" th:text="#{global.training.edit}"> Edit </a> 
+				                           <a th:href="@{'/deactivetraining/' + ${training.id}}" class="btn update" th:text="#{global.training.deactive}"> Deactive </a>
+											</td>										
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

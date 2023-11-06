@@ -1,0 +1,115 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+	<link rel="stylesheet" href="../../../css/font-awesome.min.css" th:href="@{/css/font-awesome.min.css}">    
+	<link rel="stylesheet" href="../../../css/fonts.css" th:href="@{/css/fonts.css}">
+    <link rel="stylesheet" href="../../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../css/fer.css" th:href="@{/css/fer.css}" > 
+</head>
+
+<body>  
+    <main>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="card login-form">
+                    <div class="card-body">
+                        <h3 class="card-title text-center">Reset password</h3>
+                        <div class="alert alert-success" role="alert" id="alertMessage" th:text="${otpSuccess}" th:if="${otpSuccess}"></div> </div>
+                        <div class="alert alert-danger" role="alert" id="alertMessage" th:text="${pwdNotMatch}" th:if="${pwdNotMatch}"></div>
+                        
+                        <div class="card-text">
+                            <form onsubmit="return forgotPwdValidateForm()" th:action="@{/resetPassword}" method="POST" th:object="${userMst}" autocomplete="off">
+                                <div class="form-group">
+                                    <label for="example">Set the new password for your ID so you can login and access
+                                        all the features</label>
+                                </div>
+                                <div class="wrapper">
+                                    <input type="Password" name="password" class="form-control form-control-sm"
+                                        placeholder="New Password" id="pswrd_1">
+                                    <span>
+                                        <i class="fa fa-eye" aria-hidden="true" id="eye" onclick="toggle()"></i>
+                                    </span>
+                                    <span class="red" id="blankMsg1"> </span>
+                                </div>
+
+                                <div class="wrapper">
+                                    <input type="Password" name="confirmPassword" class="form-control form-control-sm"
+                                        placeholder="Re-Enter Password" id="pswrd_2">
+                                    <span>
+                                        <i class="fa fa-eye" aria-hidden="true" id="eye1" onclick="toggle1()"></i>
+                                    </span>
+                                    <span class="red" id="blankMsg2"> </span>
+                                </div>
+
+                                <button type="submit" onclick="myFunction()" class="btn btn-primary btn-block">Reset Password</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+
+    <script>
+        var state = false;
+        function toggle() {
+            if (state) {
+
+                document.getElementById("password").setAttribute("type", "password");
+                document.getElementById("eye").style.color = '#7a797e';
+                state = false;
+            }
+            else {
+                document.getElementById("password").setAttribute("type", "text");
+                document.getElementById("eye").style.color = '#5887ef';
+                state = true;
+            }
+        }
+    </script>
+
+     <script>
+        var state = false;
+        function toggle1() {
+            if (state) {
+                document.getElementById("password1").setAttribute("type", "password");
+                document.getElementById("eye1").style.color = '#7a797e';
+                state = false;
+            }
+            else {
+                document.getElementById("password1").setAttribute("type", "text");
+                document.getElementById("eye1").style.color = '#5887ef';
+                state = true;
+            }
+        }
+    </script>
+    
+ <script>
+    /*Reset Password validation*/
+    function forgotPwdValidateForm() {
+        var pswrd_1 = document.getElementById("pswrd_1").value;
+    	var pswrd_2 = document.getElementById("pswrd_2").value;
+    	
+     
+    	 if (!pswrd_1 == null || pswrd_1 != "") {     
+    	       	document.getElementById("blankMsg1").innerHTML = "";   
+        } else {
+    			 document.getElementById("blankMsg1").innerHTML = "New password must be required ";
+          return false;
+        } 
+    if (!pswrd_2 == null || pswrd_2 != "") {     
+    	       	document.getElementById("blankMsg2").innerHTML = "";   
+        } else {
+    			 document.getElementById("blankMsg2").innerHTML = "Confirm new password must be required ";
+          return false;
+        } 
+    }
+    </script>
+    
+	<script src="../../../js/datatable/jquery-3.5.1.js" th:src="@{/js/datatable/jquery-3.5.1.js}"></script>
+    <script src="../../../js/popper.min.js" th:src="@{/js/popper.min.js}"></script>
+    <script src="../../../js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.totalLeave.heading}"> Total Leave List </h4>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.totalLeave.empId}">Employee ID</th>
+											<th th:text="#{global.totalLeave.date}">Date</th>
+											<th th:text="#{global.totalLeave.fullName}">Full Name</th>
+											<th th:text="#{global.totalLeave.fromDate}">From Date</th>
+											<th th:text="#{global.totalLeave.toDate}">To Date</th>
+											<th th:text="#{global.totalLeave.leaveType}">Leave Type</th>
+											<th th:text="#{global.totalLeave.dayLeave}">Day Leave</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="totalLeave : ${totalLeave}">
+											<td th:text="${totalLeave.empId.empId}"></td>
+											<td th:text="${totalLeave.date}"></td>
+											<td th:text="${totalLeave.fullName}"></td>
+											<td th:text="${totalLeave.fromDate}"></td>
+											<td th:text="${totalLeave.toDate}"></td>
+											<td th:text="${totalLeave.leaveType}"></td>
+											<td th:text="${totalLeave.dayLeave}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

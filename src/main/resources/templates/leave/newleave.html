@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text=#{global.applyLeave.title}>Apply Leave</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+
+			<form onsubmit="return leaveValidateForm()" th:action="@{applyLeave}" method="POST" th:object="${leaveMst}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-6">
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.empId}>Employee ID </label>
+											<div class="col-lg-9">
+												<input type="text" class="form-control" id="empId" name="empId" th:readonly="readonly" 
+													th:each="leave : ${leaveList}" th:value="${leave.empId}">
+													<span class="red" id="blankMsg"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.fromDate}>From Date </label>
+											<div class="col-lg-9">
+												<input class="form-control" type="datetime-local" id="fromDate" th:field="*{fromDate}"> 
+												<span class="red" th:if="${#fields.hasErrors('fromDate')}" th:errors="*{fromDate}"></span>
+												<span class="red" id="blankMsg2"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.leaveType}>Leave Type </label>
+											<div class="col-lg-9">
+												<select class="form-control" id="leaveType" th:field="*{leaveType}">
+													<option value="" selected th:text=#{global.applyLeave.select}>Select..</option>
+													<option value="Total Leave" th:text=#{global.applyLeave.totalLeave}>Total Leave</option>
+													<option value="Paid Leave" th:text=#{global.applyLeave.paidLeave}>Paid Leave</option>
+													<span th:each="empBasicDetails : ${leaveList}" th:if="${empBasicDetails.empPersonalDetails.maritalStatus} == 'Married'">
+														<option value="Materity Leave" th:text=#{global.applyLeave.materityLeave}>Materity Leave</option>
+													</span>														
+												</select> <span class="red" th:if="${#fields.hasErrors('leaveType')}" th:errors="*{leaveType}"></span>
+														<span class="red" id="blankMsg3"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.leaveDetails}>Leave Details</label>
+											<div class="col-lg-9">
+												<textarea class="form-control" rows="5" placeholder="Enter leave Details.." id="leaveDetails" th:field="*{leaveDetails}"></textarea>
+												<span class="red" th:if="${#fields.hasErrors('leaveDetails')}" th:errors="*{leaveDetails}"></span>
+												<span class="red" id="blankMsg4"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.phoneNo}>Phone Number </label>
+											<div class="col-lg-9">
+												<input type="tel" class="form-control" placeholder="Enter phone number.." min="10" maxlength="10"  id="phoneNo" th:field="*{phoneNo}"> 
+												<span class="red" th:if="${#fields.hasErrors('phoneNo')}" th:errors="*{phoneNo}"></span>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label" th:text=#{global.applyLeave.comment}>Write a Comment</label>
+											<div class="col-lg-9">
+												<textarea class="form-control" rows="5" placeholder="Enter your comments.." th:field="*{comments}"></textarea>
+											</div>
+										</div>
+									</div>
+
+									<div class="col-xl-6">
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.fullName}>Full Name</label>
+											<div class="col-lg-9">
+											<input class="form-control" id="fullName" name="fullName" th:readonly="readonly" 
+													th:each="leave : ${leaveList}" th:value="${leave.fullName}">
+													<span class="red" id="blankMsg6"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.toDate}>To Date</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="datetime-local" id="toDate" th:field="*{toDate}"> 
+												<span class="red" th:if="${#fields.hasErrors('toDate')}" th:errors="*{toDate}"></span>
+												<span class="red" id="blankMsg7"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk"
+												th:text=#{global.applyLeave.projectCode}>Project Code </label>
+											<div class="col-lg-9">
+												<select class="form-control" id="projectCode" th:field="*{projectCode}">
+													<option value="" selected th:text=#{global.applyLeave.select}>Select</option>
+													<option value="1" th:text=#{global.applyLeave.text1}>Text 1</option>
+													<option value="2" th:text=#{global.applyLeave.text2}>Text 2</option>
+													<option value="3" th:text=#{global.applyLeave.text3}>Text 3</option>
+												</select> <span class="red"
+													th:if="${#fields.hasErrors('projectCode')}" th:errors="*{projectCode}"></span>
+													<span class="red" id="blankMsg8"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.address}>Address During Leave</label>
+											<div class="col-lg-9">
+												<textarea class="form-control" rows="5" placeholder="Enter address during Leave.." id="addrDuringLeave" th:field="*{addrDuringLeave}"></textarea>
+												<span class="red" th:if="${#fields.hasErrors('addrDuringLeave')}" th:errors="*{addrDuringLeave}"></span>
+												<span class="red" id="blankMsg9"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text=#{global.applyLeave.managerId}>Manager Id</label>
+											<div class="col-lg-9">
+												<input type="text" class="form-control" id="managerId" name="managerId" th:readonly="readonly"
+													th:each="leave : ${leaveList}" th:value="${leave.empWorkDetails.reportingManager}" > 
+													<span class="red" id="blankMsg10"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeLeaveList}" class="btn btn-outline-secondary btn-md float-left"> <em class="fa fa-chevron-left"></em> &ensp;
+								<span th:text="#{global.applyLeave.backButton}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text=#{global.applyLeave.submit}>Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

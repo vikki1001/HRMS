@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-2" th:text="#{global.newReqList.newReq}">New Request</h4>
+					<div class="col-lg-2">
+					</div>			
+					<div class="col-lg-8">
+						<a th:href="@{/getAddRequest}" class="btn add-btn pull-right plus" th:text="#{global.newReqList.addNew}">Add New</a>
+					</div>
+			</div>
+			
+			<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+			
+			<div class=" col-sm-12 form-group text-center">		
+				<label for="name-f" th:text="#{global.newReqList.reqList}"> New Request list </label>
+                        <a th:href="@{/newReqList}">
+                            <button class="btn btn-secondary rounded-pill active" th:text="#{global.newReqList.applied}">Applied</button></a>
+                        <a th:href="@{/cancelReqList}">
+                        	<button class="btn btn-secondary rounded-pill" th:text="#{global.newReqList.cancel}">Cancel</button></a>
+               </div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+									<tr>
+										<th th:text="#{global.newReqList.attendanceDay}">Attendance Day</th>								
+										<th th:text="#{global.newReqList.checkIn}">Check-In</th>										
+										<th th:text="#{global.newReqList.checkOut}">Check-Out</th>
+										<th th:text="#{global.newReqList.totalHours}">Total Hours</th>
+										<th th:text="#{global.newReqList.reason}">Reason</th>
+										<th th:text="#{global.newReqList.description}">Description</th>
+										<th th:text="#{global.newReqList.status}">Status</th>
+										<th th:text="#{global.newReqList.action}">Action</th>
+									</tr>
+								</thead>
+									<tbody>
+										<tr th:each="add : ${addReq}">
+											<td th:text="${add.date}"></td>	
+											<td th:text="${add.checkinDateTime}"></td>
+											<td th:text="${add.checkoutDateTime}"></td>
+											<td th:text="${add.timeDuration}"></td>
+											<td th:text="${add.reason}"></td>
+											<td th:text="${add.description}"></td>										
+											<td><span class="badge badge-success" th:text="${add.approvalReq}"></span></td>
+											<td> 
+				                            <a th:href="@{'/cancelAddReq/' + ${add.id}}" class="btn update" th:if="${add.approvalReq} == 'Pending'" th:text=#{global.newReqList.cancel}> Cancel </a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

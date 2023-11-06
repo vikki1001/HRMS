@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.regEmpList.heading}"> Register Employee List</h4>
+					<div class="col-lg-12">
+						<a th:href="@{/home}" class="btn add-btn pull-right plus" th:text="#{global.regEmpList.addNew}" >Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:text="#{global.regEmpList.empRegList}"> Employee list </label>
+                        <a th:href="@{/activeEmpRegList}">
+                            <button class="btn btn-secondary rounded-pill" th:text="#{global.regEmpList.activeEmp}">Active</button></a>
+                        <a th:href="@{/inActiveEmpRegList}">
+                        	 <button class="btn btn-secondary rounded-pill active" th:text="#{global.regEmpList.inActiveEmp}">Inactive</button></a>
+               </div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.regEmpList.empId}">Employee Id</th>
+											<th th:text="#{global.regEmpList.fullName}">Full Name</th>
+											<th th:text="#{global.regEmpList.coEmailId}">Company Email Id</th>
+											<th th:text="#{global.regEmpList.department}">Department</th>
+											<th th:text="#{global.regEmpList.tenantId}">Tenant Id</th>
+											<th th:text="#{global.regEmpList.image}">Image</th>
+											<th th:text="#{global.regEmpList.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="empList : ${empRegList}">
+											<td th:text="${empList.empId}"></td>
+											<td th:text="${empList.fullName}"></td>
+											<td th:text="${empList.coEmailId}"></td>
+											<td th:text="${empList.departName}"></td>
+											<td th:text="${empList.tenantId}"></td>
+											<td>
+											<span th:if="${empList.file} != null"><img th:src="@{${'/image?empId='+ empList.empId}}" width="50px" height="50px" alt=""></span>
+											<span th:if="${empList.file} == null"><img src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" width="50px" height="50px"  alt=""></span>
+											</td>
+										 <td> 
+				                            <a th:href="@{'/activeEmp/' + ${empList.empId}}" class="btn update" th:text="#{global.regEmpList.active}"> Active </a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

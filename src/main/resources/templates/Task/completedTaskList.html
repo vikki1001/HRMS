@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.task.task}">task</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-8">
+						<a th:href="@{/task}" class="btn add-btn pull-right plus" th:text="#{global.task.addNew}" >Add New</a>
+					</div>		
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+						
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:text="#{global.task.taskList}"> Task List</label>
+                        <a th:href="@{/weeklyDataList}">
+                            <button class="btn btn-secondary rounded-pill" th:text="#{global.task.task}">Task</button></a>
+                        <a th:href="@{/completedTaskList}">
+                        	<button class="btn btn-secondary rounded-pill active" th:text="#{global.task.complete}">Completed</button></a>
+               </div>
+
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.task.empId}">Employee ID</th>
+											<th th:text="#{global.task.projects}">Projects</th>
+											<th th:text="#{global.task.date}">Date</th>
+											<th th:text="#{global.task.hours}">Hours</th>
+											<th th:text="#{global.task.description}">Description</th>
+											<th th:text="#{global.task.status}">Status</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="task: ${completedTask}">
+											<td th:text="${task.empId}"></td>
+											<td th:text="${task.projects}"></td>
+											<td th:text="${task.date}"></td>
+											<td th:text="${task.hours}"></td>
+											<td th:text="${task.description}"></td>
+											<td><span class="badge badge-success" th:text="${task.status}"></span></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html> 

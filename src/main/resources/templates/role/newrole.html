@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.role.roleMst}"> Role Managment </h4>		
+			</div>
+			<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+			
+			<form th:action="@{saveRole}" method="POST"	th:object="${roleAttribute}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									
+									    <div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.role.roleCode}">ROLE CODE</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter role code here.." th:field="*{roleCode}" style="text-transform: uppercase;"> 
+												<span class="red" th:if="${#fields.hasErrors('roleCode')}" th:errors="*{roleCode}"></span>
+											</div>
+											
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.role.roleName}">ROLE NAME</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" name="fname" id="name-f" placeholder="Enter role name here.." th:field="*{roleName}"> 
+												<span class="red" th:if="${#fields.hasErrors('roleName')}" th:errors="*{roleName}"></span>
+											</div>
+										</div>
+										 <div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.role.level}">LEVEL</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{level}">
+												<option value="" selected th:text="#{global.role.select}">Select..</option>
+													<option value="ZO" th:text="#{global.role.zonalOffice}">Zonal Office</option>
+													<option value="HO" th:text="#{global.role.headOffice}">Head Office</option>
+													<option value="BO" th:text="#{global.role.branchOffice}">Branch Office</option>
+													<option value="RO" th:text="#{global.select.regionalOffice}">Regional Office</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('level')}" th:errors="*{level}"></span>
+											</div>
+											
+											<div class="col-lg-2">
+												<input type="checkbox" name="fname" id="name-f" th:field="*{isHeadRoleYn}" value="Yes"> 
+												<label class="form-label" th:text="#{global.role.isHeadRole}">IS HEAD ROLE</label>
+											</div>
+											
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeRoleList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.role.backToList}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.role.save}">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

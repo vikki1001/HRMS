@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">.
+		<div class="container-fluid">
+                <div class="row">
+                <div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="profile-tab">
+                                    <div class="d-flex" style="border: 1px solid #4545452e;" th:each="user : ${currentUser}">
+                                        <span class="avatar avatar-md brround me-3" th:if="${user.file} == null">
+                                            <img class="avatar avatar-md brad mr-3" style="margin: 16px;" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="">
+                                        </span>
+                                        <span class="avatar avatar-md brround me-3" th:if="${user.file} != null">
+                                            <img class="avatar avatar-md brad mr-3" style="margin: 16px;" th:src="@{${'/image?empId='+ user.empId}}" alt="">
+                                        </span>		
+                                        <div class="me-3 mt-0 mt-sm-1 d-block" style="margin: 13px;">
+                                            <div class="name"><span style="color:#858c93; font-size: 13px" th:text="${user.empId}"></span> - <span style="color: #3EACAF; font-weight: 600;" th:text="${user.fullName}"></span></div>
+                                            <div class="depart"><span style="color:#858c93; font-size: 13px" th:text="${user.departName}"></span> - <span style="color:#858c93; font-size: 13px" th:text="${user.empWorkDetails.designation}"></span></div>
+                                        </div>
+                                    </div>
+                                    <div class="custom-tab-1" style="margin-top: 30px;">
+
+                                        <ul class="nav nav-tabs" style="margin-bottom: 40px;">
+                                            <li class="nav-item"><a href="#my-posts" data-toggle="tab"
+                                                    class="nav-link active show" th:text="#{global.myreview.KRA}">KRA</a>
+                                            </li>
+                                            <li class="nav-item"><a href="#about-me" data-toggle="tab"
+                                                    class="nav-link" th:text="#{global.myreview.selfAppraisal}">Self Appraisal</a>
+                                            </li>
+                                            <li class="nav-item"><a href="#profile-settings" data-toggle="tab"
+                                                    class="nav-link"  th:text="#{global.myreview.reviewHistory}">Review History</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <div id="my-posts" class="tab-pane fade active show">
+                                            
+                                                <div class="table-responsive">
+                                                    <table class="table transaction-table mb-0 text-nowrap" style="width:100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th style="width: 80%;" th:text="#{global.myreview.KRA}">KRA</th>
+                                                                <th style="width: 20%;"></th>
+                                                               
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody th:each="appraisal : ${appraisalList}">
+                                                            <tr class="border-bottom" th:if="${appraisal.kraI != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraI}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionI}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageI}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraII != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraII}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionII}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageII}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraIII != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraIII}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionIII}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageIII}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraIV != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraIV}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionIV}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageIV}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraV != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraV}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionV}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageV}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraVI != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraVI}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionVI}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageVI}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraVII != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraVII}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionVII}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageVII}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraVIII != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraVIII}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionVIII}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageVIII}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraIX != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraIX}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionIX}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageIX}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr class="border-bottom" th:if="${appraisal.kraX != null}">
+                                                                <td class="ps-6 my-auto">
+                                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${appraisal.kraX}"> </span>
+                                                                    <div class="clearfix"></div>
+                                                                    <span class="text-mutedd fs-14" th:text="${appraisal.descriptionX}">  </span>
+                                                                </td>
+                                                                <td class="text-end pe-6" style="width:20%;">
+                                                                    <span class="per" th:text="${appraisal.weightageX}"></span><span>%</span> <span class="weightage">Weightage</span>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div id="about-me" class="tab-pane fade" th:each="appraisal : ${appraisalList}">
+                                                <div class="row page-titles mx-0" style="margin:1px; margin-bottom: 30px; border: 1px solid #4545452e;">
+                                                    <div class="col-sm-8 p-md-0">
+                                                        <div class="welcome-text" style="padding: 16px;" >
+                                                            <span class="h4" th:text="${month}"> </span>&nbsp;
+                                                            <span class="mb-0" style="color:#858c93;">- Submission End Date 18-sep-2022</span> 
+                                                           	<span th:if="${appraisal.selfAppStatus} == 'Draft'">
+                                                            <span class="mb-0" style="margin-left:10px; background: #4e75994d; border-radius: 20%; color: #4E7599; padding: 3px;">Drafted</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-4" style="padding: 16px;" th:if="${appraisal.selfAppStatus} == 'Pending'">
+                                                        <a th:href="@{'/selfAppraisal/' + ${appraisal.userId}}" class="btn add-btn1 pull-right plus1" th:text="#{global.myreview.addSelfAppraisal}">Add Self Appraisal</a>
+                                                    </div>
+                                                    <div class="col-lg-4" style="padding: 16px;" th:if="${appraisal.selfAppStatus} == 'Draft'">
+                                                        <a th:href="@{'/selfAppraisal/' + ${appraisal.userId}}" class="btn add-btn1 pull-right plus1" th:text="#{global.myreview.view}">View</a>
+                                                    </div>
+                                                    <div class="col-lg-4" style="padding: 16px;" th:if="${appraisal.selfAppStatus} == 'Completed'"></div>
+                                                    
+                                                </div>
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-responsive-sm" style="width:100%;">
+                                                                <thead>
+                                                                    <tr>
+		                                                                <th th:text="#{global.myreview.name}">Name</th>
+																		<th th:text="#{global.myreview.submittedOn}">Submitted On</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody th:each="appraisal : ${appraisalCycleList}">
+                                                                    <tr th:each="self : ${getEmpId}">
+                                                                        	<td>
+                                                                        		<a th:href="@{'/previousAppraisal/' + ${self.empId} + '/' + ${appraisal.date}}" th:text="${appraisal.kraId}"></a>
+                                                                        	</td>
+                                                                        <td th:text="${#dates.format(appraisal.submittedOn, 'dd-MMM-yyyy')}"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div id="profile-settings" class="tab-pane fade">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-responsive-sm" style="width:100%;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th th:text="#{global.myreview.name}">Name</th>
+																		<th th:text="#{global.myreview.submittedOn}">Submitted On</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>Appraisal Cycle April 2022 to September 2022</td>
+                                                                        <td>January 12</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Appraisal Cycle April 2022 to September 2022</td>
+                                                                        <td>January 12</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Appraisal Cycle April 2022 to September 2022</td>
+                                                                        <td>January 12</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Appraisal Cycle April 2022 to September 2022</td>
+                                                                        <td>January 12</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Appraisal Cycle April 2022 to September 2022</td>
+                                                                        <td>January 12</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+	</div>
+</body>
+</html>

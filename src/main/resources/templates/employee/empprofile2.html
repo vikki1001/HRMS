@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+                <div class="row" th:each="basic : ${empProfile}">
+                    <div class="col-xl-3 col-md-12 col-lg-12">
+                        <div class="cardemp user-pro-list overflow-hidden">
+                            <div class="cardemp-body">
+                                <div class="user-pic text-center">
+                                <form th:action="@{/uploadImage}" th:object="${empBasicDetails}" method="POST" id="upload-file-form">
+                                    <span class="avataremp avatar-xxl brround">
+                                        <div class="circle">
+		                                    <span th:if="${basic.file} == null">
+												<img class="profile-pic" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="">
+											</span>
+											
+											<span th:if="${basic.file} != null">
+												<img class="profile-pic" th:src="@{${'/image?empId='+ basic.empId}}" alt="">
+											</span>
+                                        </div>
+                                        <span class="avataremp-status bg-green"></span>
+                                    </span>
+                                  </form>
+                                    <div class="pro-user mt-3">
+                                        <h5 class="pro-user-username text-dark mb-1 fs-16" th:text="${basic.fullName}">Ayush Panwar</h5>
+                                        <h6 class="text-muted" th:text="${basic.empWorkDetails.businessUnit}">KSV-softtech</h6>
+                                        <h6 class="pro-user-desc text-muted fs-12" th:text="${basic.empWorkDetails.designation}">UI/UX Web Designer</h6>
+                                        <h6 class="pro-user-desc text-muted fs-12" th:text="${basic.departName}">IT</h6>
+                                        <h6 class="text-muted" th:text="${basic.empId}">Employee ID: </h6> 
+                                        <h6 class="text-muted" th:text="${basic.empWorkDetails.dateOfJoining}">Date of Join: </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <a href="#">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="mt-0 text-left">
+                                                <span class="fs-16 font-weight-semibold">Completed Projects</span>
+                                                <h3 class="mb-0 mt-1 text-success fs-25">1254</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="icon2 bg-succes-transparent my-auto  float-right"><em class="fas fa-project-diagram"></em></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="card">
+									<a href="#">
+										<div class="card-body">
+											<div class="row">
+												<div class="col-8">
+													<div class="mt-0 text-left">
+														<span class="fs-16 font-weight-semibold"> Inprogress Projects</span>
+														<h3 class="mb-0 mt-1 text-primary  fs-25">42</h3>
+													</div>
+												</div>
+											<div class="col-4">
+											<div class="icon2 bg-primary-transparent my-auto  float-right"> <em class="fa-solid fa-file-invoice"></em> </div>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+                        <div class="card">
+                            <a href="#">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <div class="mt-0 text-left">
+                                                <span class="fs-16 font-weight-semibold">Absent</span>
+                                                <h3 class="mb-0 mt-1 text-secondary fs-25">11</h3>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="icon2 bg-secondary-transparent my-auto  float-right"><em class="fa-solid fa-folder-plus"></em> </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        
+                    </div>
+                    <div class="col-xl-9 col-md-12 col-lg-12">
+                        <div class="tab-menu-heading hremp-tabs p-0 ">
+                            <div class="tabs-menu1">
+                                <!-- Tabs -->
+                                <ul class="nav panel-tabs">
+                                    <li class="ml-4"><a href="#tab5" class="active" data-toggle="tab" th:text="#{global.empProfile.basic}">Basic</a></li>
+                                    <li><a href="#tab6" data-toggle="tab" th:text="#{global.empProfile.personal}">Personal </a></li>
+                                    <li><a href="#tab7" data-toggle="tab" th:text="#{global.empProfile.address}">Address </a></li>
+                                    <li><a href="#tab8" data-toggle="tab" th:text="#{global.empProfile.work}">Work </a></li>
+                                    <li><a href="#tab9" data-toggle="tab" th:text="#{global.empProfile.salary}">Salary </a></li>
+                                    <li><a href="#tab10" data-toggle="tab" th:text="#{global.empProfile.passport}">Passport</a></li>
+                                    <li><a href="#tab11" data-toggle="tab" th:text="#{global.empProfile.skill}">Skills</a></li>
+                                    <li><a href="#tab12" data-toggle="tab" th:text="#{global.empProfile.certification}">Certification</a></li>
+                                    <li><a href="#tab13" data-toggle="tab" th:text="#{global.empProfile.emergency}">Emergency Contact</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="panel-body tabs-menu-body hremp-tabs1 p-0">
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="tab5">
+                                    <div class="card-body1">
+                                        <div class="row">
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.empId}">Employee ID </label>
+                                                <span2 class="text5" th:text="${basic.empId}"> AD002d </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.compEmailId}">Company Email ID </label>
+                                                <span2 class="text5" th:text="${basic.coEmailId}"> abcexample@gmail.com </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.firstName}">First Name </label>
+                                                <span2 class="text5" th:text="${basic.firstName}"> Ayush </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.middleName}">Middle Name </label>
+                                                <span2 class="text5" th:text="${basic.middleName}"> -- </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.lastName}">Last Name </label>
+                                                <span2 class="text5" th:text="${basic.lastName}"> Panwar </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.fullName}">Full Name </label>
+                                                <span2 class="text5" th:text="${basic.fullName}"> Ayush Panwar </span2>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.gender}">Gender </label>
+                                                <span2 class="text5" th:text="${basic.gender}"> Male </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.grade}">Grade </label>
+                                                <span2 class="text5" th:text="${basic.grade}"> D </span2>
+                                            </div>                                           
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab6">
+                                    <div class="card-body1">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.birthDate}">Birth Date </label>
+                                                <span2 class="text5" th:text="${#dates.format(basic.empPersonalDetails.birthDate, 'dd-MM-yyyy')}"> 24/07/200 </span2>
+                                            </div>
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.placeOfBirth}">Place Of Birth </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.placeOfBirth}"> Indore </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.age}">Age </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.age}"> 21 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.bloodGroup}">Blood Group </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.bloodGroup}"> c </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.contactNo}">Contact No. </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.contactNo}"> 9009131172 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.alterContactNo}">Alternative Contact No. </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.alternateContactNo}">9009132222 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.alterContactNo}">Marital Status </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.maritalStatus}"> unmarried </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.aadhaarNo}">Aadhaar Number </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.addharNumber}"> 707012341234 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.panNo}">PAN Number </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.panNumber}"> 707012341234 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.personalMailId1}">Personal Email ID-1 </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.personalEmailId1}"> skvsoftech@gmail.com </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2"th:text="#{global.empProfile.personalMailId2}">Personal Email ID-2 </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.personalEmailId2}"> skvsoftech@gmail.com </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.religion}">Religion </label>
+                                                <span2 class="text5" th:text="${basic.empPersonalDetails.religion}"> Hindu </span2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane" id="tab7">
+                                    <div class="card-body1">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.presentAdd}">Present Address </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.presentAddress}"> 101 kanchan sagar 16, Near Industry House, New
+                                                    Palasia, Indore, </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.parmanentAdd}">Permanent Address </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.permanentAddress}">101 kanchan sagar 16, Near Industry House </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.presentCity}">Present City </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.presentCity}"> Indore </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.parmanentCity}">Permanent City </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.permanentCity}"> Indore </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.presentState}">Present State </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.presentState}"> Madhya Pradesh </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.parmanentState}">Permanent State </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.permanentState}"> Madhya Pradesh </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.presentPinCode}">Present PinCode </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.presentPinCode}"> 452001 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.parmanentPinCode}">Permanent PinCode </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.permanentPinCode}"> 452001 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.presentCountry}">Present Country </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.presentCountry}"> India </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.parmanentCountry}">Permanent Country </label>
+                                                <span2 class="text5" th:text="${basic.empAddressDetails.permanentCountry}"> India </span2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab8">
+                                    <div class="card-body1">
+                                        <div class="row">
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.dateOfJoin}">Date of joining </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.dateOfJoining}"> 03/01/22 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.empType}">Employee type </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.employeeType}"> Permanent </span2>
+                                            </div>
+
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.businessUnit}">Business Unit </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.businessUnit}"> Univius </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.projectId}">Project ID </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.projectId}"> -- </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.kraRole}">KRA Role </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.kraRole}"> Development </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.projectName}">Project Name </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.projectName}"> HR-managment </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.designation}">Designation </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.designation}"> Consultant </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.reportingManager}">Reporting Manager </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.reportingManager}"> -- </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.baseLocation}">Base Location </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.baseLocation}"> Indore  </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.currentLocation}">Current Location </label>
+                                                <span2 class="text5" th:text="${basic.empWorkDetails.currentLocation}"> Indore </span2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab9">
+                                    <div class="card-body1">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.salaryA/CBank}">Salary A/C Bank </label>
+                                                <span2 class="text5" th:text="${basic.empSalaryDetails.salaryAccBank}"> ICICI
+                                                </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.salaryA/CNo}">Salary A/c Number </label>
+                                                <span2 class="text5" th:text="${basic.empSalaryDetails.salaryAccNo}"> 100010001000 </span2>
+                                            </div>
+
+                                            <div class="col-sm-2 col-md-4 col-lg-12 form-group">
+                                                <label class="label2" th:text="#{global.empProfile.accIFSCode}">Account IFS Code </label>
+                                                <span2 class="text5" th:text="${basic.empSalaryDetails.accIFSCode}"> ICICI12345 </span2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab10">
+                                    <div class="card-body1">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table student-data-table m-t-20">
+                                                    <thead>
+                                                        <tr>
+                                                         <th th:text="#{global.empProfile.passportNo}">Passport-Number</th>
+														<th th:text="#{global.empProfile.nameInPassport}">Name In Passport</th>
+														<th th:text="#{global.empProfile.passportAdd}">Passport Address</th>
+														<th th:text="#{global.empProfile.passportCountry}">Passport Country</th>
+														<th th:text="#{global.empProfile.passportIssueDate}">Passport Date Of Issue Date</th>
+														<th th:text="#{global.empProfile.passportExpireDate}">Passport Date Of Expire Date</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                         <td th:text="${basic.empPassportDetails.passportNo}"></td>
+														<td th:text="${basic.empPassportDetails.passportName}"></td>
+														<td th:text="${basic.empPassportDetails.passportAddress}"></td>
+														<td th:text="${basic.empPassportDetails.passportCountry}"></td>
+														<td th:text="${basic.empPassportDetails.passportDateOfIssue}"></td>
+														<td th:text="${basic.empPassportDetails.passportDateOfExpire}"></td> 
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab11">
+                                    <div class="card-body1">
+                                        <div class="row">
+
+                                            <div class="table-responsive">
+                                                <table class="table student-data-table m-t-20">
+                                                    <thead>
+                                                        <tr>
+		                                                    <th th:text="#{global.empProfile.skillName}" >Skill/Function Name</th>
+															<th th:text="#{global.empProfile.versionName}" >Version [if applicable]</th>
+															<th th:text="#{global.empProfile.profLevel}">Proficiency Level</th>
+															<th th:text="#{global.empProfile.ExperSill}">Experience in the Skill [in years]</th>
+															<th th:text="#{global.empProfile.selfRating}">Self-Rating</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                       <tr>
+															<td th:text="${basic.empSkillDetails.skill}"></td>
+															<td th:text="${basic.empSkillDetails.skillVersion}"></td>
+															<td th:text="${basic.empSkillDetails.proficiencyLevel}"></td>
+															<td th:text="${basic.empSkillDetails.experienceSkill}"></td>
+															<td th:text="${basic.empSkillDetails.selfRating}"></td>
+														</tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab12">
+                                    <div class="card-body1">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table student-data-table m-t-20">
+                                                    <thead>
+                                                        <tr>
+                                                            <th th:text="#{global.empProfile.certiName}">Certification Name/Title</th>
+                                                            <th th:text="#{global.empProfile.certiVersion}">Version [if applicable] </th>
+                                                            <th th:text="#{global.empProfile.certiDate}">Date/Year of Completion</th>
+                                                            <th th:text="#{global.empProfile.certiValidTill}">Valid Till</th>
+                                                            <th th:text="#{global.empProfile.certiScore}">Score/Grade/GPA</th>
+                                                            <th th:text="#{global.empProfile.certiCode}">Code/Roll No.</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td th:text="${basic.empCertificationDetails.certificationName}"></td>
+                                                            <td th:text="${basic.empCertificationDetails.certVersion}"></td>
+                                                            <td th:text="${basic.empCertificationDetails.certCompleteDate}"></td>
+                                                            <td th:text="${basic.empCertificationDetails.certValidTill}"></td>
+                                                            <td th:text="${basic.empCertificationDetails.certScore}"></td>
+                                                            <td th:text="${basic.empCertificationDetails.certCode}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="tab13">
+                                    <div class="card-body1">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table student-data-table m-t-20">
+                                                    <thead>
+                                                        <tr>
+		                                                    <th th:text="#{global.empProfile.emergContName1}">Emergency Contact Name(Offshore)</th>
+															<th th:text="#{global.empProfile.emergContTelNo1}">Emergency Contact TelNo.(Offshore)</th>
+															<th th:text="#{global.empProfile.emergContName2}">Emergency Contact Name(Onsite)</th>
+															<th th:text="#{global.empProfile.emergContTelNo2}">Emergency Contact TelNo.(Onsite)</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td th:text="${basic.empEmergContactDetails.emergContactName1}"></td>
+															<td th:text="${basic.empEmergContactDetails.emergContactNo1}"></td>
+															<td th:text="${basic.empEmergContactDetails.emergContactName2}"></td>
+															<td th:text="${basic.empEmergContactDetails.emergContactNo2}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>   
+</body>
+</html>

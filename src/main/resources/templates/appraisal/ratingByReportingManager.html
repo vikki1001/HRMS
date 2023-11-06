@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<form onsubmit="return levelIAppraisalValidateForm()" th:action="@{/saveRatingByReportingManager}" th:object="${empKRA}" method="POST" autocomplete="off" onclick="change()" id="level1Appraisal">
+                <div class="row page-titles mx-0">
+                    <div class="col-sm-12 p-md-0">
+                        <div class="welcome-text" style="padding: 16px;">
+                            <span class="h4" th:text="${month}"></span>&nbsp;
+                            <span class="mb-0" style="color:#858c93;">- Submission End Date 18-sep-2022</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row page-titles mx-0" style="margin:1px; margin-bottom: 30px; border: 1px solid #4545452e;">
+                    <div class=" col-sm-6 d-flex">
+                        <span class="avatar avatar-md brround me-3" th:if="${kraList.empBasicDetails.file} == null">
+                           <img class="avatar avatar-md brad mr-3" style="margin: 16px;" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="">
+                        </span>
+                        <span class="avatar avatar-md brround me-3" th:if="${kraList.empBasicDetails.file} != null">
+                           <img class="avatar avatar-md brad mr-3" style="margin: 16px;" th:src="@{${'/image?empId='+ kraList.empBasicDetails.empId}}" alt="">
+                        </span>	
+                        <div class="me-3 mt-0 mt-sm-1 d-block" style="margin: 13px;">
+                            <div class="name"><span style="color:#858c93; font-size: 13px" th:text="${kraList.empBasicDetails.empId}"></span> - <span style="color: #ed7c1f; font-weight: 600;" th:text="${kraList.empBasicDetails.fullName}"></span></div>
+                            <div class="depart"><span style="color:#858c93; font-size: 13px" th:text="${kraList.empBasicDetails.departName}"></span> - <span style="color:#858c93; font-size: 13px" th:text="${kraList.empBasicDetails.empWorkDetails.designation}"></span></div>
+                        </div>
+                    </div>
+
+                    <div class=" col-sm-3 d-flex" style=" position: -webkit-sticky; position: sticky;">
+                        <div class="me-3 mt-0 mt-sm-1 d-block" style="margin: 13px;">
+                            <div class="name" style="color:#858c93; font-size: 13px">Final Score</div>
+                            <input type="text" class="form-control" style="color: #121212; font-size: 13px" readonly="readonly" id="total2" name="totalLevelI" th:field="*{totalLevelI}"> 
+                        </div>
+                    </div>
+                    <div class=" col-sm-3 d-flex">
+                        <div class="me-3 mt-0 mt-sm-1 d-block" style="margin: 13px;">
+                            <div class="name" style="color:#858c93; font-size: 13px">Rating</div>
+                            <input type="text" class="form-control" style="color: #121212; font-size: 13px" readonly="readonly" id="levelIRating" name="levelIRating" th:field="*{levelIRating}">
+                        </div>
+                    </div>
+                </div>
+
+                    <div class="card" style="margin:1px;border: 1px solid #4545452e; margin-bottom: 60px;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="form-group row">
+                                    <input type="hidden" name="userId" th:readonly="readonly" th:each="emp : ${userDetail}" th:value="${emp.empId}">
+                                        <label class="col-lg-1 col-form-label asterisk" style="font-size:12px;">KRA ID</label>
+                                        <div class="col-lg-2">
+                                            <input type="text" class="form-control" id="kraId" th:readonly="readonly" th:value="*{kraId}">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label asterisk" style="font-size:12px;">Employee ID</label>
+                                        <div class="col-lg-2">
+                                            <input type="text" class="form-control" id="empId" name="empId" th:readonly="readonly" th:each="emp : ${userDetail}" th:value="${emp.empId}">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label"  style="font-size:12px;">Department ID</label>
+                                        <div class="col-lg-2">
+                                            <input type="text" class="form-control" id="depId" name="depId" th:readonly="readonly" th:each="emp : ${userDetail}" th:value="${emp.departName}">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label" style="font-size:12px;">Employee Grade</label>
+                                        <div class="col-lg-2">
+                                            <input type="text" class="form-control" id="grade" name="grade" th:readonly="readonly" th:each="emp : ${userDetail}"  th:value="${emp.grade}">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" style="margin-bottom: 0px;">
+                                        <label class="col-lg-1 col-form-label" style="font-size:12px;">Training Recommendation</label>
+                                        <div class="col-lg-2">
+                                            <input type="checkbox" style="margin:10px;" id="trainingReco"  th:field="*{trainingReco}"  value="Yes">
+                                        </div>
+                                        <label class="col-lg-1 col-form-label" style="font-size:12px;">Comments</label>
+                                        <div class="col-lg-8">
+                                            <textarea class="form-control" rows="2" placeholder="Enter your Comments.."
+                                            				id="trainingRecoComment"  th:field="*{trainingRecoComment}"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="row">
+                    <div class=" col-sm-12">
+                        <div class="card">
+                            <div class="table-responsive">
+                                <table class="table table-responsive-sm" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 10%;">KRA</th>
+                                            <th style="width: 30%;"></th>
+                                            <th style="width: 10%;">
+                                                <h5 class="table-avatar">                                                    
+                                                    <span class="nameid" style="font-size:11px;">Level I Rating</span>
+                                                </h5>
+                                            </th>
+                                            <th style="width: 10%;">
+                                                <h5 class="table-avatar">                                                   
+                                                    <span class="nameid" style="font-size:11px;">Level II Rating</span>
+                                                </h5>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="border-bottom" th:if="${kraList.kraI != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageI} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraI}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionI}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17" th:text="*{selfRatingI}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingI}" id="level1ApproverRatingI">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraII != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageII} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraII}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionII}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingII}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingII}" id="level1ApproverRatingII">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraIII != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageIII} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraIII}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionIII}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingIII}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingIII}" id="level1ApproverRatingIII">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraIV != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageIV} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraIV}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionIV}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingIV}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingIV}" id="level1ApproverRatingIV">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraV != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageV} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraV}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionV}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingV}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingV}" id="level1ApproverRatingV">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraVI != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageVI} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraVI}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionVI}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingVI}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingVI}" id="level1ApproverRatingVI">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraVII != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageVII} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraVII}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionVII}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingVII}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingVII}" id="level1ApproverRatingVII">
+                                            </td>
+                                        </tr>                                        
+                                      <tr class="border-bottom" th:if="${kraList.kraVIII != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageVIII} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraVIII}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionVIII}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingVIII}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingVIII}" id="level1ApproverRatingVIII">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraIX != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageIX} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraIX}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionIX}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17"  th:text="*{selfRatingIX}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingIX}" id="level1ApproverRatingIX">
+                                            </td>
+                                        </tr>                                        
+                                        <tr class="border-bottom" th:if="${kraList.kraX != null}">
+                                            <td class="text-end pe-6" style="padding:1.75rem; text-align: center;">
+                                                <span class="per" th:text="${kraList.weightageX} + '%'"></span> <span class="weightage">Weightage</span>
+                                            </td>
+                                            <td class="d-flex ps-6" style="padding:1.75rem;">
+                                                <div class="my-auto">
+                                                    <span class="mb-1 font-weight-semibold fs-17" th:text="${kraList.kraX}"></span>
+                                                    <div class="clearfix"></div>
+                                                    <small class="text-mutedd fs-14" th:text="${kraList.descriptionX}"></small>
+                                                </div>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17" th:text="*{selfRatingX}"></span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            				th:field="*{level1ApproverRatingX}" id="level1ApproverRatingX">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="padding:1.75rem;"></td>
+                                            <td class="text-end pe-6" style="padding:1.75rem;">
+                                                <span class="mb-1 font-weight-semibold fs-17 float-right">Total  Average</span>
+                                            </td>
+                                            <td><span class="mb-1 font-weight-semibold fs-17" th:text="*{totalSelf}">4.00</span></td>
+                                            <td style="padding:1.75rem;">
+                                            <input type="text" class="form-control" style="width:50px; font-size: 12px; height:30px; border: 1px solid #6c757d63;"
+                                            						readonly="readonly" id="total" name="totalLevelI" th:field="*{totalLevelI}">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            <div class="button-footer">
+					<div class="form-group row">
+						<div class="col-sm-10  mb-0">
+							<a th:href="@{/selfAppraisalList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp; 
+								<span th:text="#{global.ratingOfRM.backToList}">Back to list </span></a>
+						</div>
+							<div class="col-sm-1 mb-0">
+								<button class="btn btn-primary2 btn-lg  float-right" type="submit" name="action" value="save"> Save </button>
+							</div>
+							<div class="col-sm-1 mb-0">
+								<button class="btn btn-primary2 btn-lg  float-right" type="submit" name="action" value="saveDraft"> Save Draft </button>
+							</div>
+					</div>
+				</div>
+				</form>
+           </div>
+	</div>
+</body>
+</html>

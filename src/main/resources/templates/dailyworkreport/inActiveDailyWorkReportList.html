@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.dailyWorkReport.dailyWorkReport}"> Daily Work Report</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-8">
+						<a th:href="@{/dailyWorkReport}" class="btn add-btn pull-right plus" th:text="#{global.dailyWorkReport.addNew}" >Add New</a>
+					</div>		
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+						
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:text="#{global.dailyWorkReport.workReport}">Work Report</label>
+                        <a th:href="@{/activeWorkReport}">
+                            <button class="btn btn-secondary rounded-pill" th:text="#{global.dailyWorkReport.active}">Active</button></a>
+                        <a th:href="@{/inActiveWorkReport}">
+                        	<button class="btn btn-secondary rounded-pill active" th:text="#{global.dailyWorkReport.inActive}">InActive</button></a>
+               </div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.dailyWorkReport.fullName}">Full NAME</th>
+											<th th:text="#{global.dailyWorkReport.date}">DATE</th>
+											<th th:text="#{global.dailyWorkReport.officeInTime}">Office In Time</th>
+										    <th th:text="#{global.dailyWorkReport.officeOutTime}">Office Out Time</th>
+										    <th th:text="#{global.dailyWorkReport.projectName}">Project Name</th>
+										    <th th:text="#{global.dailyWorkReport.module}">Module</th>
+										    <th th:text="#{global.dailyWorkReport.description}">Description</th>
+										    <th th:text="#{global.dailyWorkReport.status}">Status</th>
+										    <th th:text="#{global.dailyWorkReport.analysis}">Analysis</th>
+										    
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="dailyWorkReport : ${workReportList}">
+											<td th:text="${dailyWorkReport.fullName}"></td>
+											<td th:text="${dailyWorkReport.date}"></td>
+											<td th:text="${dailyWorkReport.officeInTime}"></td>
+											<td th:text="${dailyWorkReport.officeOutTime}"></td>
+											<td th:text="${dailyWorkReport.projectName}"></td>
+											<td th:text="${dailyWorkReport.module}"></td>
+											<td th:text="${dailyWorkReport.description}"></td>
+											<td th:text="${dailyWorkReport.status}"></td>
+											<td th:text="${dailyWorkReport.analysis}"></td>
+											
+				                        </tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

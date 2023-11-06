@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+                <h4 class="cards-title col-lg-2" th:text="#{global.allService.employees}">Employees</h4>
+                <div class="col-sm-12 form-group">
+                    <div class="line">
+                        <hr>
+                    </div>
+                </div>
+
+            <div class="row staff-grid-row">
+               <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3" th:each="allEmp : ${allEmployee}">
+                   <div class="profile-widget">
+                            <div class="profile-img">
+                                <a th:href="@{'/profile/' + ${allEmp.empId}}" class="avatar" th:if="${allEmp.file} != null"><img th:src="@{${'/image?empId='+ allEmp.empId}}" alt=""></a>
+                                <a th:href="@{'/profile/' + ${allEmp.empId}}" class="avatar" th:if="${allEmp.file} == null"><img th:src="@{/images/profile/profile.png}" src="../../../images/profile/profile.png" alt=""></a>
+                            </div>
+
+                            <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a th:href="@{'/profile/' + ${allEmp.empId}}" th:text="${allEmp.fullName}">  </a></h4>
+                            <div class="small text-muted" th:text="${allEmp.empWorkDetails.designation}">  </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

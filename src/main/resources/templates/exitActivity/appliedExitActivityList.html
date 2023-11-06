@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.exitActivity.exitActivity}">Pending Exit Activity for Approval/Reject</h4>
+					<div class="col-lg-4">
+					</div>					
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+						
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.exitActivity.empId}">Employee ID</th>
+											<th th:text="#{global.exitActivity.employeeType}">Employee Type</th>
+											<th th:text="#{global.exitActivity.reqLastWorkingDte}">Request Last Working Date</th>
+											<th th:text="#{global.exitActivity.regDate}">Registration Date Will be the Current Date</th>
+											<th th:text="#{global.exitActivity.description}">Description</th>
+											<th th:text="#{global.exitActivity.status}">Status</th>
+											<th th:text="#{global.exitActivity.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="exitActivity : ${exitActivityList}">
+											<td th:text="${exitActivity.empId.empId}"></td>
+											<td th:text="${exitActivity.employeeType}"></td>
+											<td th:text="${exitActivity.reqLastWorkingDte}"></td>
+											<td th:text="${exitActivity.regDate}"></td>
+											<td th:text="${exitActivity.description}"></td>
+											<td><span class="badge badge-success" th:text="${exitActivity.status}"></span></td>		
+				                            <td>
+				                            <a th:href="@{'/acceptExitActivity/' + ${exitActivity.id}}" class="btn update" th:text="#{global.exitActivity.acceptExitActivity}" th:if="${exitActivity.flag} != 'Y'">Accept Exit Activity </a> 
+				                            <a th:href="@{'/rejectExitActivity/' + ${exitActivity.id}}" class="btn update" th:text="#{global.exitActivity.rejectExitActivity}" th:if="${exitActivity.flag} != 'Y'">Reject Exit Activity</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

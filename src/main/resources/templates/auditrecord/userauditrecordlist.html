@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.audit.userAudit}">User Audit</h4>
+				<!-- JavaScript DataTable export to PDF with custom name & formatting -->
+				<input type="hidden" id="dtTitle" th:value="#{global.audit.userAudit}">
+			</div>
+			<div class="col-sm-12" style="margin-bottom:50px;">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+		<form onsubmit="return userValidateForm()" th:action="@{/between/fromortoorloginId}" method="GET"	th:object="${AuditRecord}">
+					<div class="row">
+						<div class="col-sm-4 form-group">
+							<label class="asterisk" th:text="#{global.audit.fromdate2}">From Date</label> 
+								<input class="form-control input-lg" type="date" id="date" name="from" /> 
+								<span class="red" id="blankMsg"> </span>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="asterisk" th:text="#{global.audit.todate2}">To Date</label> 
+								<input class="form-control input-lg" type="date" id="date1" name="to" /> 
+								<span class="red" id="blankMsgs"> </span>
+						</div>
+						<div class="col-sm-4 form-group">
+							<label class="asterisk" th:text="#{global.audit.username2}">Username</label> 
+								<select class="form-control" id="user" name="loginId">
+								<option value="" selected th:text="#{global.audit.select}">Select..</option>
+								<option th:each="user : ${allUsers}" th:value="${user.loginId}"	th:text="${user.loginId} " />
+							</select>
+							<span class="red" id = "userMsg"> </span>
+						</div>
+					<div class="col-sm-12 mb-0">
+						<div class="btn-group float-right">
+							<button type="reset" class="btn btn-tab btn-lg" onclick="myFunction()" th:text="#{global.audit.resetButton}">Reset </button> &nbsp;&nbsp;
+							<button type="submit" class="btn btn-tab btn-lg " th:text="#{global.audit.generatereportButton}"> Generate Report</button>
+						</div>
+					</div>
+			</div>
+					
+					<div class="col-sm-12 form-group">
+						<div class="card">
+							<!-- <div class="card-header">
+							</div> -->
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="datatable" class="display" style="width:100%">
+										<thead>
+                                            <tr>
+                                                <th th:text="#{global.audit.createdDate}">Log Date</th>
+												<th th:text="#{global.audit.modulename}">Module Name</th>
+												<th th:text="#{global.audit.menuCode}">Menu Name</th>
+												<th th:text="#{global.audit.activityCode}">Activity</th>
+												<th th:text="#{global.audit.remarks}">Remark</th>
+												<th th:text="#{global.audit.loginId}">Username</th>
+												<th th:text="#{global.audit.role}">Role</th>
+												<th th:text="#{global.audit.branchCode}">Branch Code</th>
+												<th th:text="#{global.audit.ipAdr}">IP Address</th>
+                                            </tr>
+                                         </thead>
+                                            <tbody>
+											<tr th:each="auditrecord : ${listAuditRecord}">
+												<td th:text="${auditrecord.createdDate}"></td>
+												<td th:text="${auditrecord.subSectionCode}"></td>
+												<td th:text="${auditrecord.menuCode}"></td>
+												<td th:text="${auditrecord.activityCode}"></td>
+												<td th:text="${auditrecord.remarks}"></td>
+												<td th:text="${auditrecord.loginId}"></td>
+												<td th:text="${auditrecord.roleCode}"></td>
+												<td th:text="${auditrecord.branchCode}"></td>
+												<td th:text="${auditrecord.ipAddr}"></td>
+											</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

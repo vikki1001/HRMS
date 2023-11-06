@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.expenseReimb.expenseReimb}">Pending Expense Reimbursement for Approval/Reject </h4>
+					<div class="col-lg-4">
+					</div>						
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>						
+				
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.expenseReimb.employeeName}">EMPLOYEE NAME</th>
+											<th th:text="#{global.expenseReimb.date}">DATE</th>
+											<th th:text="#{global.expenseReimb.reimbursementType}">REIMBURSEMENT</th>
+											<th th:text="#{global.expenseReimb.currency}">CURRENCY</th>
+											<th th:text="#{global.expenseReimb.attachment}">ATTACHMENT</th>
+											<th th:text="#{global.expenseReimb.expenseAmount}">EXPENSE AMOUNT</th>
+											<th th:text="#{global.expenseReimb.reasonsForExpense}">REASON FOR EXPENSE</th>
+											<th th:text="#{global.expenseReimb.status}">Status</th>
+											<th th:text="#{global.expenseReimb.action}">ACTION</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="expenseReimb : ${expenseReimbList}">
+											<td th:text="${expenseReimb.employeeName}"></td>
+											<td th:text="${expenseReimb.date}"></td>
+											<td th:text="${expenseReimb.reimbursementType}"></td>
+											<td th:text="${expenseReimb.currency}"></td>
+											<td>
+											<img th:src="@{${'/attachment?id='+ expenseReimb.id}}" width="50px" height="50px"  alt="">
+											</td>
+											<td th:text="${expenseReimb.expenseAmount}"></td>
+											<td th:text="${expenseReimb.reasonsForExpense}"></td>
+											<td><span class="badge badge-success"  th:text="${expenseReimb.status}"></span></td>
+											<td> 
+				                            <a th:href="@{'/acceptExpenseReimb/' + ${expenseReimb.id}}" class="btn update" th:text="#{global.expenseReimb.acceptExpenseReimb}" th:if="${expenseReimb.flag} != 'Y'">Accept Expense Reimbursement</a> 
+				                            <a th:href="@{'/rejectExpenseReimb/' + ${expenseReimb.id}}" class="btn update" th:text="#{global.expenseReimb.rejectExpenseReimb}" th:if="${expenseReimb.flag} != 'Y'">Reject Expense Reimbursement</a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">	
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.role.roleMst}">Role Management</h4>
+					
+					<div class=" col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-8">
+						<a th:href="@{/roleForm}" class="btn add-btn pull-right plus" th:text="#{global.role.addNew}" >Add New</a>
+					</div>		
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+						
+				<div class=" col-sm-12 form-group text-center">		
+				<label for="name-f" th:text="#{global.role.roleList}"> Role list </label>
+                        <a th:href="@{/activeRoleList}">
+                            <button class="btn btn-secondary rounded-pill active" th:text="#{global.role.activeRole}">Active</button></a>
+                        <a th:href="@{/inActiveRoleList}">
+                        	<button class="btn btn-secondary rounded-pill" th:text="#{global.role.inactiveRole}">Inactive</button></a>
+               </div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.role.roleCode}">ROLE CODE</th>
+											<th th:text="#{global.role.roleName}">ROLE NAME</th>
+											<th th:text="#{global.role.level}">LEVEL</th>
+											<th th:text="#{global.role.isHeadRole}">IS HEAD ROLE</th>
+											<th th:text="#{global.role.action}">ACTION</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="role : ${listRole}">
+											<td th:text="${role.roleCode}"></td>
+											<td th:text="${role.roleName}"></td>
+											<td th:text="${role.level}"></td>
+											<td th:text="${role.isHeadRoleYn}"></td>
+											<td><a th:href="@{'/roleUpdate/' + ${role.roleId}}" class="btn update" th:text="#{global.role.edit}"> Edit </a> 
+				                            <a th:href="@{'/deactiveRole/' + ${role.roleId}}" class="btn update" th:text="#{global.role.deactive}"> Deactive </a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

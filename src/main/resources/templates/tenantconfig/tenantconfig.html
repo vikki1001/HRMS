@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.tenant.basicAppConfig}">Basic Application Config </h4>		
+			</div>
+			<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+			<form th:action="@{saveTenantConfig}" method="POST" th:object="${tenantConfigAttribute}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.selectCountry}">Country</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{country}">
+													<option value="" selected  th:text="#{global.tenant.select}">Select..</option>
+													<option value="1">India</option>
+													<option value="2">Canada</option>
+													<option value="3">Germany</option>
+													<option value="4">United Kingdom</option>
+												</select> <span class="red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.selectCurrency}">Select Currency</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{currency}">
+													<option value="" selected  th:text="#{global.tenant.select}">Select..</option>
+													<option value="1">Rupee</option>
+													<option value="2">Dollar</option>
+													<option value="3">Euro</option>
+													<option value="4">United States Dollar</option>
+												</select> <span class="red" th:if="${#fields.hasErrors('currency')}" th:errors="*{currency}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.dateFormat}">Date Format</label>
+											<div class="col-lg-4">
+												<input type="date" class="form-control"  placeholder="Enter date here.." th:field="*{dateFormat}"> 
+												<span class="red" th:if="${#fields.hasErrors('dateFormat')}" th:errors="*{dateFormat}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.timeFormat}">Time Format</label>
+											<div class="col-lg-4">
+												<input type="time" class="form-control" placeholder="Enter time here.." th:field="*{timeFormat}">
+												<span class="red" th:if="${#fields.hasErrors('timeFormat')}" th:errors="*{timeFormat}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.sessionTimeout}">Session Timeout (Seconds)</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter session timeout here.." th:field="*{sessionTimeOutInMin}"> 
+												<span class="red" th:if="${#fields.hasErrors('sessionTimeOutInMin')}" th:errors="*{sessionTimeOutInMin}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.newCustDays}">New Customer Days</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter new customer days here.." th:field="*{newCustomerDays}">
+												<span class="red" th:if="${#fields.hasErrors('newCustomerDays')}" th:errors="*{newCustomerDays}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.decimalCount}">Decimal Count</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter decimal count here.." th:field="*{numberDecimalCount}"> 
+												<span class="red" th:if="${#fields.hasErrors('numberDecimalCount')}" th:errors="*{numberDecimalCount}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.amountLength}">Amount Length</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter amount length here.." th:field="*{amountLength}">
+												<span class="red" th:if="${#fields.hasErrors('amountLength')}" th:errors="*{amountLength}"></span>
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.tenant.activeSessionUser}">Active Session User</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{isActive}">
+													<option value="" selected  th:text="#{global.tenant.select}">Select..</option>
+													<option value="1">admin</option>
+													<option value="2">user</option>
+													<option value="3">superuser</option>
+													<option value="4">admin2</option>
+												</select> <span class="red" th:if="${#fields.hasErrors('isActive')}" th:errors="*{isActive}"></span>
+											</div>
+										</div>
+					
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom:16px;">
+						<div class="col-sm-12 margin">
+							<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.tenant.save}">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

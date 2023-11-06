@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+<th:block th:fragment="menus">
+	<ul class="metismenu" id="menu">
+		<li th:each="event : ${session.webSession.menuLHMap}">
+			<a class="has-arrow" href="javascript:void()" aria-expanded="false">
+				<span th:each="eventItem : ${event.value}"> <i th:class="${eventItem.menuIcon}"> </i></span> &nbsp;
+				<span class="nav-text" th:text="#{${event.key}}" ></span>
+			</a>
+	
+			<ul aria-expanded="false">
+				<li class="menuicon" th:each="eventItem : ${event.value}">
+					<a th:href="@{${eventItem.menuFilePath}}" th:text="#{${eventItem.menuName}}"></a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</th:block>			
+</body>
+</html>

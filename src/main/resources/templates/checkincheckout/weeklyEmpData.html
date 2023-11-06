@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.checkInCheckOut.dataTable2}">Weekly Time Summary</h4>
+				<div class="col-lg-4">
+		    	</div>
+			</div>
+			
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+				<div class="col-sm-12 form-group">
+						<div class="card">
+						<div class="card-header"></div>
+						<div class="card-body">
+						<div class="table-responsive">
+						<table id="example" class="display" style="width:100%">
+							<thead>
+								<tr>
+									<th th:text="#{global.checkInCheckOut.date}">Date</th>
+									<th th:text="#{global.checkInCheckOut.day}">Day</th>
+									<th th:text="#{global.checkInCheckOut.inDateTime}">CheckIn DateTime</th>
+									<th th:text="#{global.checkInCheckOut.outDateTime}">CheckOut DateTime</th>
+									<th th:text="#{global.checkInCheckOut.totalTime}">Total Time</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr th:each="weekly : ${weeklyList}">
+									<td th:text="${weekly.date}"></td>
+									<td th:text="${weekly.dayOfTheWeek}"></td>
+									<td th:text="${weekly.checkinDateTime}"></td>
+									<td th:text="${weekly.checkoutDateTime}"></td>
+									<td th:text="${weekly.timeDuration}"></td>
+								</tr>
+							</tbody>
+						</table>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

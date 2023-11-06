@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+    <style>
+        body {
+            font-family: Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+            text-align: center;
+            padding-left: 400px;
+            padding-right: 400px;
+        }
+        h4 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #444141;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+        }
+        h5 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2d5580;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        table {
+            margin-bottom: 1rem;
+            color: var(--gray);
+            font-family: 'Josefin Sans', sans-serif;
+            width: 100%;
+        }
+        table th {
+            padding: 0.75rem;
+            vertical-align: baseline;
+            border: 1px solid rgb(207, 205, 205);
+            font-size: 14px;
+            color: #2e2d2d;
+        }
+
+        table td {
+            padding: 0.75rem;
+            vertical-align: baseline;
+            border: 1px solid rgb(207, 205, 205);
+            font-size: 12px;
+            color: #666565;
+        }
+        table thead th {
+            vertical-align: baseline;
+        }
+        tr {
+            text-align: left;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h4> Employees who do not complete 9 hours of work </h4>
+    <h5> Employee List </h5>
+    <table>
+        <thead>
+            <tr>
+                <th>User Id</th>
+                <th>Created Date</th>
+                <th>Check In Date Time</th>
+                <th>Check Out Date Time</th>
+                <th>Total Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="userList : ${userList}">
+                <td th:text="${userList.userId}"></td>
+                <td th:text="${userList.createdDate}"></td>
+                <td th:text="${userList.checkinDateTime}"></td>
+                <td th:text="${userList.checkoutDateTime}"></td>
+                <td th:text="${userList.timeDuration}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

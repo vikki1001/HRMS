@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" th:href="@{/images/Favicon.png}" href="../../../images/Favicon.png">
+</head>
+<body>
+	<div id="preloader">
+		<div class="sk-three-bounce">
+			<div class="sk-child sk-bounce1"></div>
+			<div class="sk-child sk-bounce2"></div>
+			<div class="sk-child sk-bounce3"></div>
+		</div>
+	</div>
+
+	<div id="main-wrapper">
+		<div class="header">
+			<th:block th:replace="fragments/header :: header" />
+		</div>
+
+		<div class="quixnav">
+			<div class="quixnav-scroll">
+				<div class="quixnav menu">
+					<th:block th:replace="fragments/menu :: menus" />
+				</div>
+			</div>
+		</div>
+		<div class="content-body">
+			<th:block layout:fragment="content" />
+		</div>
+	</div>
+
+	<!-- jQuery -->
+	<script src="../../../js/datatable/jquery-3.5.1.js" th:src="@{/js/datatable/jquery-3.5.1.js}"></script>
+	<!-- Main JS -->
+	<script src="../../../vendor/global/global.min.js" th:src="@{/vendor/global/global.min.js}"></script>
+	<script src="../../../js/quixnav-init.js" th:src="@{/js/quixnav-init.js}"></script>
+	<script src="../../../js/custom.min.js" th:src="@{/js/custom.min.js}"></script>
+	<!-- VectorMap -->
+	<script src="../../../vendor/chart.js/Chart.bundle.min.js" th:src="@{/vendor/chart.js/Chart.bundle.min.js}"></script>
+	<!-- Owl Carousel -->
+	<script src="../../../vendor/owl-carousel/js/owl.carousel.min.js" th:src="@{/vendor/owl-carousel/js/owl.carousel.min.js}"></script>
+	<!-- Counter Up -->
+	<script src="../../../vendor/jqvmap/js/jquery.vmap.min.js" th:src="@{/vendor/jqvmap/js/jquery.vmap.min.js}"></script>
+	<script src="../../../vendor/jqvmap/js/jquery.vmap.usa.js" th:src="@{/vendor/jqvmap/js/jquery.vmap.usa.js}"></script>
+
+	<!-- Other Validation -->
+	<script src="../../../js/script.js" th:src="@{/js/script.js}"></script>
+	<script src="../../../js/sweet.js" th:src="@{/js/sweet.js}"></script>
+	<!-- Animation JS -->
+	<script src="../../../js/animate.js" th:src="@{/js/animate.js}"></script>
+	<script src="./js/owl.js "></script>
+
+	<!-- Multi-Step Form -->
+	<script src="../../../js/multi-step-form/jquery.validate.min.js" th:src="@{/js/multi-step-form/jquery.validate.min.js}"></script>
+	<script src="../../../js/multi-step-form/validation.js" th:src="@{/js/multi-step-form/validation.js}"></script>
+	<script src="../../../js/multi-step-form/multi-form.js" th:src="@{/js/multi-step-form/multi-form.js}"></script>
+
+	<!-- DataTable -->
+	<script src="../../../js/datatable/jquery.dataTables.min.js" th:src="@{/js/datatable/jquery.dataTables.min.js}"></script>
+	<script src="../../../js/datatable/dataTables.buttons.min.js" th:src="@{/js/datatable/dataTables.buttons.min.js}"></script>
+	<script src="../../../js/datatable/buttons.html5.min.js" th:src="@{/js/datatable/buttons.html5.min.js}"></script>
+	<script src="../../../js/datatable/jszip.min.js" th:src="@{/js/datatable/jszip.min.js}"></script>
+	<script src="../../../js/datatable/pdfmake.min.js" th:src="@{/js/datatable/pdfmake.min.js}"></script>
+	<script src="../../../js/datatable/vfs_fonts.js" th:src="@{/js/datatable/vfs_fonts.js}"></script>
+	<script src="../../../js/datatable/buttons.print.min.js" th:src="@{/js/datatable/buttons.print.min.js}"></script>
+
+	<script>
+		/* DataTable with Export */
+		$(document).ready(function() {
+			$('#datatable').DataTable({
+				"bSort" : false,
+				dom : 'Bfrtip',
+				buttons : [ {
+					extend : 'copyHtml5',
+					footer : true,
+					title : function() {
+						return $('#dtTitle').val()
+					}
+				}, {
+					extend : 'excelHtml5',
+					footer : true,
+					title : function() {
+						return $('#dtTitle').val()
+					}
+				}, {
+					extend : 'csvHtml5',
+					footer : true,
+					title : function() {
+						return $('#dtTitle').val()
+					}
+				}, {
+					extend : 'pdfHtml5',
+					download : 'open',
+					footer : true,
+					title : $('#dtTitle').val(),
+					customize : function(doc) {
+						doc.styles.title = {
+							color : 'black',
+							fontSize : '25',
+							background : 'white',
+							alignment : 'center'
+						}
+					}
+				}, {
+					extend : 'print',
+					footer : true,
+					title : function() {
+						return $('#dtTitle').val()
+					}
+				} ]
+			});
+		});
+
+		/* DataTable without Export */
+		$(document).ready(function() {
+			$('#example').DataTable({
+				"bSort" : false
+			});
+		});
+
+		/* Future Date Validation */
+		var today = new Date().toISOString().split('T')[0];
+		document.getElementsByName("from")[0].setAttribute('max', today);
+		document.getElementsByName("to")[0].setAttribute('max', today);
+	</script>
+
+	<script>		
+		/* Reset & Change Password Validation  */
+		const pswrd_1 = document.querySelector("#pswrd_1");
+		const pswrd_2 = document.querySelector("#pswrd_2");
+		const errorText = document.querySelector(".error-text");
+		const showBtn = document.querySelector(".show");
+		const btn = document.querySelector("button");
+
+		function active() {
+			if (pswrd_1.value.length >= 6) {
+				btn.removeAttribute("disabled", "");
+				btn.classList.add("active");
+				pswrd_2.removeAttribute("disabled", "");
+			} else {
+				btn.setAttribute("disabled", "");
+				btn.classList.remove("active");
+				pswrd_2.setAttribute("disabled", "");
+			}
+		}
+
+		function myFunction() {
+			if (pswrd_1.value != pswrd_2.value) {
+				errorText.style.display = "block";
+				errorText.classList.remove("matched");
+				errorText.textContent = "Error! Confirm Password Not Match";
+				return false;
+			} else {
+				errorText.style.display = "block";
+				errorText.classList.add("matched");
+				errorText.textContent = "Confirm Password Matched";
+				return true;
+			}
+		}
+		function active_2() {
+			if (pswrd_2.value != "") {
+				showBtn.style.display = "block";
+				showBtn.onclick = function() {
+					if ((pswrd_1.type == "password") && (pswrd_2.type == "password")) {
+						pswrd_1.type = "text";
+						pswrd_2.type = "text";
+						this.textContent = "Hide";
+						this.classList.add("active");
+					} else {
+						pswrd_1.type = "password";
+						pswrd_2.type = "password";
+						this.textContent = "Show";
+						this.classList.remove("active");
+					}
+				}
+			} else {
+				showBtn.style.display = "none";
+			}
+		}
+	</script>
+
+	<script>	
+		/* Falsh Message TimeOut */
+		$(function() {
+			$('#alertMessage').delay(5000).fadeOut();
+		});
+	</script>
+
+	<script>
+		/* Toast Message */
+		function myFunction() {
+			var x = document.getElementById("snackbar");
+			x.className = "show";
+			setTimeout(function() {
+				x.className = x.className.replace("show", "");
+			}, 3000);
+		}
+	</script>
+
+	<script>
+		$('input.deletable').wrap('<span class="deleteicon"></span>').after(
+				$('<span>x</span>').click(function() {
+					$(this).prev('input').val('').trigger('change').focus();
+				}));
+	</script>
+
+	<!-- -------------------------------------------------------------------------------------------------------------------------- -->
+	<script>
+		/* Check-In Enable & Disable Button in Attendance */
+		function disableButton() {
+			var x = document.getElementById("enable");
+			var y = document.getElementById("disable");
+
+			x.style.display = "none";
+			y.style.display = "block";
+		}
+	</script>
+
+	<!-- First Button -->
+	<script>
+		/* For Check-In & Check-Out using Ajax Dashboard*/
+		$('#enable').click(function() {
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : '/ksvsofttech/saveCheckIn',
+				success : function(data) {
+					console.log("CHECKIN SUCCESS ::: ", data);
+					onSuccess(data);
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		});
+
+		function onSuccess(data) {
+			let html = `<input class="btn66 btn-primary punch-btn" type="button" value="CheckOut" id="disable" onclick="enableButton1()"/>`
+			$('#disableajaxbutton1').html(html);
+		}
+
+		/* CheckIn DateTime */
+		var countDownDate = new Date(document.getElementById("checkinDateTime").value);
+		console.log("CHECKINTIME ::: = " + countDownDate);
+		
+
+		// Update the count down every 1 second
+		var x = setInterval(function() {
+			// Get today's date and time
+			var now = new Date().getTime();
+			// Find the distance between now and the count down date
+			var distance = now - countDownDate;
+			// Time calculations for days, hours, minutes and seconds
+			var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+			var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+			var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+			if(countDownDate != 'Invalid Date') {
+				// Output the result in an element with id="demo"
+				document.getElementById("coundownStart").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+			}		
+
+			// If the count down is over, write some text 
+			if (distance < 0) {
+				clearInterval(x);
+				document.getElementById("coundownStart").innerHTML = "EXPIRED";
+			}
+		}, 1000);
+
+		$('#disable').click(function() {
+			clearTimeout(x);
+		});
+	</script>
+
+	<script>
+		/*Check-Out Enable & Disable Button Dashboard*/
+		$('#disable').click(function() {
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : '/ksvsofttech/saveCheckOut',
+				success : function(data) {
+					console.log("CHECKOUT SUCCESS ::: ", data);
+					var x = document.getElementById("disableajaxbutton");
+					x.style.display = "none";
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		});
+	</script>
+
+	<script>
+		/*Check-Out 2 Enable & Disable Button Dashboard */
+		function enableButton1() {
+			$.ajax({
+				type : 'GET',
+				contentType : 'application/json',
+				url : '/ksvsofttech/saveCheckOut',
+				success : function(data) {
+					console.log("CHECKOUT SUCCESS ::: ", data);
+					var x = document.getElementById("disableajaxbutton1");
+					x.style.display = "none";
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		}
+	</script>
+
+	<script>
+		$("#enable").click(function() {
+							// Set the date we're counting down to
+							var countDownDate = new Date().getTime();
+							console.log("CHECKINTIME ::: = " + countDownDate);
+							// Update the count down every 1 second
+							var x = setInterval(
+									function() {
+										// Get today's date and time
+										var now = new Date().getTime();
+										// Find the distance between now and the count down date
+										var distance = now - countDownDate;
+										// Time calculations for days, hours, minutes and seconds
+										var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+										var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+										var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+										var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+										// Output the result in an element with id="demo"
+										document.getElementById("coundownStart1").innerHTML = ('0' + hours).slice(-2) + ":" + ('0' + minutes).slice(-2) + ":" + ('0' + seconds).slice(-2)  + " hrs";
+
+										// If the count down is over, write some text 
+										if (distance < 0) {
+											clearInterval(x);
+											document.getElementById("coundownStart1").innerHTML = "EXPIRED";
+										}
+									}, 1000);
+
+							$('#disable').click(function() {
+								clearTimeout(x);
+							});
+						});
+	</script>
+
+	<!-- -------------------------------------------------------------------------------------------------------------------------- -->
+	
+
+<!-- -------------------------------------------------------------------------------------------------------------------------- -->
+	<!-- Upload Image by Employee (empProfile) -->
+	<script>
+		$(document).ready(function() {
+			$("#upload-file-input").on("change", uploadFile);
+
+			var readURL = function(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('.profile-pic').attr('src', e.target.result);
+					}
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+
+			$(".file-upload").on('change', function() {
+				readURL(this);
+			});
+
+			$(".upload-button").on('click', function() {
+				$(".file-upload").click();
+			});
+		});
+
+		function uploadFile() {
+			var form = $("#upload-file-form")[0];
+			var data = new FormData(form);
+			$.ajax({
+				url : "/ksvsofttech/uploadImage",
+				type : "POST",
+				data : data,
+				enctype : 'multipart/form-data',
+				processData : false,
+				contentType : false,
+				cache : false,
+				success : function(data) {
+					window.location.reload();
+				},
+				error : function(e) {
+					console.log("ERROR : ", e);
+				}
+			});
+		}
+	</script>
+
+	<script>
+		/* Add New Notification Red Alert */
+		$(document).ready(function() {
+					$.ajax({
+						url : "/ksvsofttech/addNewReqNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+	<script>
+		/* Exit Activity Notification Red Alert */
+		$(document).ready(function() {
+					$.ajax({
+						url : "/ksvsofttech/exitActivityNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+	
+	<script>
+		/* Expense Notification Red Alert */
+		$(document).ready(function() {
+					$.ajax({
+						url : "/ksvsofttech/expenseNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+	<script>
+		/* Leave Notification Red Alert */
+		$(document).ready(function() {
+					$.ajax({
+						url : "/ksvsofttech/leaveNotificationAlert",
+						contentType : 'application/json',
+						type : "GET",
+						success : function(data) {
+							if (data == 'Unread') {
+								var element = document.getElementById("notification-red");
+								var data = element.classList.add("pulse-css");
+							} else {
+								//console.log("Read : ", data);
+							}
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script>
+
+
+	<!-- <script>
+		/*View Payroll Slip*/
+		$('#viewPayrollSlip').click(function() {
+					var month = $("#month").val();
+					var year = $("#ddlYears").val();
+					console.log('month ::: ' + month + ' - Year ::: ' + year)
+					$.ajax({
+						type : 'GET',
+						contentType : 'application/json',
+						url : '/ksvsofttech/payrollSlip?month=' + month + '&'
+								+ 'year=' + year + '&view',
+						success : function(data) {
+							console.log('Flag' + data);
+							$('#modalGrid').find('.modal-body').html(data);
+						},
+						error : function(e) {
+							console.log("ERROR : ", e);
+						}
+					});
+				});
+	</script> -->
+	
+	<script>
+
+	
+     $('.owl-carousel').owlCarousel({
+         loop: true,
+         stagePadding: 15,
+         margin: 10,
+         nav: true,
+         speed: 100,
+         slidesToShow: 4,
+         slidesToScroll: 1,
+         autoplay: true,
+         autoplaySpeed: 500,
+         dots: true,
+         centerMode: true,
+         navText: ['<span class="uk-margin-small-right uk-icon" uk-icon="icon: chevron-left"></span>', '<span class="uk-margin-small-left uk-icon" uk-icon="icon: chevron-right"></span>'],
+         responsive: {
+             0: {
+                 items: 1
+             },
+             640: {
+                 items: 2
+             },
+             960: {
+                 items: 3
+             },
+             1200: {
+                 items: 4
+             }
+         }
+     });
+ 
+	</script>
+	
+	  <script type="text/javascript">
+                const slider = document.querySelector(".slider");
+                const nextBtn = document.querySelector(".next-btn");
+                const prevBtn = document.querySelector(".prev-btn");
+                const slides = document.querySelectorAll(".slide");
+                const slideIcons = document.querySelectorAll(".slide-icon");
+                const numberOfSlides = slides.length;
+                var slideNumber = 0;
+
+                //image slider next button
+                nextBtn.addEventListener("click", () => {
+                    slides.forEach((slide) => {
+                        slide.classList.remove("active");
+                    });
+                    slideIcons.forEach((slideIcon) => {
+                        slideIcon.classList.remove("active");
+                    });
+
+                    slideNumber++;
+
+                    if (slideNumber > (numberOfSlides - 1)) {
+                        slideNumber = 0;
+                    }
+
+                    slides[slideNumber].classList.add("active");
+                    slideIcons[slideNumber].classList.add("active");
+                });
+
+                //image slider previous button
+                prevBtn.addEventListener("click", () => {
+                    slides.forEach((slide) => {
+                        slide.classList.remove("active");
+                    });
+                    slideIcons.forEach((slideIcon) => {
+                        slideIcon.classList.remove("active");
+                    });
+
+                    slideNumber--;
+
+                    if (slideNumber < 0) {
+                        slideNumber = numberOfSlides - 1;
+                    }
+
+                    slides[slideNumber].classList.add("active");
+                    slideIcons[slideNumber].classList.add("active");
+                });
+
+                //image slider autoplay
+                var playSlider;
+
+                var repeater = () => {
+                    playSlider = setInterval(function () {
+                        slides.forEach((slide) => {
+                            slide.classList.remove("active");
+                        });
+                        slideIcons.forEach((slideIcon) => {
+                            slideIcon.classList.remove("active");
+                        });
+
+                        slideNumber++;
+
+                        if (slideNumber > (numberOfSlides - 1)) {
+                            slideNumber = 0;
+                        }
+
+                        slides[slideNumber].classList.add("active");
+                        slideIcons[slideNumber].classList.add("active");
+                    }, 4000);
+                }
+                repeater();
+
+                //stop the image slider autoplay on mouseover
+                slider.addEventListener("mouseover", () => {
+                    clearInterval(playSlider);
+                });
+
+                //start the image slider autoplay again on mouseout
+                slider.addEventListener("mouseout", () => {
+                    repeater();
+                });
+            </script>
+	
+	
+
+</body>
+</html>

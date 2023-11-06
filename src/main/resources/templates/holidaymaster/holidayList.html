@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">               
+        <div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4">Holiday Management</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+										
+					<div class="col-lg-8">
+						<a th:href="@{/holidayForm}" class="btn add-btn pull-right plus">Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<!-- <div class=" col-sm-12 form-group text-center">		
+				<label for="name-f" th:text="#{global.branch.branchList}"> Holiday list  </label>
+                        <a th:href="@{/activeBranchList}">
+                            <button class="btn btn-secondary rounded-pill active" th:text="#{global.branch.activebranch}">Active</button></a>
+                        <a th:href="@{/inActiveBranchList}">
+                        	 <button class="btn btn-secondary rounded-pill" th:text="#{global.branch.inactiveBranch}">Inactive</button></a>
+               </div> -->
+                       
+				<div class="col-sm-12 form-group">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th>Holiday Code</th>
+											<th>Holiday Date</th>
+											<th>Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="holiday : ${holidayList}">
+											<td th:text="${holiday.holidayCode}"></td>
+											<td th:text="${#dates.format(holiday.holidayDate, 'dd-MMM-yyyy')}"></td>
+											<td th:text="${holiday.description}"></td>
+											<!-- <td>
+											<a th:href="@{branchUpdate/{branchId}(branchId=${branch.branchId})}" class="btn update" th:text="#{global.branch.edit}"> Edit </a>
+											<a th:href="@{deactiveBranch/{branchId}(branchId=${branch.branchId})}" class="btn update" th:text="#{global.branch.deactive}"> Deactive </a>  
+											</td> -->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</body>
+</html>

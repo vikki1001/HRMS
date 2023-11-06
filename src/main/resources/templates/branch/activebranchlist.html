@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">               
+        <div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.branch.branchMst}">Branch Management</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+									
+					<div class="col-lg-8">
+						<a th:href="@{/branchForm}" class="btn add-btn pull-right plus" th:text="#{global.branch.addNew}" >Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<div class=" col-sm-12 form-group text-center">		
+				<label for="name-f" th:text="#{global.branch.branchList}"> Branch list  </label>
+                        <a th:href="@{/activeBranchList}">
+                            <button class="btn btn-secondary rounded-pill active" th:text="#{global.branch.activebranch}">Active</button></a>
+                        <a th:href="@{/inActiveBranchList}">
+                        	 <button class="btn btn-secondary rounded-pill" th:text="#{global.branch.inactiveBranch}">Inactive</button></a>
+               </div>
+                       
+				<div class="col-sm-12 form-group">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.branch.branchCode}">BRANCH CODE</th>
+											<th th:text="#{global.branch.branchName}">BRANCH NAME</th>
+											<th th:text="#{global.branch.address}">ADDRESS</th>
+											<th th:text="#{global.branch.city}">CITY</th>
+											<th th:text="#{global.branch.country}">COUNTRY</th>
+											<th th:text="#{global.branch.action}">ACTION</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="branch : ${listBranch}">
+											<td th:text="${branch.branchCode}"></td>
+											<td th:text="${branch.branchName}"></td>
+											<td th:text="${branch.address1}"></td>
+											<td th:text="${branch.city}"></td>
+											<td th:text="${branch.country}"></td>
+											<td>
+											<a th:href="@{branchUpdate/{branchId}(branchId=${branch.branchId})}" class="btn update" th:text="#{global.branch.edit}"> Edit </a>
+											<a th:href="@{deactiveBranch/{branchId}(branchId=${branch.branchId})}" class="btn update" th:text="#{global.branch.deactive}"> Deactive </a>  
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</body>
+</html>

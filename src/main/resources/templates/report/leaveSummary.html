@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6"
+					th:text="#{global.leaveSummary.title}">Leave Summary Report</h4>
+				<!-- JavaScript DataTable export to PDF with custom name & formatting -->
+				<input type="hidden" id="dtTitle" th:value="#{global.leaveSummary.title}">
+			</div>
+
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+
+			<form th:action="@{/leaveSummary}" method="POST" th:object="${leaveMst}" onsubmit="return leaveSummaryValidateForm()" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.leaveSummary.leaveType}">LeaveType</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{leaveType}" id="leaveType">
+													<option value="" selected th:text="#{global.leaveSummary.select}">Select</option>
+													<option value="Total Leave">Total Leave</option>
+													<option value="Paid Leave">Paid Leave</option>
+													<option value="Materity Leave">Materity Leave</option>
+												</select>
+												<span class="red" id="blankMsg"></span>
+											</div>
+											<div class="col-lg-1">
+												<button type="submit" class="btn btn-primary1" th:text="#{global.leaveSummary.viewButton}">View</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+
+			<div class="col-sm-12 form-group">
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="datatable" class="display" style="width: 100%">
+								<thead>
+									<tr>
+										<th th:text="#{global.leaveSummary.empId}">Employee Id</th>
+										<th th:text="#{global.leaveSummary.leaveDate}">Leave Date</th>
+										<th th:text="#{global.leaveSummary.leaveType}">Leave Type</th>
+										<th th:text="#{global.leaveSummary.managerId}">Manager Id</th>
+										<th th:text="#{global.leaveSummary.status}">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="leave : ${leaveSummaryList}">
+										<td th:text="${leave.empId.empId}"></td>
+										<td th:text="${leave.createdDate}"></td>
+										<td th:text="${leave.leaveType}"></td>
+										<td th:text="${leave.managerId}"></td>
+										<td th:text="${leave.status}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

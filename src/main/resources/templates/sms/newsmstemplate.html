@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.sms.smsTemplate}">SMS Template</h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+			<form onsubmit="return smsValidateForm()" th:action="@{/saveSMS}" method="POST" th:object="${smsAttribute}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.sms.mobileNo}">Mobile No</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter mobile no Here.." maxlength="10" id="mobileNo" th:field="*{additionalNo}"> 
+												<span class="red" id="blankMsg"> </span>
+											</div>
+											<div class="col-lg-1">
+												<button type="button" class="btn btn-primary1" th:text="#{global.sms.addButton}">Add</button>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.sms.message}">Message</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter message Here.." id="msg" th:field="*{smsMsg}"> 
+												<span class="red" id="blankMsg2"> </span>
+											</div>
+											<div class="col-lg-1">
+												<button type="button" class="btn btn-primary1" th:text="#{global.sms.addButton}">Add</button>
+											</div>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom:16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeSMSList}" class="btn btn-outline-secondary btn-md float-left"> <em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.sms.backButton}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.sms.saveButton}">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

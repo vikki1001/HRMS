@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.department.Department}"> Department Managment</h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+			<form th:action="@{/updateDepartment}" method="POST" th:object="${departmentMst}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									<input type = "hidden" th:field="*{departmentId}">
+
+										<div class="form-group row">										
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.department.departmentName}">Department Name </label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter department name here.." th:field="*{departmentName}"> 
+												<span class="red" th:if="${#fields.hasErrors('departmentName')}" th:errors="*{departmentName}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.department.DepartmentDescription}">Department Description </label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter description here.." th:field="*{departmentDesc}"> 
+												<span class="red" th:if="${#fields.hasErrors('departmentDesc')}" th:errors="*{departmentDesc}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.department.roleId}">Role Id</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{roleId}">
+													<option value="" selected th:text="#{global.department.select}">Select..</option>
+													<option th:each="role : ${listRole}" th:value="${role.roleId}" th:text="${role.RoleName} ">
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('roleId')}" th:errors="*{roleId}"></span>
+											</div>
+
+											
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeDepartment}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.department.backToList}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.department.update}">Update</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

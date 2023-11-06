@@ -1,0 +1,35 @@
+.uk-card {
+    position: relative;
+    box-sizing: border-box;
+    transition: box-shadow .1s ease-in-out;
+   
+    padding: 10px;
+}
+.uk-card-primary {
+
+    background: #e7e8eb;
+    color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, .08)
+}
+
+.uk-card-primary .uk-card-title {
+    color: #fff
+}
+
+.uk-card-primary.uk-card-hover:hover {
+    -webkit-transform: translateY(-4px) scale(1.02);
+    -moz-transform: translateY(-4px) scale(1.02);
+    -ms-transform: translateY(-4px) scale(1.02);
+    -o-transform: translateY(-4px) scale(1.02);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: rgb(0 0 0 / 16%) 0px 3px 6px, rgb(0 0 0 / 23%) 0px 3px 6px;
+   
+}
+
+.uk-section{
+	margin-top: 10px;
+    margin-bottom: 40px;
+}
+.item{
+	margin: 16px;
+}

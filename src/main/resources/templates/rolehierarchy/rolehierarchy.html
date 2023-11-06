@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.rolehierarchy.title}">Role Hierarchy</h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+
+			<form th:action="@{/roleDetails}" method="POST" th:object="${roleMst}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.rolehierarchy.roleName}">Role Name</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{roleName}">
+													<option value="" selected th:text="#{global.rolehierarchy.select}">Select..</option>
+													<option th:each="role : ${listRole}" th:value="${role.roleName}" th:text="${role.roleName}">
+												</select>
+											</div>
+											<div class="col-lg-1">
+												<button type="button" class="btn btn-primary1" th:text="#{global.rolehierarchy.viewButton}">View</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-sm-12 form-group">
+			<div class="card">
+				<div class="card-body">
+				<div class="table-responsive">
+					<table id="example" class="display"  style="width:100%">
+						<thead>
+							<tr>
+								<th th:text="#{global.rolehierarchy.tableTh4}">Select</th>
+								<th th:text="#{global.rolehierarchy.tableTh2}">Role Code</th>
+								<th th:text="#{global.rolehierarchy.tableTh3}">Role Name</th>
+
+							</tr>
+						</thead>
+						<tbody>
+							<tr aria-expanded="false" th:each="role : ${roleItem}">
+								<td class="text-center"><input class="form-check-input" type="checkbox" value="1"></td>
+								<td th:text="${role.menuName}"></td>
+								<td th:text="${role.sectionDisplayName}"></td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="button-footer">
+			<div class="row" style="margin-bottom:16px;">
+				<div class="col-sm-12 margin">
+					<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.rolehierarchy.saveButton}">Update</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

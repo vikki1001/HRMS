@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6"
+					th:text="#{global.roleMenuActionAccess.title}">Role Menu Action Access Management</h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+
+			<form th:action="@{/menuDetails}" method="POST" th:object="${roleMst}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"
+												th:text="#{global.roleMenuActionAccess.roleCode}">Role Code</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{roleCode}">
+													<option value="" selected th:text="#{global.roleMenuActionAccess.select}">Select..</option>
+													<option th:each="role : ${listRole}" th:value="${role.roleCode}" th:text="${role.roleName} " />
+												</select>
+											</div>
+											<div class="col-lg-1">
+												<button type="submit" class="btn btn-primary1" th:text="#{global.roleMenuActionAccess.viewButton}">View</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-sm-12 form-group">
+			<div class="card">
+				<div class="card-body">
+				<div class="table-responsive">
+					<table id="example" class="display"  style="width:100%">
+						<thead>
+							<tr>
+								<th th:text="#{global.roleMenuActionAccess.tableTh1}">Sr. No.</th>
+								<th th:text="#{global.roleMenuActionAccess.tableTh2}">Menu Name</th>
+								<th th:text="#{global.roleMenuActionAccess.tableTh3}"> Section Name</th>
+								<th class="text-center"><span th:text="#{global.roleMenuActionAccess.tableTh4}"></span><br>
+										<input type="checkbox" id="selectAll" class="checkAll" /></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="menu : ${menuItem}">
+								<td th:text="${menu.menuId}"></td>
+								<td th:text="#{${menu.menuName}}"></td>
+								<td th:text="#{${menu.sectionDisplayName}}"></td>
+								<td class="text-center"><input class="form-check-input"
+									type="checkbox" th:checked="${menu.IsActive}" value="1" /></td>
+							</tr>
+						</tbody>
+					</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="button-footer">
+			<div class="row" style="margin-bottom:16px;">
+				<div class="col-sm-12 margin">
+					<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.roleMenuActionAccess.saveButton}">Save</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

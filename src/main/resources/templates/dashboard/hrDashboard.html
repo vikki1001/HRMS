@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+				
+			
+
+			<div class="row">
+                    <div class="col-12">
+                        <div class="uk-section">
+                            <div class="owl-carousel owl-theme carousel">
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/allEmployee}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalEmployee}">Total
+                                                            Employee</h5>
+                                                        <h3 class="mb-0 mt-auto text-danger" th:text="${allEmp}">0</h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-danger my-auto  float-end">
+                                                    <em class="fa-solid fa-users"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalLeave}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalLeave}">Total
+                                                            leave</h5>
+                                                        <h3 class="mb-0 mt-auto text-secondary" th:text="${allLeave}">0
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-secondary my-auto  float-end">
+                                                    <em class="fa-solid fa-arrow-right-to-bracket"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalAttendance}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalAttendance}">
+                                                            Total Attendence</h5>
+                                                        <h3 class="mb-0 mt-auto text-primary"
+                                                            th:text="${allAttendance}">0</h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-warning my-auto  float-end">
+                                                    <em class="fa-solid fa-cube"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <h5 class="" th:text="#{global.chkInChkOut.completeProject}">
+                                                        Completed Projects</h5>
+                                                    <h3 class="mb-0 mt-auto text-success">0</h3>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-success my-auto  float-end">
+                                                    <em class="fa-solid fa-file"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalAbsentEmp}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalAbsent}">Total
+                                                            Absent</h5>
+                                                        <h3 class="mb-0 mt-auto text-danger1" th:text="${allAbsent}">0
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-danger1 my-auto  float-end">
+                                                    <em class="fa-solid fa-suitcase"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalPendingLeave}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.leavePending}">Leave
+                                                            pending</h5>
+                                                        <h3 class="mb-0 mt-auto text-secondary1"
+                                                            th:text="${allPendingLeaves}">0</h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-secondary1 my-auto  float-end">
+                                                    <em class="fa-regular fa-calendar-minus"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalNewReq}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalNewReq}"> Total
+                                                            New Request</h5>
+                                                        <h3 class="mb-0 mt-auto text-success1" th:text="${allNewReq}">0
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-success1 my-auto  float-end">
+                                                    <em class="fa-solid fa-bezier-curve"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalTraining}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalTraining}">Total
+                                                            Training</h5>
+                                                        <h3 class="mb-0 mt-auto text-danger2" th:text="${allTraining}">0
+                                                        </h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-danger2 my-auto  float-end">
+                                                    <em class="fa-solid fa-arrow-trend-up"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalWorkReport}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.totalWorkReport}">
+                                                            Total Work report</h5>
+                                                        <h3 class="mb-0 mt-auto text-secondary2"
+                                                            th:text="${allWorkReport}">0</h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-secondary2 my-auto  float-end">
+                                                    <em class="fa-solid fa-file-import"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="item">
+                                    <div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+                                        <div class="row">
+                                            <div class="col-7">
+                                                <div class="mt-0 text-start" style="margin-left: 10px">
+                                                    <a th:href="@{/totalExitActivity}">
+                                                        <h5 class="" th:text="#{global.chkInChkOut.exitActivity}">Exit
+                                                            Activity</h5>
+                                                        <h3 class="mb-0 mt-auto text-primary1"
+                                                            th:text="${allExitActivity}">0</h3>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-5 mt-1">
+                                                <div class="icon1 bg-warning1 my-auto  float-end">
+                                                    <em class="fa-solid fa-square-arrow-up-right"></em>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+			<div class="row">
+				<!-- <div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.quickLinks}">Quick Links</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">India Payroll Portal</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">UK Payroll Portal</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">Kiyazen</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">4sight</p></li>
+								<li><img src="./images/profile/link.png" class="img_class" alt=""> <p class="d">Happy</p></li>
+							</ul>
+						</div>
+					</div>
+				</div> -->
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles"
+								th:text="#{global.chkInChkOut.upcomingBirthday}">Upcoming Birthday</h4>
+							<div class="recent-comment" th:each="emp : ${upcomingBirthDay}">
+								<ul class="vertical-scroll pt-4 ">									
+									<li class="item">
+										<div class="card p-4" >
+											<div class="d-flex">
+												<span th:if="${emp.empBasicDetails.file} == null"> <img class="avatar avatar-md bradius mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt=""></span> 
+												<span th:if="${emp.empBasicDetails.file} != null"> <img class="avatar avatar-md bradius mr-3" th:src="@{${'/image?empId='+ emp.empBasicDetails.empId}}" alt=""></span>
+												<div class="mr-3 mt-0 mt-sm-1 d-block">
+													<h6 class="mb-1" th:text=${emp.empBasicDetails.fullName}>
+													</h6>
+													<small th:text="#{global.chkInChkOut.birthDayOn}">
+													</small> 
+													<small th:text="${#dates.format(emp.birthDate, 'dd/MMMM')}"></small>
+													<br> <small th:text=${emp.contactNo}> </small>
+												</div>
+											</div>
+										</div>
+									</li>
+									
+									<!-- <li><img src="./images/profile/cloud.png" class="img_classe" alt="">
+									<p class="cards-description text-center">no data found</p></li> -->
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles"
+								th:text="#{global.chkInChkOut.reqForApproval}">Request For Approval</h4>
+							<p class="cards-description7" th:text="#{global.chkInChkOut.pending}">Pending</p>
+							<div class="recent-comment">
+								<div class="media" th:each="leave : ${leaveDashboard}">
+									<div class="media-left">
+										<a th:href="@{/appliedLeaveList}" th:if="${leave.empId.file} != null"><img class="media-object mr-3 center" th:src="@{${'/image?empId='+ leave.empId}}" alt=""></a> 
+										<a th:href="@{/appliedLeaveList}" th:if="${leave.empId.file} == null"><img class="media-object mr-3 center" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt=""></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/appliedLeaveList}">
+											<h4 class="media-heading text-primary" th:text="'For Leave - ' + ${leave.fullName}"></h4>
+											<p class="comment-date" th:text="${leave.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+								<div class="media" th:each="att : ${attendanceDashboard}">
+									<div class="media-left">
+										<a th:href="@{/approvalNewReqList}" th:each="img : ${image}" th:if="${img.file} != null"> <img class="media-object mr-3" th:src="@{${'/image?empId='+ att.userId}}" alt="..."></a> 
+										<a th:href="@{/approvalNewReqList}" th:each="img : ${image}" th:if="${img.file} == null"> <img class="media-object mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/approvalNewReqList}">
+											<h4 class="media-heading text-danger" th:text="'For Attendance - ' + ${att.UserId}"></h4>
+											<p class="comment-date" th:text="${att.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+								<div class="media" th:each="exit : ${exitActivityDashboard}">
+									<div class="media-left">
+										<a th:href="@{/appliedExitActivityList}" th:each="img : ${image}" th:if="${img.file} != null"> <img class="media-object mr-3" th:src="@{${'/image?empId='+ exit.empId.empId}}" alt="..."></a>
+										<a th:href="@{/appliedExitActivityList}" th:each="img : ${image}" th:if="${img.file} == null"> <img class="media-object mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/appliedExitActivityList}">
+											<h4 class="media-heading text-danger" th:text="'For Exit Activity - ' + ${exit.empId.empId}"></h4>
+											<p class="comment-date" th:text="${exit.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+								<div class="media" th:each="expense : ${expenseReimbDashboard}">
+									<div class="media-left">
+										<a th:href="@{/appliedExpenseReimbList}" th:each="img : ${image}" th:if="${img.file} != null"> <img class="media-object mr-3" th:src="@{${'/image?empId='+ expense.empId}}" alt="..."></a>
+										<a th:href="@{/appliedExpenseReimbList}" th:each="img : ${image}" th:if="${img.file} == null"> <img class="media-object mr-3" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="..."></a>
+									</div>
+									<div class="media-body">
+										<a th:href="@{/appliedExpenseReimbList}">
+											<h4 class="media-heading text-danger" th:text="'For Expense - ' + ${expense.empId}"></h4>
+											<p class="comment-date" th:text="${expense.createdDate}"></p>
+										</a>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.files}">Files</h4>
+							<p class="cards-description7 ">Total Files</p>
+							<div class="tabset">
+								<!-- Tab 1 -->
+								<input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked> <label for="tab1" th:text="#{global.chkInChkOut.organization}" th:href="@{/empDashboard}">Organization</label>
+								<!-- Tab 2 -->
+								<input type="radio" name="tabset" id="tab2" aria-controls="rauchbier"> <label for="tab2" th:text="#{global.chkInChkOut.employee}" th:href="@{/empDashboard}">Employee</label>
+
+								<div class="tab-panels">
+									<section id="marzen" class="tab-panel">
+										<ul class="files-activity">
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension} == 'pdf'" src="./images/profile/pdf.png" th:src="@{/images/profile/pdf.png}" alt="PDF"></a>
+												<p class="d" th:if="${orgList.extension} == 'pdf'" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension == 'xlsx' or orgList.extension == 'xls'}" src="./images/profile/xls.png" th:src="@{/images/profile/xls.png}" alt="EXCEL"></a>
+												<p class="d" th:if="${orgList.extension == 'xlsx' or orgList.extension == 'xls'}" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension == 'docx' or orgList.extension == 'doc'}" src="./images/profile/doc.png" th:src="@{/images/profile/doc.png}" alt="DOC"></a>
+												<p class="d" th:if="${orgList.extension == 'docx' or orgList.extension == 'doc'}" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension == 'pptx' or orgList.extension == 'ppt'}" src="./images/profile/ppt.png" th:src="@{/images/profile/ppt.png}" alt="PPT"></a>
+												<p class="d" th:if="${orgList.extension == 'pptx' or orgList.extension == 'ppt'}" th:text="${orgList.templateName}"></p></li>
+
+											<li th:each="orgList : ${organizationList}">
+												<a th:href="@{'/downloadfile?id=' + ${orgList.id}}"> <img class="img_class" th:if="${orgList.extension} == 'txt'" src="./images/profile/txt.png" th:src="@{/images/profile/txt.png}" alt="txt"></a>
+												<p class="d" th:if="${orgList.extension} == 'txt'" th:text="${orgList.templateName}"></p></li>
+										</ul>
+									</section>
+
+									<section id="getResultDiv" class="tab-panel">
+										<ul class="files-activity">
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"> <img class="img_class" th:if="${empList.extension} == 'pdf'" src="./images/profile/pdf.png" th:src="@{/images/profile/pdf.png}" alt="PDF"></a>
+												<p class="d" th:if="${empList.extension} == 'pdf'" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"> <img class="img_class" th:if="${empList.extension == 'xlsx' or empList.extension == 'xls'}" src="./images/profile/xls.png" th:src="@{/images/profile/xls.png}" alt="EXCEL"></a>
+												<p class="d" th:if="${empList.extension == 'xlsx' or empList.extension == 'xls'}" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"><img class="img_class" th:if="${empList.extension == 'docx' or empList.extension == 'doc'}" src="./images/profile/doc.png" th:src="@{/images/profile/doc.png}" alt="DOC"></a>
+												<p class="d" th:if="${empList.extension == 'docx' or empList.extension == 'doc'}" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"><img class="img_class" th:if="${empList.extension == 'pptx' or empList.extension == 'ppt'}" src="./images/profile/ppt.png" th:src="@{/images/profile/ppt.png}" alt="PPT"></a>
+												<p class="d" th:if="${empList.extension == 'pptx' or empList.extension == 'ppt'}" th:text="${empList.templateName}"></p>
+											</li>
+
+											<li th:each="empList : ${employeeList}">
+												<a th:href="@{'/downloadfile?id=' + ${empList.id}}"><img class="img_class" th:if="${empList.extension} == 'txt'" src="./images/profile/txt.png" th:src="@{/images/profile/txt.png}" alt="txt"></a>
+												<p class="d" th:if="${empList.extension} == 'txt'" th:text="${empList.templateName}"></p>
+											</li>
+										</ul>
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.onLeaveToday}">On leave Today</h4>
+							<div class="recent-comment">
+								<ul class="vertical-scroll pt-4 ">
+									<li class="item">
+										<div class="card p-4" th:each="leave : ${onLeaveToday}">
+											<div class="d-flex">
+												<span th:if="${leave.empId.file} == null"><img src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="img" class="avatar avatar-md bradius mr-3"></span> 
+												<span th:if="${leave.empId.file} != null"><img th:src="@{${'/image?empId='+ leave.empId.empId}}" alt="img" class="avatar avatar-md bradius mr-3"></span>
+												<div class="mr-3 mt-0 mt-sm-1 d-block"> <h6 th:text="${leave.empId.empId}"></h6><small th:text="${leave.fullName}"></small></div>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-4 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.upcomingHoliday}">Upcoming Holidays</h4>
+							<ul class="holiday-activity">
+								<div class="d-flex comming_holidays calendar-icon icons mb-5" th:each="holiday : ${holidayList}">
+									<span class="date_time bg-success-transparent bradius mr-3">
+										<span class="date fs-20"><span th:text="${#dates.format(holiday.holidayDate, 'dd')}"></span></span>
+										<span class="month fs-13"><span th:text="${#dates.format(holiday.holidayDate, 'MMM')}"></span></span>
+									</span>
+									<div class="mr-3 mt-0 mt-sm-1 d-block"> 
+										<h6 class="mb-1 font-weight-semibold" th:text="${holiday.description}"></h6>
+										<span class="clearfix"></span> <small th:text="${#dates.dayOfWeekName(holiday.holidayDate)}"></small>
+									</div>
+									<p class="float-right text-muted  mb-0 fs-13 ml-auto bradius my-auto" th:with="days=${T(java.util.concurrent.TimeUnit).DAYS}, millis=${T(java.util.concurrent.TimeUnit).MILLISECONDS}" th:text="${days.convert(holiday.holidayDate.getTime() - #dates.createNow().getTime(), millis) + ' days to left'}">
+									</p>
+								</div>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.favorites}">Favorites</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.bill}">Billable/Non-Billable</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles" th:text="#{global.chkInChkOut.pendingTask}">Pending Tasks</h4>
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-xl-6 col-lg-6 col-xxl-6 col-md-6">
+					<div class="cards">
+						<div class="cards-body">
+							<h4 class="card-titles ">Pending Jobs</h4>
+							<div class="table-responsive">
+								<table class="table table-striped">
+									<tbody>
+										<tr>
+											<td class="py-1">Training</td>
+											<td>--</td>
+											<td>12-april-2022</td>
+											<td>--</td>
+											<td>No End Date</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<ul class="quick-activity">
+								<li><img src="./images/profile/cloud.png" class="img_classe" alt=""><p class="cards-description text-center">no data found</p></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

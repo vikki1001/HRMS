@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.totalExitActivity.heading}"> Total Exit Activity List </h4>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.totalExitActivity.empId}">Employee ID</th>
+											<th th:text="#{global.totalExitActivity.regDate}">Registration Date</th>
+											<th th:text="#{global.totalExitActivity.reqLastWorkingDte}"> Request Last Working Date </th>
+											<th th:text="#{global.totalExitActivity.description}"> Description </th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="totalExitActivity : ${totalExitActivity}">
+											<td th:text="${totalExitActivity.empId.empId}"></td>
+											<td th:text="${totalExitActivity.regDate}"></td>
+											<td th:text="${totalExitActivity.reqLastWorkingDte}"></td>
+											<td th:text="${totalExitActivity.description}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

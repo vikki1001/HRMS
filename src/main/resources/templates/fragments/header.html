@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="header">
+	<link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.carousel.min.css" th:href="@{/vendor/owl-carousel/css/owl.carousel.min.css}">
+	<link rel="stylesheet" href="../../../vendor/owl-carousel/css/owl.theme.default.min.css" th:href="@{/vendor/owl-carousel/css/owl.theme.default.min.css}">
+	<link href="../../../vendor/jqvmap/css/jqvmap.min.css" rel="stylesheet" th:href="@{/vendor/jqvmap/css/jqvmap.min.css}">
+
+	<link href="../../../css/style.css" rel="stylesheet" th:href="@{/css/style.css}">
+	<link href="../../../css/Animate.css" rel="stylesheet" th:href="@{/css/Animate.css}">
+	<link href="../../../css/sweet.css" rel="stylesheet" th:href="@{/css/sweet.css}">
+	<link href="../../../vendor/toastr/css/toastr.min.css" rel="stylesheet" th:href="@{/vendor/toastr/css/toastr.min.css}">
+	
+	<link href="../../../css/uk.css" rel="stylesheet" th:href="@{/css/uk.css}">
+
+	<!-- DataTable -->
+	<link rel="stylesheet" href="../../../css/datatable/buttons.dataTables.min.css" th:href="@{/css/datatable/buttons.dataTables.min.css}">
+	<link rel="stylesheet" href="../../../css/datatable/jquery.dataTables.min.css" th:href="@{/css/datatable/jquery.dataTables.min.css}">
+
+	<!--**********************************
+            Header start
+        ***********************************-->
+        
+        
+	<div class="header-content">
+	 
+		<nav class="navbar navbar-expand">
+		
+			<div class="collapse navbar-collapse justify-content-between">
+			<div class="nav-header">
+			<a th:href="@{/loginSuccess}" class="brand-logo"> 
+				<img class="logo-abbr" th:src="@{${'/images/' + session.webSession.tenantFaviconPath}}" alt=""> 
+				<img class="brand-title" th:src="@{${'/images/' + session.webSession.tenantLogoPath}}" alt="" >
+			</a>
+
+			<div class="nav-control">
+				<div class="hamburger">
+					<span class="line"></span> <span class="line"></span> <span class="line"></span>
+				</div>
+			</div>
+		</div>
+				<div class="header-left">
+					<div class="search_bar dropdown" data-toggle="dropdown">
+						<span class="search_icon p-3 c-pointer"> 
+						<i class="mdi mdi-magnify"></i>
+						</span>
+						<div class="dropdown-menu p-0 m-0">
+							 <form autocomplete="off">
+							 <input class="deletable" type="text" value="" placeholder="Search Employee"
+									aria-label="Search" id="search" onkeydown="dropDown(event);" data-toggle="dropdown">									
+									<div class="dropdown-search" id="dropdown-container">								
+									</div>								
+							</form>
+						</div>
+					</div>
+				</div>
+
+				<ul class="navbar-nav header-right">
+					<li class="nav-item dropdown notification_dropdown"><a
+						class="nav-link" title="All Services" th:href="@{/allServices}"> <i
+							class="icon-globe"></i></a></li>	
+									
+					<li class="nav-item dropdown notification_dropdown"><a
+					class="nav-link" title="Apply For Leave" th:href="@{/leaveForm}"> 
+					<i class="fa-solid fa-right-from-bracket"></i></a></li>
+										
+					<li class="nav-item dropdown notification_dropdown"><a
+						class="nav-link" href="#" role="button" title="Notification" data-toggle="dropdown">
+							<em class="mdi mdi-bell"></em>
+							<div id="notification-red"></div></a> 
+							
+						<div class="dropdown-menu dropdown-menu-right animated bounceInDown box" style="margin: 30px;">
+							<ul class="list-unstyled">
+							
+						<span th:each="leave : ${session.webSession.leaveMstNotification}">
+							<span th:if="${leave.notification} == 'Unread'">
+							<li class="media dropdown-item"><span class="primary"><em
+										class="ti-wheelchair"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/leaveNotification/' + ${leave.id}}">
+											<p>
+												<strong th:text="${leave.empId.empId}"></strong> apply for exit activity.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(leave.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>								
+							</span>
+							
+							<span th:if="${leave.notification} == 'Read'">
+							<li class="media dropdown-item"><span class="primary"><em
+										class="ti-wheelchair"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/leaveNotification/' + ${leave.id}}">
+											<p>
+												<strong th:text="${leave.empId.empId}"></strong> apply for exit activity.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(leave.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>								
+							</span>
+						</span>
+							
+						<span th:each="expense : ${session.webSession.expenseReimbNotification}">
+							<span th:if="${expense.notification} == 'Unread'">
+							<li class="media dropdown-item"><span class="primary"><em
+										class="ti-wheelchair"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/expenseNotification/' + ${expense.id}}">
+											<p>
+												<strong th:text="${expense.empId}"></strong> apply for exit activity.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(expense.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>								
+							</span>
+							
+							<span th:if="${expense.notification} == 'Read'">
+							<li class="media dropdown-item"><span class="primary"><em
+										class="ti-wheelchair"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/expenseNotification/' + ${expense.id}}">
+											<p>
+												<strong th:text="${expense.empId}"></strong> apply for exit activity.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(expense.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>								
+							</span>
+						</span>
+
+						<span th:each="exitActivity : ${session.webSession.exitActivityNotification}">
+							<span th:if="${exitActivity.notification} == 'Unread'">
+							<li class="media dropdown-item"><span class="primary"><em
+										class="ti-shopping-cart"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/exitActivityNotification/' + ${exitActivity.id}}">
+											<p>
+												<strong th:text="${exitActivity.empId.empId}"></strong> apply for exit activity.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(exitActivity.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>								
+							</span>
+							
+							<span th:if="${exitActivity.notification} == 'Read'">
+							<li class="media dropdown-item"><span class="primary"><em
+										class="ti-shopping-cart"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/exitActivityNotification/' + ${exitActivity.id}}">
+											<p>
+												<strong th:text="${exitActivity.empId.empId}"></strong> apply for exit activity.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(exitActivity.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>								
+							</span>
+						</span>
+							
+						<span th:each="addReq : ${session.webSession.addNewReqNotification}">							
+							<span th:if="${addReq.notification} == 'Unread'">
+								<li class="media dropdown-item" ><span class="success"><em 
+										class="ti-user"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/addNewReqNotification/' + ${addReq.id}}">
+											<p>
+											<strong th:text="${addReq.userId}"></strong> apply for add new req.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(addReq.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>
+								</span>
+								
+								<span th:if="${addReq.notification} == 'Read'">
+								<li class="media dropdown-item"><span class="success"><em 
+										class="ti-user"></em></span>
+									<div class="media-body">
+										<a th:href="@{'/addNewReqNotification/' + ${addReq.id}}">
+											<p>
+											<strong th:text="${addReq.userId}"></strong> apply for add new req.
+											</p>
+										</a>
+									</div> <span class="notify-time" th:text="${#dates.format(addReq.createdDate, 'dd-MM-yyyy hh:mm a')}"></span></li>
+								</span>								
+							</span>
+									
+							</ul>
+							<a class="all-notification" href="#">See all notifications 
+							<em	class="ti-arrow-right"></em></a>
+						</div>
+						</li>
+
+
+					<li class="nav-item dropdown header-profile"><a
+						class="nav-link" href="#" role="button" data-toggle="dropdown">
+
+						<span th:if="${session.webSession.file} == null"> 
+							<img src="./././images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="">
+						</span> 
+						<span th:if="${session.webSession.file} != null"> 
+							<img th:src="@{${'/image?empId='+ session.webSession.empId}}" alt="">
+						</span>
+					</a>
+					
+					
+						<div class="dropdown-menu dropdown-menu-right animated bounceInDown box">	
+						<label class="dropdown-item"> <em class="icon-user"></em>
+								<span class="ml-2">Last Logged In:</span>
+								<span1 class="text4"> <em
+									th:text="${#dates.format(session.webSession.lastSuccessfullLoginDateTime, 'dd-MM-yyyy hh:mm a')}">
+									<!-- th:text="${session.webSession.lastSuccessfullLoginDateTime !=null ? session.webSession.lastSuccessfullLoginDateTime : '-' }"> -->
+									</em>
+								</span1></label> 
+								
+							<label class="dropdown-item"> <em class="icon-user"></em>
+								<span class="ml-2" th:text="#{global.lbl.welcome}">Welcome</span>
+								<span1 class="text4"> <em
+									th:text="${session.webSession.firstName !=null ? session.webSession.firstName : '-' }"></em>
+								<em
+									th:text="${session.webSession.lastName !=null ? session.webSession.lastName : '-' }"></em>
+								</span1></label> 
+								
+								<label class="dropdown-item"> <em class="icon-docs"></em>
+								<span class="ml-2" th:text="#{global.lbl.role}">Role</span> <span1
+									class="text4"> <em
+									th:text="${session.webSession.mainRole !=null ? session.webSession.mainRole : '-' }"></em>
+								<span1></label> <label class="dropdown-item"> <em
+								class="icon-loop"></em> <span class="ml-2"
+								th:text="#{global.lbl.branch}">Branch</span> <span1
+									class="text4"> <em
+									th:text="${session.webSession.branch !=null ?session.webSession.branch : '-' }"></em>
+								</span1></label> <a th:href="@{/changePassword}"> <label
+								class="dropdown-item"> <em class="icon-lock-open"></em>
+									<span class="ml-2" th:text="#{global.lbl.changePwd}">
+										Change Password </span>
+							</label>
+							</a> <a th:href="@{/logout}"> <label class="dropdown-item">
+									<em class="icon-key"></em> <span class="ml-2"
+									th:text="#{global.lbl.logout}">Logout </span>
+							</label>
+							</a>
+						</div></li>
+				</ul>
+			</div>
+		</nav>
+	</div>
+</th:block>
+</html>

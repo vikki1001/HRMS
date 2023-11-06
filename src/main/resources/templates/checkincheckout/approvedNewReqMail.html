@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+    <style>
+         body {
+            font-family: Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+        }
+       form{
+        padding:30px 50px;
+       }
+       p{
+        font-size: 16px;
+       }
+       h1 {
+           text-align: center;
+            font-size: 26px;
+            color: #1b7abd;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+        span{
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 >Approved Attendance</h1>
+<form th:each="add : ${approvedNewReqList}"> 
+     <p> <span th:text="${add.empBasicDetails.fullName}">Ayush Panwar</span><br />
+         <span th:text="${add.empBasicDetails.empWorkDetails.designation}">Web Designer UI/UX Designer,Indore</span>
+    </p>
+
+    <p>
+        We have received your Attendance request for these dates:<br/> Check In  <span th:text="${add.checkinDateTime}">24/07/2022</span> ,Check Out <span th:text="${add.checkoutDateTime}">14/06/2022</span>
+    </p>
+    <p>
+    Totalling <span th:text="${add.timeDuration}">120hrs</span>
+    </p>
+    <p>
+        As of  <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}">24/07/2022</span>, your Attendance request is <span>Approved</span>.
+    </p>   
+
+    <p>Thanks,
+    </p>
+    
+    <br/> 
+    
+    <p> 
+         <span th:text="${add.managerId}">Puspendra Shakyawar</span><br/><span>Java Developer</span>
+    </p>
+</form>
+
+</body>
+
+</html>

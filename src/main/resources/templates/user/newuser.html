@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6"  th:text="#{global.user.userMst}"> User Managment </h4>		
+			</div>
+			<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+			<form th:action="@{saveUser}" method="POST" th:object="${userMst}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.loginType}">Login Type </label>
+											<div class="col-lg-2">
+												<input type="radio" id="radio-1" class="chb chb-3" name="radio-group" value="Manual" th:field="*{loginType}">
+													<label for="radio-1" class="radio-custom-label" th:text="#{global.user.manual}">Manual</label>
+											</div>
+											<div class="col-lg-2">
+												<input id="radio-2" class="chb chb-3" name="radio-group" type="radio" value="ADS" th:field="*{loginType}">
+												<label for="radio-2" class="radio-custom-label" th:text="#{global.user.ads}">ADS</label>
+											</div>
+										<span class="red" th:if="${#fields.hasErrors('loginType')}" th:errors="*{loginType}"></span>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.loginId}">Login ID</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter ID Here.." th:field="*{loginId}"> 
+												<span class="red" th:if="${#fields.hasErrors('loginId')}" th:errors="*{loginId}"></span>
+											</div>
+											<div class="col-lg-2 col-md-4 col-sm-4">
+												<button type="button" class="btn btn-primary1">Verify ADS ID</button>
+											</div>
+											<div class="col-lg-2 col-md-4 col-sm-4">
+												<button type="button" class="btn btn-primary1">Verify Login ID</button>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.title}">Title</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{title}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option value="Mr." th:text="#{global.user.mr}"> Mr.</option>
+													<option value="Mrs." th:text="#{global.user.mrs}"> Mrs.</option>
+													<option value="Ms." th:text="#{global.user.ms}"> Ms.</option>
+												</select> <span class="red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.tenantId}">Tenant Id</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{tenantId}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option th:each="tenantId : ${tenantId}" th:value="${tenantId.tenantId}" th:text="${tenantId.companyName} " />
+												</select> <span class="red" th:if="${#fields.hasErrors('tenantId')}" th:errors="*{tenantId}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.firstName}">First Name</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter first name here.." th:field="*{firstName}"> 
+												<span class="red" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label" th:text="#{global.user.middleName}">Middle Name</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter middle name here.." th:field="*{userMiddleName}">
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.lastName}">Last Name</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter last name here.." th:field="*{lastName}"> 
+												<span class="red" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.userDisplayName}">User Display Name </label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter user display name here.." th:field="*{userDisplayName}"> 
+													<span class="red" th:if="${#fields.hasErrors('userDisplayName')}" th:errors="*{userDisplayName}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.gender}">Gender</label>
+											<div class="col-lg-4">
+												<select id="sex" class="form-control browser-default custom-select" th:field="*{gender}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>											
+													<option value="Male" th:text="#{global.user.male}"> Male</option>
+													<option value="Female" th:text="#{global.user.female}"> Female</option>
+													<option value="unspesified" th:text="#{global.user.Unspecified}">Unspecified</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('gender')}" th:errors="*{gender}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.dob}">Date Of Birth</label>
+											<div class="col-lg-4">
+												<input class="form-control" type="date" name="dob" id="date" th:field="*{dob}"> 
+												<span class="red" th:if="${#fields.hasErrors('dob')}" th:errors="*{dob}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.email}">E-mail</label>
+											<div class="col-lg-4">
+												<input class="form-control input-field" type="email" placeholder="e.g. example@gmail.com" name="email" th:field="*{emailId}">
+												<span class="red" th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label  asterisk" th:text="#{global.user.mobile}">Phone Number </label>
+											<div class="col-lg-4">
+												<input class="form-control input-field" type="tel" id="tel " placeholder="Enter phone number.." th:field="*{mobileNo1}" maxlength="10"> 
+												<span class="red" th:if="${#fields.hasErrors('mobileNo1')}" th:errors="*{mobileNo1}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.baseBranch}">Base Branch </label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{baseBranch}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option th:each="branch : ${listBranch}" th:value="${branch.branchName}" th:text="${branch.branchName} " />
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('baseBranch')}" th:errors="*{baseBranch}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.mainRole}">Main Role </label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{mainRole}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option th:each="role : ${listRole}" th:value="${role.roleCode}" th:text="${role.roleName} " />
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('mainRole')}" th:errors="*{mainRole}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.department}">Department Name</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{department}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option th:each="department : ${departmentList}" th:value="${department.departmentName}" th:text="${department.departmentName} " />
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('department')}" th:errors="*{department}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.branch}">Branch Name </label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{branch}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option th:each="branch : ${listBranch}"
+														th:value="${branch.branchCodeName}"
+														th:text="${branch.branchCodeName}" />
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('branch')}" th:errors="*{branch}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.userLock}">User Lock </label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{isUserLocked}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option value="0">Yes</option>
+													<option value="1">No</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('isUserLocked')}" th:errors="*{isUserLocked}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.escalationManager}">Escalation Manager</label>
+											<div class="col-lg-4">
+																							
+												<input list="listdown-container" type="search" class="form-control" th:field="*{escalationManager}" placeholder="Search Here.."
+																	aria-label="Search" id="escalationSearch" onkeydown="selectList(event);" data-toggle="listdown">
+												<datalist id="listdown-container"> </datalist> 
+																							 
+												<span class="red" th:if="${#fields.hasErrors('escalationManager')}" th:errors="*{escalationManager}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.secondaryUser}">Secondary User </label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{secondaryUser}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option value="1">Text 1</option>
+													<option value="2">Text 2</option>
+													<option value="3">Text 3</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('secondaryUser')}" th:errors="*{secondaryUser}"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.userGroup}">User Group </label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{userGroup}">
+													<option value="" selected  th:text="#{global.user.select}">Select..</option>
+													<option value="1">Text 1</option>
+													<option value="2">Text 2</option>
+													<option value="3">Text 3</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('userGroup')}" th:errors="*{userGroup}"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.user.password}">Password  </label>
+											<div class="col-lg-4">
+												<input type="password" class="form-control" placeholder="Enter  password here.." th:field="*{password}"> 
+												<span class="red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+											</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom:16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeUserList}" class="btn btn-outline-secondary btn-md float-left"> <em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.user.backToList}"></span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.user.save}">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

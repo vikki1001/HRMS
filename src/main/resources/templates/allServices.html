@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/allEmployee}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/team.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.organization}">Organization</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a href="">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/stairs.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.rmgActivity}">RMG Activity</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/attendance}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/cal.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.attendance}">Attendance</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/leaveTracker}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/l.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.leaveTracker}">Leave Tracker</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/totalTime}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/back-in-time.png"
+									class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.timeTracker}">Time Tracker</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a href="">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/business-card.png"
+									class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.businessCardRequ}">Business Card Requisition</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/documentList}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/documents.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.files}">Files</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a href="">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/trophy.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.performance}">Performance</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a href="">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/work-process.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.confirmationProcess}">Confirmation Process</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/activeExpenseReimbList}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/expenses.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.expenseReimb}">Expense Reimbursement</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+
+				<div class="col-xl-2 col-lg-6 col-md-6">
+					<div class="card">
+						<a th:href="@{/activeExitActivityList}">
+							<div class="card-body0 text-center">
+								<img src="./images/profile/logout.png" class="img_serivice">
+								<h5 class="mb-0 mt-3 hover" th:text="#{global.allService.exitActivity}">Exit Activity</h5>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

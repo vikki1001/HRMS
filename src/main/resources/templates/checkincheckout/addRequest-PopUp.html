@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.addReq.title}">Add Request For CheckInCheckOut</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+
+			<form onsubmit="return addNewReqValidateForm()" th:action="@{addRequest}" method="POST" th:object="${checkInCheckOut}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-6">
+									<input type="hidden" name=userId th:value="${user.empId}" readonly="readonly">
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label" th:text="#{global.addReq.attendanceDay}"> Attendance Day </label>
+											<div class="col-lg-9">
+											<input type="date" class="form-control" id="attendanceDate" th:field="*{date}" placeholder="eg. 2000-11-05">
+											<span class="red" id="blankMsg"></span>
+											<span class="red" th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>										
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.addReq.checkIn}"> Check-In </label>
+											<div class="col-lg-9">
+												<input class="form-control" type="datetime-local" onclick="change()" id="fromDate" th:field="*{checkinDateTime}" placeholder="eg. 10:00:00"> 
+												<span class="red" id="blankMsg2"></span>	
+											</div>
+										</div>								
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.addReq.checkOut}">Check-Out</label>
+											<div class="col-lg-9">
+												<input class="form-control" type="datetime-local" id="toDate" th:field="*{checkoutDateTime}" placeholder="eg. 15:00:00">
+												<span class="red" id="blankMsg3"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label" th:text="#{global.addReq.totalHours}"> Total Hours </label>
+											<div class="col-lg-9">
+												<input type="text" class="form-control" id="time" th:field="*{timeDuration}" readonly="readonly"> 
+											</div>
+										</div>
+										
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label asterisk" th:text="#{global.addReq.reason}"> Reason </label>
+											<div class="col-lg-9">
+												<select class="form-control" id="reason" th:field="*{reason}">
+													<option value="" selected th:text="#{global.addReq.select}">Select</option>
+													<option value="Forgot to checkin" th:text="#{global.addReq.forgetToCheckIn}">Forgot to checkin</option>
+													<option value="Forgot to checkout" th:text="#{global.addReq.forgetToCheckOut}">Forgot to checkout</option>
+													<option value="Not attendant" th:text="#{global.addReq.notAttendant}">Not attendant</option>
+													<option value="Half day" th:text="#{global.addReq.halfDay}">Half day</option>
+												</select>
+												<span class="red" id="blankMsg4"></span>	
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-3 col-form-label" th:text="#{global.addReq.description}"> Description </label>
+											<div class="col-lg-9">
+												<textarea class="form-control" rows="5" placeholder="Enter description here" th:field="*{description}"></textarea>
+											</div>
+										</div>
+									</div>
+									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/newReqList}" class="btn btn-outline-secondary btn-md float-left"> <em class="fa fa-chevron-left"></em> &ensp;
+								<span th:text="#{global.addReq.backButton}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text="#{global.addReq.add}">Add</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

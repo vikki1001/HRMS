@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.leaveTracker.title}">Add Leave</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-12">
+						<a th:href="@{/addLeaveForm}" class="btn add-btn pull-right plus" th:text="#{global.leaveTracker.addNew}">Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:text="#{global.leave.leaveList}">Add Leave list  </label>
+                        <a th:href="@{/activeAddLeaveList}">
+                            <button class="btn btn-secondary rounded-pill active" th:text="#{global.leaveTracker.active}">Active</button></a>
+                        <a th:href="@{/inActiveAddLeaveList}">
+                        	 <button class="btn btn-secondary rounded-pill" th:text="#{global.leaveTracker.inActive}">In Active</button></a>
+               </div>
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+									<tr>
+								    	<th th:text=#{global.leaveTracker.addLeave}>Add Leave</th>
+										<th th:text=#{global.leaveTracker.leaveType}>Leave Type</th>
+										 <th th:text=#{global.leaveTracker.totalLeave}>Total Leave</th>
+										<th th:text=#{global.leaveTracker.paidLeave}>Paid Leave</th>
+<!-- 										<th th:text=#{global.leaveTracker.materityLeave}>Materity Leave</th>
+ -->									</tr>
+								</thead>
+									<tbody>
+										<tr th:each="leaveTracker : ${addLeaveList}">	
+											<td th:text="${leaveTracker.addLeave}"></td>	
+											<td th:text="${leaveTracker.leaveType}"></td>
+											<td th:text="${leaveTracker.totalLeave}"></td>	
+											<td th:text="${leaveTracker.paidLeave}"></td>
+<!-- 											<td th:text="${leaveTracker.materityLeave}"></td> -->
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

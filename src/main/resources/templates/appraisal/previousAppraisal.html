@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+		<form th:action="@{/previousAppraisal}" th:object="${empKRA}" method="POST" autocomplete="off">
+			<div class="row">
+				<div class="col-sm-12 p-md-0" th:each="kraList : ${kraList}">
+					<div class="form-group row">
+							<div class="col-sm-6 welcome-text">
+							<h4 th:text="${kraList.kraId}"></h4>				
+					</div>
+						<label class="col-lg-1 col-form-label" style="font-size: 12px;"> Final Score - </label>
+							<div class="col-lg-1">
+								<input type="text" class="form-control" readonly="readonly" th:value="${kraList.totalSelf}" />
+							</div>
+							<label class="col-lg-1 col-form-label" style="font-size: 12px;"> Rating - </label>
+							<div class="col-lg-3">
+								<input type="text" class="form-control" readonly="readonly" th:value="${kraList.selfRating}"/>
+							</div>
+					</div>
+				</div>
+			</div>
+			
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="form-group row">										
+									<!-- <label class="col-lg-1 col-form-label asterisk" style="font-size: 12px;" th:text="#{global.selfAppraisal.kraId}">KRA ID</label>
+										<div class="col-lg-2">
+											<input class="form-control" th:readonly="readonly" >
+										</div> -->
+											<label class="col-lg-1 col-form-label asterisk" style="font-size: 12px;" th:text="#{global.selfAppraisal.empId}">Employee ID</label>
+										<div class="col-lg-2">
+											<input class="form-control" id="empId" name="empId" th:readonly="readonly" th:each="emp : ${userDetail}" th:value="${emp.empId}">
+										</div>
+								
+									<label class="col-lg-1 col-form-label asterisk" style="font-size: 12px;" th:text="#{global.selfAppraisal.depId}">Department ID</label>
+										<div class="col-lg-2">
+											<input class="form-control" id="depId" name="depId" th:readonly="readonly" th:each="emp : ${userDetail}" th:value="${emp.departName}">
+										</div>
+											<label class="col-lg-1 col-form-label asterisk" style="font-size: 12px;" th:text="#{global.selfAppraisal.grade}">Employee Grade</label>
+										<div class="col-lg-2">
+											<input class="form-control" id="grade" name="grade" th:readonly="readonly" th:each="emp : ${userDetail}" th:value="${emp.grade}">
+										</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<section class="review-section professional-excellence" style="margin-bottom: 200px;">
+				<div class="row">
+					<div class="col-xl-12">
+						<div class="table-responsive">
+								<table class="table table-bordered review-table mb-0" style="width: 100%;">
+									<thead>
+										<tr>
+											<th style="width: 20%;" th:text="#{global.ratingOfRM.kra}">KRA</th>
+											<th style="width: 55%;">Description</th>
+											<th th:text="#{global.ratingOfRM.weightage}">Weightage</th>
+											<th>
+												<h5 class="table-avatar">
+													<a class="avatar"> 
+														<span th:if="${kraList.empBasicDetails.file} == null"> 
+															<img class="avatar" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="">
+														</span> 
+														<span th:if="${kraList.empBasicDetails.file} != null">
+															<img class="avatar" th:src="@{${'/image?empId='+ kraList.empBasicDetails.empId}}" alt="">
+														</span>
+													</a> 
+													<span class="nameid" th:text="${kraList.empBasicDetails.fullName}"></span>
+												</h5>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:if="${kraList.kraI != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraI}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionI}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageI} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingI}"></td>											
+										</tr>
+										<tr th:if="${kraList.kraII != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraII}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionII}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageII} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingII}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraIII != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraIII}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionIII}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageIII} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingIII}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraIV != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraIV}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionIV}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageIV} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingIV}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraV != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraV}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionV}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageV} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingV}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraVI != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraVI}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionVI}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageVI} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingVI}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraVII != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraVII}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionVII}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageVII} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingVII}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraVIII != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraVIII}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionVIII}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageVIII} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingVIII}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraIX != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraIX}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionIX}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageIX} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingIX}"></td>	
+										</tr>
+										<tr th:if="${kraList.kraX != null}">
+											<td class="pers" style="font-size: 14px; color: #273951; font-weight: 600;" th:text="${kraList.kraX}"></td>
+											<td style="font-size: 12px; color: #817e7e;"><span th:text="${kraList.descriptionX}"></span></td>
+											<td><label class="col-lg-2 col-form-label text-center per"><span th:text="${kraList.weightageX} + '%'"></span></label></td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.selfRatingX}"></td>	
+										</tr>
+										<tr>
+											<td colspan="3" class="text-center" style="font-size: 14px; color: #273951; font-weight: 600;">Total </td>
+											<td style="font-size:14px; color: #273951; font-weight: 600;" th:text="${kraList.totalSelf}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</section>
+			</form>
+		</div>
+	</div>
+</body>
+</html>									

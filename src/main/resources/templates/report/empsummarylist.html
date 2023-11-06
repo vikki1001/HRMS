@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6"
+					th:text="#{global.checkInCheckOut.dataTable}">Employee Time Summary</h4>
+				<!-- JavaScript DataTable export to PDF with custom name & formatting -->
+				<input type="hidden" id="dtTitle" th:value="#{global.checkInCheckOut.dataTable}">
+			</div>
+			<div class="col-sm-12" style="margin-bottom:50px;">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+			
+			<form th:action="@{/between/fromortooruserIdortenantId}" method="GET" onsubmit="return auditValidateForm()" autocomplete="off">
+				<div class="row">
+					<div class="col-sm-3 form-group">
+						<label class="asterisk" th:text="#{global.checkInCheckOut.fromDate}"> From Date </label>
+						<input class="form-control" type="datetime-local" name="from" id="date" /> 
+						<span class="red" id="blankMsg"></span>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label class="asterisk" th:text="#{global.checkInCheckOut.toDate}"> To Date </label> 
+						<input class="form-control" type="datetime-local" name="to" id="date1" /> <span class="red" id="blankMsgs"></span>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label th:text="#{global.checkInCheckOut.userId}"> User Id </label> 
+						<select class="form-control" id="dropEmp" name="userId">
+							<option value="" selected th:text="#{global.checkInCheckOut.select}">Select.. </option>
+							<option th:each="empId : ${empIdList}" th:value="${empId.empId}" th:text="${empId.empId}" />
+						</select>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label th:text="#{global.checkInCheckOut.tenantId}"> Tenant Id </label> 
+						<select class="form-control" id="dropTenantId" name="tenantId">
+							<option value="" selected th:text="#{global.checkInCheckOut.select}">Select..</option>
+							<option th:each="tenantId : ${tenantIdList}" th:value="${tenantId}" th:text="${tenantId}" />
+						</select>
+					</div>
+					<div class="col-sm-12 mb-0">
+						<div class="btn-group float-right">
+							<button type="reset" class="btn btn-tab btn-lg " th:text="#{global.checkInCheckOut.reset}">Reset</button>
+							&nbsp;&nbsp;
+							<button type="submit" class="btn btn-tab btn-lg " th:text="#{global.checkInCheckOut.generatedReport}"> Generate Report</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+							<table id="datatable" class="display" style="width: 100%">
+								<thead>
+									<tr>
+										<th th:text="#{global.checkInCheckOut.userId}">User Id</th>
+										<th th:text="#{global.checkInCheckOut.date}">Date</th>
+										<th th:text="#{global.checkInCheckOut.checkinActionFrom}">Checkin Action From</th>
+										<th th:text="#{global.checkInCheckOut.checkoutActionFrom}">Checkout Action From</th>
+										<th th:text="#{global.checkInCheckOut.inDateTime}">Checkin Date Time</th>
+										<th th:text="#{global.checkInCheckOut.outDateTime}">Checkout Date Time</th>
+										<th th:text="#{global.checkInCheckOut.day}">Day</th>
+										<th th:text="#{global.checkInCheckOut.totalTime}">Total Time</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="checkInCheckOut : ${checkInCheckOutList}">
+										<td th:text="${checkInCheckOut.userId}"></td>
+										<td th:text="${checkInCheckOut.date}"></td>
+										<td th:text="${checkInCheckOut.checkinActionFrom}"></td>
+										<td th:text="${checkInCheckOut.checkoutActionFrom}"></td>
+										<td th:text="${checkInCheckOut.checkinDateTime}"></td>
+										<td th:text="${checkInCheckOut.checkoutDateTime}"></td>
+										<td th:text="${checkInCheckOut.dayOfTheWeek}"></td>
+										<td th:text="${checkInCheckOut.timeDuration}"></td>
+									</tr>
+								</tbody>
+							</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

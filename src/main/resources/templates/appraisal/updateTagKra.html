@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.updateTagKRA.title}">Add Appraisal</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+			<form th:action="@{/updateTagKRA}" th:object="${kraList2}" method="POST" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+									<input type="hidden" name="userId" th:field="*{userId}">
+									<input type="hidden" name="depId" th:field="*{depId}">
+								<div class="row" th:each="getKra :${kraList2}">
+									<div class="col-xl-6" th:if="${getKra.kraI} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAI</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraI}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageI</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageI}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraII} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAII</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraII}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageII</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageII}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraIII} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAIII</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraIII}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageIII</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageIII}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraIV} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAIV</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraIV}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageIV</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageIV}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraV} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAV</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraV}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageV</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageV}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraVI} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAVI</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraVI}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageVI</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageVI}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraVII} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAVII</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraVII}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageVII</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageVII}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraVIII} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAVIII</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraVIII}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageVIII</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageVIII}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraIX} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAIX</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraIX}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageIX</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageIX}">
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-xl-6" th:if="${getKra.kraX} != null">
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">KRAX</label>
+											<div class="col-lg-4">
+												<select class="form-control"  th:field="*{kraX}">
+													<option value="" >Select..</option>
+													<option th:each="kraList : ${kraList}" th:value="${kraList.kraName}" th:text="${kraList.kraName}">
+												</select>
+											</div>
+										</div>
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk">WeightageX</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter weightage here......" th:field="*{weightageX}">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/tagKRAReqList/{empId}(empId=${userId})}" class="btn btn-outline-secondary btn-md float-left">
+							<em class="fa fa-chevron-left"></em> &ensp; <span th:text="#{global.updateTagKRA.backToList}">Back to list </span></a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text="#{global.updateTagKRA.submit}">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

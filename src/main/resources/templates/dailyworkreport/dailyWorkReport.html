@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.dailyWorkReport.title}">Daily Work Report</h4>
+				<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+			</div>
+			<div class="col-sm-12 form-group">
+				
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+	
+				<form onsubmit="return dailyWorkReportValidateForm()" th:action="@{saveDailyWorkReport}" th:object="${dailyWorkReport}" method="POST" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.fullName}> Full Name</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" id="fullName" name="fullName" th:readonly="readonly"
+												th:each="empBasic : ${empDetailsList}" th:value="${empBasic.fullName}">
+												<span class="red" id="blankMsg"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.date}>Date</label>
+											<div class="col-lg-4">
+												<input class="form-control" type="date" id ="date" placeholder="YYYY-MM-DD" th:field="*{date}"/>
+												<span class="red" id="blankMsg2"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.officeInTime}>Office In Time</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="officeInTime" type="datetime-local" placeholder="eg. 2000-11-05 10:00:00" th:field="*{officeInTime}"/>
+												<span class="red" id="blankMsg3"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.officeOutTime}>Office Out Time</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="officeOutTime" type="datetime-local"  placeholder="eg. 2000-11-05 10:00:00" th:field="*{officeOutTime}"/>
+												<span class="red" id="blankMsg4"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.projectName}>Project Name</label>
+											<div class="col-lg-4">
+												<select class="form-control" id="projectName" th:field="*{projectName}">
+													<option value="" selected th:text="#{global.dailyWorkReport.select}">Select...</option>
+													<option value="ksvSofttech">ksvSofttech</option>
+													<option value="HR Management">HR Management</option>
+													<option value="School/College Management">School/College Management</option>
+												</select>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.module}>Module</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="module" placeholder="Enter module here..." th:field="*{module}"/>
+												<span class="red" id="blankMsg6"></span>
+											</div>
+										</div>
+																				
+										<div class="form-group row">
+										<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.description}>Description</label>
+											<div class="col-lg-4">
+												<textarea class="form-control" id="description" rows="5" placeholder="Enter description here..." th:field="*{description}"></textarea>
+												<span class="red" id="blankMsg7"></span>
+											</div>
+										
+										<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.analysis}>Analysis</label>
+											<div class="col-lg-4">
+												<textarea class="form-control" id="analysis" rows="5" placeholder="Enter analysis here..." th:field="*{analysis}"></textarea>
+												<span class="red" id="blankMsg8"></span>
+											</div>	
+										</div>	
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.dailyWorkReport.status}>Status</label>
+											<div class="col-lg-4">
+												<select class="form-control" id="status" th:field="*{status}">
+													<option value="" selected th:text="#{global.dailyWorkReport.select}">Select...</option>
+													<option value="Complete">Complete</option>
+													<option value="InProgress">InProgress</option>
+												</select>
+												<span class="red" id="blankMsg9"></span>
+											</div>
+										</div>																							
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeWorkReport}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.dailyWorkReport.backToList}">Back to list </span></a>
+						</div>
+					
+					<div class="col-sm-6  margin">
+						<button class="btn btn-primary2 btn-lg  float-right" th:text=#{global.dailyWorkReport.save}>Save</button>
+					</div>
+				</div>
+				</div>
+			</form> 
+		</div>
+	</div>
+</body>
+</html>

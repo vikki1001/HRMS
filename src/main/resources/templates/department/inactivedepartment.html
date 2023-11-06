@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.department.Department}">Department Management</h4>
+					<div class="col-lg-12">
+						<a th:href="@{/department}" class="btn add-btn pull-right plus" th:text="#{global.department.addNew}" >Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<div class=" col-sm-12 form-group text-center">		
+				<label for="name-f" th:text="#{global.department.departmentlist}"> Department list  </label>
+                        <a th:href="@{/activeDepartment}">
+                            <button class="btn btn-secondary rounded-pill" th:text="#{global.user.activeUser}">Active</button></a>
+                        <a th:href="@{/inActiveDepartment}">
+                        	 <button class="btn btn-secondary rounded-pill active" th:text="#{global.user.inactiveUser}">Inactive</button></a>
+               </div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.department.departmentName}">DEPARTMENT Name</th>
+											<th th:text="#{global.department.roleId}">ROLE ID</th>
+											<th th:text="#{global.department.DepartmentDescription}">DEPARTMENT DESCRIPTION</th>
+											<th th:text="#{global.department.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="department : ${listdepartment}">
+											<td th:text="${department.departmentName}"></td>
+											<td th:text="${department.roleId}"></td>
+											<td th:text="${department.departmentDesc}"></td>
+											<td>
+				                           <a th:href="@{'/activedepartment/' + ${department.departmentId}}" class="btn update" th:text="#{global.department.active}"> Active </a>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

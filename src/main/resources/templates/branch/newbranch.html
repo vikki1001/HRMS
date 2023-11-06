@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.branch.branchMst}"> Branch Managment </h4>		
+			</div>
+			<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+			
+			<form th:action="@{saveBranch}" method="POST" th:object="${branchAttribute}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.branchCode}">Branch Code</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter branch code here.." th:field="*{branchCode}" style="text-transform: uppercase;"> 
+												<span class="red" th:if="${#fields.hasErrors('branchCode')}" th:errors="*{branchCode}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.branchRefCode}">Branch Ref Code</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter branch ref code here.." th:field="*{branchRefCode}">
+												<span class="red" th:if="${#fields.hasErrors('branchRefCode')}" th:errors="*{branchRefCode}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.branchName}">Branch Name</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter branch name here.." th:field="*{branchName}"> 
+												<span class="red" th:if="${#fields.hasErrors('branchName')}" th:errors="*{branchName}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.branchType}">Branch type</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{branchType}">
+													<option value="" selected  th:text="#{global.branch.select}">Select..</option>
+													<option value="Head Office">Head Office</option>
+													<option value="Branch Office">Branch Office</option>
+													<option value="Development Center">Development Center</option>
+													<option value="Service Center">Service Center</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('branchType')}" th:errors="*{branchType}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.postalCode}">Postal Code</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" placeholder="Enter postal code here.." th:field="*{postalCode}"> 
+												<span class="red" th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.address1}">Address1</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter address1 here.." th:field="*{address1}">
+												<span class="red" th:if="${#fields.hasErrors('address1')}" th:errors="*{address1}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.address2}">Address2</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter address2 here.." th:field="*{address2}">
+												<span class="red" th:if="${#fields.hasErrors('address2')}" th:errors="*{address2}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.address3}">Address3</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter address3 here.." th:field="*{address3}">
+												<span class="red" th:if="${#fields.hasErrors('address3')}" th:errors="*{address3}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.country}">Country</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{country}" id="country">
+													<option value="">Select Country</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('country')}" th:errors="*{country}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.state}">State</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{state}" id="state">
+													<option value="">Select State</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('state')}" th:errors="*{state}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.city}">City</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{city}" id="city">
+												<option value="" >Select City</option>
+												</select> 
+												<span class="red" th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.contactPerson}">Contact Person</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter contact persopn here.." th:field="*{contactPerson}">
+												<span class="red" th:if="${#fields.hasErrors('contactPerson')}" th:errors="*{contactPerson}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.email}">E-mail</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="e.g. example@gmail.com" th:field="*{email}">
+												<span class="red" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.telephone}">Telephone</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter telephone here.." th:field="*{telephoneno}">
+												<span class="red" th:if="${#fields.hasErrors('telephoneno')}" th:errors="*{telephoneno}"></span>
+											</div>
+									</div>
+									
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.mobile}">Phone Number</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter phone number here" th:field="*{mobile}" maxlength="10">
+												<span class="red" th:if="${#fields.hasErrors('mobile')}" th:errors="*{mobile}"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.branch.fax}">Fax</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control"  placeholder="Enter fax here.." th:field="*{fax}">
+												<span class="red" th:if="${#fields.hasErrors('fax')}" th:errors="*{fax}"></span>
+											</div>
+									</div>
+									
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom:16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeBranchList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.branch.backToList}">Back to list </span>
+							</a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg float-right" th:text="#{global.branch.save}">Save</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

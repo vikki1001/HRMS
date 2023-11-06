@@ -1,0 +1,14 @@
+<a th:each="empDetails : ${empBasicDetails}" class="search-drop">  
+	<span style="display:-webkit-box;" th:if="${empDetails.file} != null">
+		<img class="avatar avatar-md brad mr-3" th:src="@{${'/image?empId='+ empDetails.empId}}" alt=""></span>
+	<span th:if="${empDetails.file} == null">
+		<img class="avatar avatar-md brad mr-3" src="./././images/profile/avatar.png" th:src="@{/images/profile/avatar.png}" alt=""></span>                                 
+	<small> Name : </small> <small th:text="${empDetails.fullName}"></small> <br>
+	<small> Designation : </small> <small  th:text="${empDetails.empWorkDetails.designation}"></small> <br>
+	<small> Mobile No. : </small> <small  th:text="${empDetails.empPersonalDetails.contactNo}"></small>
+</a>
+
+<a class="view" th:each="view : ${viewAll}" th:href="@{'/detail/' + ${view}}"> View All </a> 
+
+
+ 

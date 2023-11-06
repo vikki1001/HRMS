@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.empSummReport.dataTable}">Employee Summary Report</h4>
+				<!-- JavaScript DataTable export to PDF with custom name & formatting -->
+				<input type="hidden" id="dtTitle" th:value="#{global.empSummReport.dataTable}">
+			</div>
+			<div class="col-sm-12" style="margin-bottom:50px;">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+			<form th:action="@{/empSummaryReport}" method="GET" th:object="${empBasicDetail}" onsubmit="return auditValidateForm()" autocomplete="off">
+				<div class="row">
+					
+				<div class="col-sm-3 form-group">
+                  <label th:text="#{global.empSummReport.empId}">Employee Id</label>
+                  <input type="text"  name="empId" class="form-control" placeholder="Enter employee id here"  />
+                </div>	
+                <div class="col-sm-3 form-group">
+                  <label th:text="#{global.empSummReport.empName}">Employee Name</label>
+                  <input type="text"  name="fullName" class="form-control" placeholder="Enter employee name here"  />
+                </div>	
+                <div class="col-sm-3 form-group">
+                  <label th:text="#{global.empSummReport.department}">Department</label>
+                  <input type="text"  name="departName" class="form-control" placeholder="Enter department here" />
+                </div>	
+                <div class="col-sm-3 form-group">
+                  <label th:text="#{global.empSummReport.grade}">Grade</label>
+                  <input type="text"  name="grade" class="form-control" placeholder="Enter grade here"  />
+                </div>	
+                <div class="col-sm-12 mb-0">
+						<div class="btn-group float-right">
+							<button type="reset" class="btn btn-tab btn-lg " th:text="#{global.empSummReport.reset}">Reset</button>
+							&nbsp;&nbsp;
+							<button type="submit" class="btn btn-tab btn-lg " th:text="#{global.empSummReport.generatedReport}"> Generate Report</button>
+						</div>
+					</div>
+				</div>
+					<div class="col-sm-12 form-group">
+						<div class="card">
+							<div class="card-body">
+								<div class="table-responsive">
+									<table id="datatable" class="display" style="width:100%">
+										<thead>
+											<tr>
+												<th>Employee Id</th>
+												<th>Full Name</th>
+												<th>Department</th>
+												<th>Grade</th>
+												<th>Date Of Birth</th>												
+												<th>Date Of Joining</th>
+												<th>Reporting Manager</th>											
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="report : ${empBasicList}">
+												<td th:text="${report.empId}"></td>	
+												<td th:text="${report.fullName}"></td>
+												<td th:text="${report.departName}"></td>
+												<td th:text="${report.grade}"></td>
+											    <td th:text="${#dates.format(report.empPersonalDetails.birthDate, 'dd/MM/yyyy')}"></td>
+												<td th:text="${report.empWorkDetails.dateOfJoining}"></td>
+												<td th:text="${report.empWorkDetails.reportingManager}"></td>
+											</tr>
+										</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

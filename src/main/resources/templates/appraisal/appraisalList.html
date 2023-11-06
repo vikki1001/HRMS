@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6"
+					th:text="#{global.apprasialList.title}">Apprasial View</h4>
+			</div>
+			<div class="col-sm-12">
+				<div class="line">
+					<hr>
+				</div>
+			</div>
+			<div class="col-sm-12 form-group">
+				<div class="card">
+					<div class="card-body">
+						<div class="table-responsive">
+							<table id="example" class="display" style="width: 100%">
+								<thead>
+									<tr>
+										<th th:text="#{global.apprasialList.emp}">Employee's</th>
+										<th th:text="#{global.apprasialList.rating}">Rating</th>
+										<th th:text="#{global.apprasialList.selfApp}">Self Apprasial</th>
+										<th th:text="#{global.apprasialList.status}">Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="appraisal : ${appraisal}">
+										<td>
+											<h5 class="table-avatar">
+											<a th:href="@{'/teammetReview/' + ${appraisal.empBasicDetails.empId}}">
+												<span class="avatar"> 
+													<span th:if="${appraisal.empBasicDetails.file} == null"> 
+														<img class="avatar" src="./images/profile/profile.png" th:src="@{/images/profile/profile.png}" alt="">
+													</span> 
+													<span th:if="${appraisal.empBasicDetails.file} != null">
+														<img class="avatar" th:src="@{${'/image?empId='+ appraisal.empBasicDetails.empId}}" alt="">
+													</span>
+												</span> 
+												<span class="idcolor" th:text="${appraisal.empBasicDetails.empId}"></span> - 
+												<span class="nameid" th:text="${appraisal.empBasicDetails.fullName}"></span> - 
+												<span class="idcolor" > year month </span>
+											</a></h5>
+										</td>
+										<td th:text="${appraisal.levelIAppStatus}">To be Provided</td>
+										<td th:text="${appraisal.selfAppStatus}">Pending</td>
+										<td th:text="#{global.apprasialList.complete}">Complete</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+body {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  #parent-circle {
+    position: relative;
+    width: 20vw;
+    height: 20vw;
+    border: 0.4vw solid rgba(0, 0, 0, 0.4);
+    border-radius: 50%;
+    transform: rotate(0deg);
+    transition: transform 0.7s linear;
+    animation: rotate 5400s infinite linear;
+
+    .circle {
+      display: block;
+      position: absolute;
+      width: 16%;
+      height: 16%;
+      margin: -8%;
+      border-radius: 50%;
+      top: 0%; 
+      left: 0%;
+
+      &.blue {
+        background-color: #416ba9;
+        transform: translate(10vw); // parent size/2
+      }
+     
+    }
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(359deg);
+  }
+}

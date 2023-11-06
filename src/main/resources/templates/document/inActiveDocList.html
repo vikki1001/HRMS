@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">               
+        <div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:field="#{global.docMgmt.title}">Document Management</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+								
+					<div class="col-lg-8">
+						<a th:href="@{/getUploadDoc}" class="btn add-btn pull-right plus" th:field="#{global.docMgmt.addNew}">Add New</a>
+					</div>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+				
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:field="#{global.docMgmt.heading}"> Upload Document list  </label>
+                        <a th:href="@{/activeDocList}">
+                            <button class="btn btn-secondary rounded-pill" th:field="#{global.docMgmt.active}">Active</button></a>
+                        <a th:href="@{/inActiveDocList}">
+                        	 <button class="btn btn-secondary rounded-pill active" th:field="#{global.docMgmt.inactive}">Inactive</button></a>
+               </div>
+                       
+				<div class="col-sm-12 form-group">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:field="#{global.docMgmt.templateName}">Template Name</th>
+											<th th:field="#{global.docMgmt.download}">Download</th>
+											<th th:field="#{global.docMgmt.action}">Action</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="doc : ${docList}">
+											<td th:text="${doc.templateName}"></td>
+											<td><a th:href="@{'/downloadfile?id=' + ${doc.id}}"><i class="fa-solid fa-download"></i></a></td>
+											<td>
+											<a th:href="@{'/activeDoc/' +${doc.id}}" class="btn update" th:field="#{global.docMgmt.active}"> Active </a>  
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+</body>
+</html>

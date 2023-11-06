@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+ 		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.leaveTracker.addLeave}" >Add Leave</h4>
+				
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+			<form onsubmit="return addLeaveValidateForm()" th:action="@{/saveAddLeave}"  th:object="${leaveTracker}" method="POST" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-6">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.leaveTracker.addLeave}"> Add Leave</label>
+											<div class="col-lg-9">
+												<input type="text" id="addLeave" class="form-control" placeholder="Add Leave here......"  th:field="*{addLeave}"/> 
+												<span class="red" id="blankMsg"></span>
+											</div>
+										</div>
+
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk"  th:text="#{global.leaveTracker.leaveType}">Leave Type </label>
+											<div class="col-lg-9">
+												<select class="form-control" id="leaveType"  th:field="*{leaveType}">
+													<option value="" >Select..</option>
+													<option value="Total Leave">Total Leave</option>
+													<option value="Paid Leave">Paid Leave</option>
+													<option value="Maternity Leave">Maternity Leave</option>
+												</select> 
+												<span class="red" id="blankMsg2"></span>
+											</div>
+										</div>	
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">	
+						<div class="col-sm-6 margin">
+							<a th:href="@{/activeAddLeaveList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.leaveTracker.backToList}">Back to list </span></a>
+					   </div>
+					
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text="#{global.leaveTracker.submit}">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div> 
+		</div>
+</body>
+</html>

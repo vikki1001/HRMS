@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.totalWorkReport.heading}"> Total Work Report List </h4>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.totalWorkReport.empId}">Employee ID</th>											
+											<th th:text="#{global.totalWorkReport.date}">Date</th>
+											<th th:text="#{global.totalWorkReport.fullName}">Full Name</th>
+											<th th:text="#{global.totalWorkReport.officeInTime}">Office In Time</th>
+											<th th:text="#{global.totalWorkReport.officeOutTime}">Office Out Time</th>
+											<th th:text="#{global.totalWorkReport.projectName}">Project Name</th>
+											<th th:text="#{global.totalWorkReport.module}">Module</th>
+											<th th:text="#{global.totalWorkReport.description}">Description of Work</th>
+											<th th:text="#{global.totalWorkReport.status}">Status</th>
+											<th th:text="#{global.totalWorkReport.analysis}">Analysis</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="totalWorkReport : ${totalWorkReport}">
+											<td th:text="${totalWorkReport.empId}"></td>
+ 											<td th:text="${totalWorkReport.fullName}"></td>
+ 											<td th:text="${totalWorkReport.date}"></td>
+											<td th:text="${totalWorkReport.officeInTime}"></td>
+											<td th:text="${totalWorkReport.officeOutTime}"></td>
+											<td th:text="${totalWorkReport.projectName}"></td>
+											<td th:text="${totalWorkReport.module}"></td>
+											<td th:text="${totalWorkReport.description}"></td>
+											<td th:text="${totalWorkReport.status}"></td>
+											<td th:text="${totalWorkReport.analysis}"></td>											
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

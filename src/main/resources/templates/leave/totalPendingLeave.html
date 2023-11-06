@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.totalPendingLeave.heading}"> Total Pending Leave List </h4>		
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+    
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.totalPendingLeave.empId}">Employee ID</th>
+											<th th:text="#{global.totalPendingLeave.date}">Date</th>
+											<th th:text="#{global.totalPendingLeave.fullName}">Full Name</th>
+											<th th:text="#{global.totalPendingLeave.fromDate}">From Date</th>
+											<th th:text="#{global.totalPendingLeave.toDate}">To Date</th>
+											<th th:text="#{global.totalPendingLeave.leaveType}">Leave Type</th>
+											<th th:text="#{global.totalPendingLeave.dayLeave}">Day Leave</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="totalPendingLeave : ${totalPendingLeave}">
+											<td th:text="${totalPendingLeave.empId.empId}"></td>
+											<td th:text="${totalPendingLeave.date}"></td>
+											<td th:text="${totalPendingLeave.fullName}"></td>
+											<td th:text="${totalPendingLeave.fromDate}"></td>
+											<td th:text="${totalPendingLeave.toDate}"></td>
+											<td th:text="${totalPendingLeave.leaveType}"></td>
+											<td th:text="${totalPendingLeave.dayLeave}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>

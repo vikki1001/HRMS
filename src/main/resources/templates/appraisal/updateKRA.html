@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+<div layout:fragment="content">
+ 		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.updateKRA.title}">Add Appraisal</h4>
+				
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+			</div>
+			<form onsubmit="return addKraValidateForm()" th:action="@{/saveKRA}" th:object="${kra}" method="POST" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">										
+									<div class="col-xl-12">
+										<div class="form-group row">
+										<input type="hidden" th:field=*{id}>
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.updateKRA.kra}">KRA</label>
+											<div class="col-lg-4">
+												<input type="text"  class="form-control" placeholder="Enter kra here......" th:field="*{kraName}" id="kra"> 
+												<span class="red" id="blankMsg"></span> 
+											</div>
+											
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.updateKRA.weightage}">Weightage</label>
+											<div class="col-lg-4">
+												<input type="text"  class="form-control" placeholder="Enter weightage here......" th:field="*{weightage}" id="weightage">
+												<span class="red" id="blankMsg2"></span>
+											</div>																					
+										</div>	
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.updateKRA.department}">Department</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{department}" id="department">
+													<option value=""  th:text="#{global.updateKRA.select}">Select..</option>
+													<option th:each="department : ${departmentList}" th:value="${department.departmentName}" th:text="${department.departmentName}">
+												</select> 
+												<span class="red" id="blankMsg3"></span>
+											</div>
+									
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.updateKRA.grade}">Employee Grade</label>
+											<div class="col-lg-4">
+												<select class="form-control" th:field="*{grade}" id="grade">
+													<option value=""  th:text="#{global.updateKRA.select}">Select..</option>
+													<option value="I">I</option>
+															<option value="II">II</option>
+															<option value="III">III</option>
+															<option value="IV">IV</option>
+															<option value="V">V</option>
+															<option value="VI">VI</option>
+															<option value="VII">VII</option>
+															<option value="VIII">VIII</option>
+															<option value="IX">IX</option>
+															<option value="X">X</option>
+															<option value="XI">XI</option>
+															<option value="XII">XII</option>
+															<option value="XIII">XIII</option>
+															<option value="XIV">XIV</option>
+												</select>  
+												<span class="red" id="blankMsg4"></span>
+											</div>
+										</div>	
+										
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text="#{global.updateKRA.description}">Description</label>
+											<div class="col-lg-4">
+												<textarea class="form-control" rows="5" placeholder="Enter kra description here..." th:field="${kra.kraDescription.description}" id="description"></textarea>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+										</div>	
+									</div>																							
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/kraList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.updateKRA.backOfList}">Back to list </span></a>
+					   </div>
+					
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text="#{global.updateKRA.sumit}">Submit</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div> 
+		</div>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-6" th:text="#{global.hrAppraisalList.title}">Appraisal</h4>			
+			</div>
+			
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+			</div>
+			
+			<form th:action="@{/empIdAndTenantId}" method="GET" onsubmit="return auditValidateForm()" autocomplete="off">
+				<div class="row">
+					
+					<div class="col-sm-3 form-group">
+						<label> User Id </label> 
+						<select class="form-control" id="dropEmp" name="empId">
+							<option value="" selected>Select.. </option>
+						 	<option th:each="emp : ${empList}" th:value="${emp.empId}" th:text="${emp.empId}" />
+						</select>
+					</div>
+					<div class="col-sm-3 form-group">
+						<label> Department Id </label> 
+						<select class="form-control" id="dropDepartmentId" name="depId">
+							<option value="" selected>Select..</option>
+							<option th:each="depId : ${empDepId}" th:value="${depId}" th:text="${depId}" />
+						</select>
+					</div>
+					<div class="col-sm-12 mb-0">
+						<div class="btn-group float-right">
+							<button type="reset" class="btn btn-tab btn-lg " th:text="#{global.checkInCheckOut.reset}">Reset</button>
+							&nbsp;&nbsp;
+							<button type="submit" class="btn btn-tab btn-lg " th:text="#{global.checkInCheckOut.generatedReport}"> Generate Report</button>
+						</div>
+					</div>
+				</div>
+			
+				<div class="col-sm-12 form-group">
+					<div class="card">						
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display"  style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.hrAppraisalList.empId}">Employee ID</th>
+											<th th:text="#{global.hrAppraisalList.kra}">KRA</th>
+											<th th:text="#{global.hrAppraisalList.weightage}">Weightage</th>
+											<th th:text="#{global.hrAppraisalList.rating}">Rating</th>
+											<th th:text="#{global.hrAppraisalList.ratingByRM }">Rating By ReportingManager</th>
+											<th th:text="#{global.hrAppraisalList.ratingByM}">Rating By Manager</th>
+										</tr>
+									</thead>
+									<tbody th:each="appraisal : ${appraisalList}">
+										
+										<tr>
+											<td></td>
+											<td th:text="${appraisal.kraI}"></td>
+											<td th:text="${appraisal.weightageI}"></td>
+											<td th:text="${appraisal.selfRatingI}"></td>
+											<td th:text="${appraisal.level1ApproverRatingI}"></td>										
+											<td th:text="${appraisal.level2ApproverRatingI}"></td>
+										</tr><tr>	
+											<td></td>
+											<td th:text="${appraisal.kraII}"></td>
+											<td th:text="${appraisal.weightageII}"></td>
+											<td th:text="${appraisal.selfRatingII}"></td>
+											<td th:text="${appraisal.level1ApproverRatingII}"></td>										
+											<td th:text="${appraisal.level2ApproverRatingII}"></td>
+										</tr><tr>
+											<td th:text="${appraisal.userId}"></td>
+											<td th:text="${appraisal.kraIII}"></td>
+											<td th:text="${appraisal.weightageIII}"></td>
+											<td th:text="${appraisal.selfRatingIII}"></td>
+											<td th:text="${appraisal.level1ApproverRatingIII}"></td>										
+											<td th:text="${appraisal.level2ApproverRatingIII}"></td>
+										</tr><tr>	
+											<td></td>
+											<td th:text="${appraisal.kraIV}"></td>
+											<td th:text="${appraisal.weightageIV}"></td>
+											<td th:text="${appraisal.selfRatingIV}"></td>
+											<td th:text="${appraisal.level1ApproverRatingIV}"></td>										
+											<td th:text="${appraisal.level2ApproverRatingIV}"></td>
+										</tr><tr>	
+											<td></td>
+											<td th:text="${appraisal.kraV}"></td>
+											<td th:text="${appraisal.weightageV}"></td>
+											<td th:text="${appraisal.selfRatingV}"></td>
+											<td th:text="${appraisal.level1ApproverRatingV}"></td>										
+											<td th:text="${appraisal.level2ApproverRatingV}"></td>
+										</tr>	
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

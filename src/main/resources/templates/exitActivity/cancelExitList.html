@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+					<h4 class="cards-title col-lg-4" th:text="#{global.exitActivity.exitActivity}">Exit Activity</h4>
+					
+					<div class="col-lg-2 success-primary" id="alertMessage" th:text="${success}" th:if="${success}"></div>
+					
+					<div class="col-lg-8">
+						<a th:href="@{/exitActivity}" class="btn add-btn pull-right plus" th:text="#{global.exitActivity.addNew}" >Add New</a>
+					</div>		
+			</div>
+				<div class="col-sm-12">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+						
+				<div class=" col-sm-12 form-group text-center">		
+				<label th:text="#{global.exitActivity.exitList}"> Exit list </label>
+                        <a th:href="@{/activeExitActivityList}">
+                            <button class="btn btn-secondary rounded-pill" th:text="#{global.exitActivity.active}">Active</button></a>
+                        <a th:href="@{/cancelExitActivityList}">
+                        	<button class="btn btn-secondary rounded-pill active" th:text="#{global.exitActivity.cancel}">Cancel</button></a>
+               </div>
+
+				<div class="col-sm-12 form-group">
+					<div class="card">
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="example" class="display" style="width:100%">
+									<thead>
+										<tr>
+											<th th:text="#{global.exitActivity.empId}">Employee ID</th>
+											<th th:text="#{global.exitActivity.employeeType}">Employee Type</th>
+											<th th:text="#{global.exitActivity.reqLastWorkingDte}">Request Last Working Date</th>
+											<th th:text="#{global.exitActivity.regDate}">Registration Date Will be the Current Date</th>
+											<th th:text="#{global.exitActivity.description}">Description</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="exitActivity : ${cancelExitActivityList}">
+											<td th:text="${exitActivity.empId.empId}"></td>
+											<td th:text="${exitActivity.employeeType}"></td>
+											<td th:text="${exitActivity.reqLastWorkingDte}"></td>
+											<td th:text="${exitActivity.regDate}"></td>
+											<td th:text="${exitActivity.description}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html> 

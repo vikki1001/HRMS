@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.empReg.title}">Employee Registration</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+
+				<form class="form" id="myForm" th:action="@{saveEmployee}" th:object="${empBasicDetails}" method="POST" autocomplete="off" enctype="multipart/form-data">
+					<!-- Circles which indicates the steps of the form: -->
+					<div class="row">
+						<div class="col-xl-12">
+							<div class="progressbar" style="text-align: center;">
+								<span class="step one" th:text="#{global.empReg.basic}">Basic</span> 
+								<span class="step one" th:text="#{global.empReg.personal}">Personal</span>
+								<span class="step one" th:text="#{global.empReg.work}">Work</span> 
+								<span class="step one" th:text="#{global.empReg.address}">Address</span>
+								<span class="step one" th:text="#{global.empReg.salary}">Salary</span> 
+								<span class="step one" th:text="#{global.empReg.certification}">Certification</span>
+								<span class="step one" th:text="#{global.empReg.skill}">Skills</span> 
+								<span class="step one" th:text="#{global.empReg.passport}">Passport</span>
+								<span class="step one" th:text="#{global.empReg.emergency}">Emergency</span>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Basic Details -->
+					<!-- One "tab" for each step in the form: -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.compEmailId}">Company Employee ID </label>
+													<div class="col-lg-4">
+														<input type="email" class="form-control" placeholder="Enter Email here" name="coEmailId" th:field="*{coEmailId}"/>
+													</div>
+
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.tenantId}">Tenant ID</label>
+													<div class="col-lg-4">
+														<select class="form-control" th:field="*{tenantId}">
+															<option value="" selected th:text="#{global.empRegList.select}">Select... </option>
+															<option th:each="tenantId : ${tenantId}" th:value="${tenantId.tenantId}" th:text="${tenantId.companyName} " />
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.firstName}">First Name</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control"placeholder="Enter Your First Name here..." name="firstName" th:field="*{firstName}">
+													</div>
+
+													<label class="col-lg-2 col-form-label" th:text="#{global.basicDetails.middleName}">Middle Name</label>
+
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter Your Middle Name here..." th:field="*{middleName}">
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.lastName}">Last Name </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter Your Last Name here..." name="lastName" th:field="*{lastName}">
+													</div>
+
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.fullName}">Full Name</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter Your Full Name here..." name="fullName" th:field="*{fullName}">
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.department}">Department</label>
+													<div class="col-lg-4">
+														<select class="form-control" name="departName" th:field="*{departName}">
+															<option value="" selected th:text="#{global.empRegList.select}">Select... </option>
+															<option th:each="department : ${departmentList}" th:value="${department.departmentName}" th:text="${department.departmentName} " />
+														</select>
+													</div>
+
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.gender}">Gender</label>
+													<div class="col-lg-4">
+														<select class="form-control" name="gender" th:field="*{gender}">
+															<option value="" selected th:text="#{global.empRegList.select}">Select...  </option>
+															<option value="Male">Male</option>
+															<option value="Female">Female</option>
+															<option value="unspesified">Unspecified</option>
+														</select>
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.basicDetails.grade}">Grade </label>
+													<div class="col-lg-4">
+														<select class="form-control" name="grade" th:field="*{grade}">
+															<option value="" selected th:text="#{global.empRegList.select}">Select... </option>
+															<option value="I">I</option>
+															<option value="II">II</option>
+															<option value="III">III</option>
+															<option value="IV">IV</option>
+															<option value="V">V</option>
+															<option value="VI">VI</option>
+															<option value="VII">VII</option>
+															<option value="VIII">VIII</option>
+															<option value="IX">IX</option>
+															<option value="X">X</option>
+															<option value="XI">XI</option>
+															<option value="XII">XII</option>
+															<option value="XIII">XIII</option>
+															<option value="XIV">XIV</option>
+														</select>
+													</div>
+												</div>										
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Personal Details -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.birthDate}">Birth Date </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" id="fulldate" placeholder="YYYY-MM-DD" name="birthDate" th:field="${empBasicDetails.empPersonalDetails.birthDate}"/>
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.placeOfBirth}">Place Of Birth </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter place of birth here" name="placeOfBirth" th:field="${empBasicDetails.empPersonalDetails.placeOfBirth}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.bloodGroup}">Blood Group </label>
+													<div class="col-lg-4">
+														<select class="form-control" th:field="${empBasicDetails.empPersonalDetails.bloodGroup}">
+															<option value="" selected th:text="#{global.empRegList.select}">Select... </option>
+															<option value="A+">A+</option>
+															<option value="A-">A-</option>
+															<option value="B+">B+</option>
+															<option value="B-">B-</option>
+															<option value="AB+">AB+</option>
+															<option value="AB-">AB-</option>
+															<option value="O+">O+</option>
+															<option value="O-">O-</option>
+														</select>
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.prsnDetails.age}">Age</label>
+													<div class="col-lg-4"> 
+                  										<input type="text" class="form-control" name="age" id="result" th:field="${empBasicDetails.empPersonalDetails.age}" readonly="readonly" />                  										
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.contactNo}">Contact No.</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter contact number here" name="contactNo" th:field="${empBasicDetails.empPersonalDetails.ContactNo}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.prsnDetails.alterContactNo}">Alternative Contact No. </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter alternative contact Number here" th:field="${empBasicDetails.empPersonalDetails.alternateContactNo}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.maritalStatus}">Marital Status</label>
+													<div class="col-lg-4">
+														<select class="form-control" th:field="${empBasicDetails.empPersonalDetails.maritalStatus}">
+															<option value="" selected th:text="#{global.empRegList.select}">Select... </option>
+															<option value="Single">Single</option>
+															<option value="Married">Married</option>															
+														</select>													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.religion}">Religion </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter religion here" name="religion" th:field="${empBasicDetails.empPersonalDetails.religion}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.aadhaarNo}">Aadhaar Number </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter Aadhaar no. here" name="addharNumber" th:field="${empBasicDetails.empPersonalDetails.addharNumber}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.panNo}">PAN Number </label>
+													<div class="col-lg-4">
+														<input placeholder="Enter PAN no. here" class="form-control" name="panNumber" th:field="${empBasicDetails.empPersonalDetails.panNumber}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.prsnDetails.prsnEmailId1}">Personal Email ID-1  </label>
+													<div class="col-lg-4">
+														<input type="email" placeholder="Enter email ID-1 here"
+															class="form-control" name="personalEmailId1" th:field="${empBasicDetails.empPersonalDetails.personalEmailId1}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.prsnDetails.prsnEmailId2}">Personal Email ID-2  </label>
+													<div class="col-lg-4">
+														<input type="email" placeholder="Enter email ID-2 here"
+															 class="form-control" name="personalEmailId2" th:field="${empBasicDetails.empPersonalDetails.personalEmailId2}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Work Details -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.workDetails.dateOfJoining}">Date of joining </label>
+													<div class="col-lg-4">
+														<input type="datetime-local" class="form-control" placeholder="Enter joining here" name="dateOfJoining" th:field="${empBasicDetails.empWorkDetails.dateOfJoining}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.workDetails.empType}">Employee type </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter Type here" name="employeeType" th:field="${empBasicDetails.empWorkDetails.employeeType}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.workDetails.businessUnit}">Business Unit</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter unit here" name="businessUnit" th:field="${empBasicDetails.empWorkDetails.businessUnit}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.workDetails.projectId}">Project ID </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter ID here" th:field="${empBasicDetails.empWorkDetails.projectId}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.workDetails.kraRole}">KRA Role </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter role here" th:field="${empBasicDetails.empWorkDetails.kraRole}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.workDetails.projectName}">Project Name </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter project name here" th:field="${empBasicDetails.empWorkDetails.projectName}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.workDetails.designation}">Designation </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter designation here" th:field="${empBasicDetails.empWorkDetails.designation}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.workDetails.reportingManager}">Reporting Manager </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter reporting manager here" name="reportingManager" th:field="${empBasicDetails.empWorkDetails.reportingManager}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.workDetails.baseLocation}">Base Location </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter base Location here" name="baseLocation" th:field="${empBasicDetails.empWorkDetails.baseLocation}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.workDetails.currentLocation}">Current Location </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter current Location here" name="currentLocation" th:field="${empBasicDetails.empWorkDetails.currentLocation}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Address Details -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.presentAddress}">Present Address </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter present address here" name="presentAddress" th:field="${empBasicDetails.empAddressDetails.presentAddress}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.permanentAddress}">Permanent Address </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter permanent address here" name="permanentAddress" th:field="${empBasicDetails.empAddressDetails.permanentAddress}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.presentCity}">Present City</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter present city here" name="presentCity" th:field="${empBasicDetails.empAddressDetails.presentCity}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.permanentCity}">Permanent City </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter permanent city here" name="permanentCity" th:field="${empBasicDetails.empAddressDetails.permanentCity}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.presentState}">Present State </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter present state here" name="presentState" th:field="${empBasicDetails.empAddressDetails.presentState}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.permanentState}">Permanent State </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter permanent state here" name="permanentState" th:field="${empBasicDetails.empAddressDetails.permanentState}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.presentPinCode}">Present PinCode </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter present pinCode here" name="presentPinCode" th:field="${empBasicDetails.empAddressDetails.presentPinCode}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.permanentPinCode}">Permanent PinCode </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter permanent pinCode here" name="permanentPinCode" th:field="${empBasicDetails.empAddressDetails.permanentPinCode}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.presentCountry}">Present Country </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter present country here" name="presentCountry" th:field="${empBasicDetails.empAddressDetails.presentCountry}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.addrDetails.permanentCountry}">Permanent Country </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter permanent country here" name="permanentCountry" th:field="${empBasicDetails.empAddressDetails.permanentCountry}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Salary Details -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.salaryDetails.salaryAccBank}">Salary A/C Bank </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter Bank A/C here" th:field="${empBasicDetails.empSalaryDetails.salaryAccBank}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.salaryDetails.salaryAccNo}">Salary A/C Number </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter  A/C number here" th:field="${empBasicDetails.empSalaryDetails.salaryAccNo}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.salaryDetails.AccIfscode}">Account IFSC Code </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter IFSC here" th:field="${empBasicDetails.empSalaryDetails.accIFSCode}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Certification Details -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.certDetails.certName}">Certification Name </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter name/title here" th:field="${empBasicDetails.empCertificationDetails.certificationName}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.certDetails.version}">Version [if applicable] </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter version here" th:field="${empBasicDetails.empCertificationDetails.certVersion}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.certDetails.dateYear}">Date/Year of Completion </label>
+													<div class="col-lg-4">
+														<input type="date" class="form-control" placeholder="Enter date/year here" th:field="${empBasicDetails.empCertificationDetails.certCompleteDate}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.certDetails.validTill}">Valid Till </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter valid till here" th:field="${empBasicDetails.empCertificationDetails.certValidTill}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.certDetails.score}">Score/Grade/GPA </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter text here" th:field="${empBasicDetails.empCertificationDetails.certScore}" >
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.certDetails.code}">Code/Roll </label>
+													<div class="col-lg-4">
+														<input type="text" placeholder="Enter code here" class="form-control" th:field="${empBasicDetails.empCertificationDetails.certCode}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- SkillDetails -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.skillsDetails.skill}">Skill/Function Name </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter skill here" th:field="${empBasicDetails.empSkillDetails.skill}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.skillsDetails.version}">Version [if applicable] </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter version here" th:field="${empBasicDetails.empSkillDetails.skillVersion}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.skillsDetails.proficiencyLevel}">Proficiency Level </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter level here" th:field="${empBasicDetails.empSkillDetails.proficiencyLevel}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.skillsDetails.ExpcSkill}">Experience in the Skill [in years] </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter skill here" th:field="${empBasicDetails.empSkillDetails.experienceSkill}">
+													</div>
+												</div>
+
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.skillsDetails.rating}">Self-Rating </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter self-rating here" th:field="${empBasicDetails.empSkillDetails.selfRating}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Passport -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.passportDetails.passportNo}">Passport-Number</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter no. here" th:field="${empBasicDetails.empPassportDetails.passportNo}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.passportDetails.nameInPassport}">Name in Passport </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter passport here" th:field="${empBasicDetails.empPassportDetails.passportName}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.passportDetails.passportAdd}">Passport-Address </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter passport address here" th:field="${empBasicDetails.empPassportDetails.passportAddress}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.passportDetails.passportCountry}">Passport-Country</label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter passport country here" th:field="${empBasicDetails.empPassportDetails.passportCountry}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.passportDetails.passportDOI}">Passport-Date Of Issue </label>
+													<div class="col-lg-4">
+														<input type="date" class="form-control" placeholder="DD/MM/YYYY" th:field="${empBasicDetails.empPassportDetails.passportDateOfIssue}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.passportDetails.passportDOE}">Passport-Date Of Expire </label>
+													<div class="col-lg-4">
+														<input type="date" class="form-control" placeholder="DD/MM/YYYY" th:field="${empBasicDetails.empPassportDetails.passportDateOfExpire}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<!-- Emergency Contact Details -->
+					<div class="tab">
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="card">
+									<div class="card-body">
+										<div class="row">
+											<div class="col-xl-12">
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.emergContDetails.emergName1}">Emergency Contact Name(Offshore) </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter name here" name="EmergencyContactName_Offshore" th:field="${empBasicDetails.empEmergContactDetails.emergContactName1}">
+													</div>
+													<label class="col-lg-2 col-form-label asterisk" th:text="#{global.emergContDetails.emergNo1}">Emergency Contact TelNo.(Offshore) </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter no. here" name="EmergencyContactTelNum_Offshore" th:field="${empBasicDetails.empEmergContactDetails.emergContactNo1}">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-lg-2 col-form-label" th:text="#{global.emergContDetails.emergName2}">Emergency Contact Name(Onsite) </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter name here" th:field="${empBasicDetails.empEmergContactDetails.emergContactName2}">
+													</div>
+													<label class="col-lg-2 col-form-label" th:text="#{global.emergContDetails.emergNo2}">Emergency Contact TelNo.(Onsite) </label>
+													<div class="col-lg-4">
+														<input type="text" class="form-control" placeholder="Enter no. here" th:field="${empBasicDetails.empEmergContactDetails.emergContactNo2}">
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+                      <div class="button-footer">
+                          <div class= "btns-group">
+                              <button type="button" class="btn1 previous" th:text="#{global.empReg.previous}">Previous</button>
+                              <button type="button" class="btn1 next" th:text="#{global.empReg.next}">Next</button>
+                              <button type="button" class="btn1 submit" th:text="#{global.empReg.submit}">Submit</button>
+                          </div>
+                       </div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

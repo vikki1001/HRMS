@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{global.lbl.title}">KSV - SoftTech Digital Solution</title>
+    <style>
+         body {
+            font-family: Optima, Segoe, Segoe UI, Candara, Calibri, Arial, sans-serif;
+        }
+       form{
+        padding:30px 50px;
+       }
+       p{
+        font-size: 16px;
+       }
+       h1 {
+           text-align: center;
+            font-size: 26px;
+            color: #1b7abd;
+            text-transform: uppercase;
+            margin-bottom: 50px;
+        }
+        span{
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Approved Leave</h1>
+<form th:each="leave : ${leaveList}"> 
+    <p> <span th:text="${leave.fullName}">Ayush Panwar</span><br />
+         <span th:text="${leave.empId.empWorkDetails.designation}">Web Designer UI/UX Designer,Indore</span>
+    </p>
+    <br/>    
+    <p>Hi , <span th:text="${leave.fullName}">Ayush Sir</span>
+   <br/>
+    </p>
+    <br/> 
+    <p>
+        We have received your leave request for these date: <span th:text="${leave.fromDate}">24/07/2022</span> to <span th:text="${leave.toDate}">14/06/2022</span>
+    </p>
+    <p>
+        As of <span th:text="${#dates.format(#dates.createNow(), 'dd MMM yyyy')}">24/07/2022</span>, your leave request is <span>Approved</span>.
+    </p>    
+    <p>
+        Per your request, this time off will be marked as <span th:text="${leave.leaveType}">HOLIDAY LEAVE</span>.
+    </p>
+    <p>Thanks,
+    </p>
+ 
+    <br/> 
+    <p> 
+<span th:text="${leave.managerId}">Puspendra Shakywar</span><br/><span>Java Developer</span>
+    </p>
+</form>
+
+</body>
+
+</html>

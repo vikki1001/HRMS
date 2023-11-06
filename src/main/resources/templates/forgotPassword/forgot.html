@@ -1,0 +1,39 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title th:text="#{global.lbl.title}">KSV - SoftTech Digital
+	Solution</title>
+<link rel="stylesheet" href="../../../css/fonts.css" th:href="@{/css/fonts.css}">
+<link rel="stylesheet" href="../../../css/materialdesignicons.min.css" th:href="@{/css/materialdesignicons.min.css}">
+<link rel="stylesheet" href="../../../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" href="../../../css/fer.css" th:href="@{/css/fer.css}">
+</head>
+<body>
+	<main>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="card login-form">
+					<div class="card-body">
+						<h3 class="card-title text-center">Forgot password</h3>
+						<div class="alert alert-danger" role="alert" id="alertMessage" th:text="${failed}" th:if="${failed}"></div>
+
+						<div class="card-text">
+							<form th:action="@{/sendOtp}" method="POST" autocomplete="off">
+								<div class="form-group">
+									<label for="exampleInputEmail1">Enter your Mail ID for the verification Process, We will send 6 digit code to
+										your mail id.
+									</label> 
+									<input type="email" name="emailId" class="form-control form-control-sm" placeholder="Enter your Mail ID">
+								</div>
+									<button class="btn btn-primary btn-block">Send OTP</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+</body>
+</html>

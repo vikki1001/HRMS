@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{layout/layout}">
+<body>
+	<div layout:fragment="content">
+		<div class="container-fluid">
+			<div class="row">
+				<h4 class="cards-title col-lg-6" th:text="#{global.task.title}">Task</h4>
+				<div class="col-sm-12 form-group">
+					<div class="line">
+						<hr>
+					</div>
+				</div>
+		    </div>
+		    
+			<form th:action="@{/updateTask}" method="POST" th:object="${task}" autocomplete="off">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="card">
+							<div class="card-body">
+								<div class="row">
+									<div class="col-xl-12">
+									<input type="hidden" th:field="*{id}">
+										<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.task.empId}>Employee Id</label>
+											<div class="col-lg-4">
+														<select class="form-control"  th:field="*{empId}">
+															<option value="" selected th:text="#{global.task.select}">Select...  </option>
+															<option th:each="empId : ${empIdList}" th:value="${empId.empId} " th:text="${empId.empId} " />
+														</select>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.task.projects}>Projects</label>
+											<div class="col-lg-4">
+												<input type="text" class="form-control" id="projects" placeholder="Enter projects here..." th:field="*{projects}"></input>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+										</div>																							
+													
+																		
+									<div class="form-group row">
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.task.hours}>Hours</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="hours" placeholder="Enter hours here..." th:field="*{hours}"></input>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+											<label class="col-lg-2 col-form-label asterisk" th:text=#{global.task.description}>Description</label>
+											<div class="col-lg-4">
+												<input class="form-control" id="description" placeholder="Enter description here..." th:field="*{description}"></input>
+												<span class="red" id="blankMsg5"></span>
+											</div>
+									</div>
+									<div class="form-group row">
+										<label class="col-lg-2 col-form-label asterisk" th:text=#{global.task.date}>Date</label>
+											<div class="col-lg-4">
+												<input class="form-control" type="date" id ="date" placeholder="YYYY-MM-DD" th:field="*{date}"></input>
+												<span class="red" id="blankMsg2"></span>
+											</div>
+										</div>	
+																																				
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="button-footer">
+					<div class="row" style="margin-bottom: 16px;">
+						<div class="col-sm-6 margin">
+							<a th:href="@{/weeklyDataList}" class="btn btn-outline-secondary btn-md float-left"><em class="fa fa-chevron-left"></em> &ensp;
+							<span th:text="#{global.task.back}"> Back to List </span></a>
+						</div>
+						<div class="col-sm-6 margin">
+							<button class="btn btn-primary2 btn-lg  float-right" th:text=#{global.task.save}>Save</button>
+						</div>
+					</div>
+				</div>				
+        </form>
+        </div>
+	</div>
+</body>
+</html>
